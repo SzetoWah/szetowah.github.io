@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[Hello World]]></title>
       <url>http://szetowah.com/2016/07/26/test/</url>
-      <content type="html"><![CDATA[<p><a onclick="_hmt.push(['_trackEvent', 'test', 'click', 'test-value']);" href="http://www.baidu.com/" target="_blank">访问事件追踪</a></p>
+      <content type="html"><![CDATA[<p><a id="test" onclick="_hmt.push(['_trackEvent', 'test', 'click', 'test-value']);" href="http://www.baidu.com/" target="_blank">访问事件追踪</a></p>
 ]]></content>
     </entry>
     
