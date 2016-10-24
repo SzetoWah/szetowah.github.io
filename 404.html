@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>404页面</title>
@@ -92,36 +91,38 @@
             margin: 0 5px;
             font-weight: bold;
         }
-    </style>
-    <script type="text/javascript">
-        var num = 4;
 
-        function redirect() {
-            num--;
-            document.getElementById("num").innerHTML = num;
-            if (num < 0) {
-                document.getElementById("num").innerHTML = 0;
-                location.href = "http://szetowah.com";
-            }
+        .plan {
+            color: black;
+            background: white;
+            font-size: 30px;
+            margin-top: 20px;
         }
-        setInterval("redirect()", 1000);
-    </script>
-</head>
 
-<body onload="redirect();">
+        .plan:hover {
+            color: white;
+            background: black;
+            font-size: 30px;
+        }
+
+        #gg {
+            position: absolute;
+            width: 654px;
+            height: 470px;
+            left: 50%;
+            top: 50%;
+            margin-left: -377px;
+            margin-top: -235px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gg">
+        <iframe class="gg" scrolling="no" frameborder="0" src="https://yibo.iyiyun.com/Home/Distribute/ad404/key/1122458" width="654" height="470" style="display:block;">
+        </iframe>
+    </div>
     <div class="whole">
         <img src="http://7xowaa.com1.z0.glb.clouddn.com/back.jpg">
-        <div class="mask"></div>
     </div>
-    <div class="b">
-        <img src="http://7xowaa.com1.z0.glb.clouddn.com/404.png" class="center">
-        <p>
-            暂时未能找到您查找的页面<br> 可能输入的网址错误或此页面不存在
-            <br>
-            <span id="num"></span>秒后自动跳转到主页
-        </p>
-    </div>
-
 </body>
-
 </html>
