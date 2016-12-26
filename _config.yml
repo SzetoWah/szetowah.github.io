@@ -1,9 +1,9 @@
 # Site settings
-title: Your Blog
-SEOTitle: Stuart Hua's Blog
+title: Stuart Hua's Blog
+SEOTitle: Are you asking me the way?
 header-img: img/home-bg.jpg
 email: stuarthua.cn@gmail.com
-description: "Stuart Hua's Blog"
+description: ""
 keyword: "android"
 url: "http://stuarthua.com"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
@@ -14,9 +14,9 @@ baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 RSS: false
 #weibo_username:     huxpro
 #zhihu_username:     huxpro
-github_username:    stuarthua
-twitter_username:  huxpro
-facebook_username:  huxpro
+github_username: stuarthua
+twitter_username: stuarthua_sir
+facebook_username: stuarthua.sir
 
 
 
@@ -50,9 +50,8 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: huxblog
-# Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+duoshuo_username: stuarthua
+duoshuo_share: false
 
 
 
@@ -69,7 +68,7 @@ ga_domain: stuarthua.com
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Are you asking me the way? "
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar-stuart.jpg  # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -80,21 +79,12 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 
 
 # Friends
-friends: [
-    {
-        title: "Hux Blog",
-        href: "http://huangxuan.me"
-    },{
-        title: "Foo",
-        href: "#"
-    },{
-        title: "Bar",
-        href: "#"
-    },{
-        title: "Example Friends",
-        href: "#"
-    },{
-        title: "It helps SEO",
-        href: "#"
-    }
-]
+# friends: [
+#     {
+#         title: "Example Friends",
+#         href: "#"
+#     },{
+#         title: "It helps SEO",
+#         href: "#"
+#     }
+# ]
