@@ -47,11 +47,11 @@ kramdown:
 
 
 # Disqus settings
-#disqus_username: stuarthua
+disqus_username: stuarthua
 
 # Duoshuo settings
-duoshuo_username: stuarthua
-duoshuo_share: false
+#duoshuo_username: stuarthua
+#duoshuo_share: false
 
 
 
