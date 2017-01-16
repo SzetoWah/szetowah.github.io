@@ -1,10 +1,10 @@
 # Site settings
 title: Stuart Hua's Blog
-SEOTitle: Learn and Live?
+SEOTitle: Stuart Hua's Blog
 header-img: img/home-bg.jpg
 email: stuarthua.cn@gmail.com
-description: "android,mac,git,gradle"
-keyword: "android,mac,git,gradle"
+description: "a programmer's blog"
+keyword: "android,mac,git,gradle,html5,node"
 url: "http://stuarthua.com"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -26,7 +26,7 @@ highlighter: rouge
 permalink: pretty
 paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+anchorjs: no                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
 
@@ -66,8 +66,8 @@ ga_domain: stuarthua.com
 
 
 # Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Are you asking me the way? "
+sidebar: false                           # whether or not using Sidebar.
+sidebar-about-description: ""
 sidebar-avatar: /img/avatar-stuart.jpg  # use absolute URL, seeing it's used in both `/` and `/about/`
 
 

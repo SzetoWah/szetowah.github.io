@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "流浪似的清明节"
-subtitle:   "see the world"
+subtitle:   "See the world!"
 date:       2015-04-06
 author:     "Stuart"
 header-img: "img/post-bg-2015.jpg"
