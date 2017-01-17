@@ -5,12 +5,10 @@ subtitle:   "See the world!"
 date:       2015-04-06
 author:     "Stuart"
 header-img: "img/post-bg-2015.jpg"
+catalog: true
 tags:
     - Daily
 ---
-
-![大马路](http://rickalexander.qiniudn.com/fangchang.jpg)
-<!-- more -->
 
 ## 太棒了，鸽子
 我已经记不清这是第几次在广兰路折返了，只是生生的记得出门的时候时间是17：00，而现在，时间分明走在21：07！

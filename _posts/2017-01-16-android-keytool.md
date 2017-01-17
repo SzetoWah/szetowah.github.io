@@ -5,6 +5,7 @@ subtitle:   "Android 签名证书相关"
 date:       2017-01-16
 author:     "Stuart"
 header-img: "img/post-bg-2017.jpg"
+catalog: true
 tags:
     - Notes
 ---

@@ -3,8 +3,8 @@ title: Stuart Hua's Blog
 SEOTitle: Stuart Hua's Blog
 header-img: img/home-bg.jpg
 email: stuarthua.cn@gmail.com
-description: "a programmer's blog"
-keyword: "android,mac,git,gradle,html5,node"
+description: "关于Android、生活、思考 | Stuard Hua，Android Engineer"
+keyword: "stuart, Stuart Hua, @StuartHua, Stuart Hua's Blog, android, 博客, 个人网站, 互联网, APP"
 url: "http://stuarthua.com"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -17,7 +17,7 @@ RSS: false
 github_username: stuarthua
 twitter_username: stuarthua_sir
 facebook_username: stuarthua.sir
-
+# linkedin_username:  firstname-lastname-idxxxx
 
 
 # Build settings
@@ -59,6 +59,7 @@ disqus_username: stuarthua
 # Analytics settings
 # Baidu Analytics
 ba_track_id: 15604eac1992a89871cd85f2cd425d50
+
 # Google Analytics
 ga_track_id: 'UA-55082727-2'            # Format: UA-xxxxxx-xx
 ga_domain: stuarthua.com
@@ -75,6 +76,12 @@ sidebar-avatar: /img/avatar-stuart.jpg  # use absolute URL, seeing it's used in 
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
 
 
 
