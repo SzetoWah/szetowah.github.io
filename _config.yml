@@ -66,8 +66,8 @@ ga_domain: stuarthua.com
 
 
 # Sidebar settings
-sidebar: false                           # whether or not using Sidebar.
-sidebar-about-description: ""
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "Rethink to be better!"
 sidebar-avatar: /img/avatar-stuart.jpg  # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
