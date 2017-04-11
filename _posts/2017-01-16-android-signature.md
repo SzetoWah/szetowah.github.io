@@ -9,7 +9,6 @@ catalog: true
 tags:
     - Notes
     - Android
-    - signature
 ---
 
 ## Android Signature
@@ -123,3 +122,5 @@ jarsigner  -verbose -certs -verify my-app.apk
 ## 参考
 
 * [官方说明](https://developer.android.com/studio/publish/app-signing.html?hl=zh-cn#signing-manually)
+
+
