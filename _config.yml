@@ -12,8 +12,8 @@ baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
 # SNS settings
 RSS: false
-#weibo_username:     339719222
-#zhihu_username:     stuarthua
+# weibo_username: 339719222
+# zhihu_username: stuarthua
 github_username: stuarthua
 twitter_username: stuarthua_sir
 facebook_username: stuarthua.sir
@@ -21,7 +21,6 @@ facebook_username: stuarthua.sir
 
 
 # Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
 paginate: 10
@@ -32,7 +31,7 @@ anchorjs: no                          # if you want to customize anchor. check o
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+gems: [jekyll-paginate, rouge]
 
 
 
@@ -42,12 +41,13 @@ gems: [jekyll-paginate]
 # document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
 kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
+  input: GFM
+  syntax_highlighter: rouge
 
 
 
 # Disqus settings
-disqus_username: stuarthua
+# disqus_username: stuarthua
 
 # Duoshuo settings
 #duoshuo_username: stuarthua
@@ -58,11 +58,11 @@ disqus_username: stuarthua
 
 # Analytics settings
 # Baidu Analytics
-ba_track_id: 15604eac1992a89871cd85f2cd425d50
+# ba_track_id: 15604eac1992a89871cd85f2cd425d50
 
 # Google Analytics
-ga_track_id: 'UA-55082727-2'            # Format: UA-xxxxxx-xx
-ga_domain: stuarthua.com
+# ga_track_id: 'UA-55082727-2'            # Format: UA-xxxxxx-xx
+# ga_domain: stuarthua.com
 
 
 
