@@ -62,10 +62,10 @@ tags:
 
 #### 接口
 
-1. 单个单词，首字母大写，例如: Login
-2. 多个单词，每个单词的首字母大写，例如: LoginRegisterListener
-3. 如果接口表示一个事件，则应该取名为OnXxxListener
-4. 如果表示一种能力，应以"able"、"ible"结尾，如interface Runable | interface Accessible
+1. 单个单词，首字母大写，例如: `Login`
+2. 多个单词，每个单词的首字母大写，例如: `LoginRegisterListener`
+3. 如果接口表示一个事件，则应该取名为`OnXxxListener`
+4. 如果表示一种能力，应以"able"、"ible"结尾，如`interface Runable`、`interface Accessible`
 
 #### 方法
 
@@ -203,3 +203,5 @@ View 的缩写：
 * [Android 开发规范](http://www.jianshu.com/p/59c0b0e38231)
 * [Android 代码规范参考文档](https://www.gitbook.com/book/shibin/android-codeformat/details)
 * [Android代码规范-命名规范](https://segmentfault.com/a/1190000005893399)
+
+
