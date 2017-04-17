@@ -28,7 +28,8 @@ tags:
 * 类注释 `AndroidStudio -> Setting -> Editor -> File and Code Templates -> Includes -> File Header`
 
 ```
-#set( $USER = "XXXXXX" $EMAIL = "XXXXXX@XXX.com" )
+#set( $USER = "XXXXXX" )
+#set( $EMAIL = "XXXXXX@XXX.com" )
 /**
  * User $USER
  * Date ${YEAR}-${MONTH}-${DAY}
@@ -146,7 +147,7 @@ View 的缩写：
 
 ### Drawable 命名
 
-全部小写，采用下划线命名法，加前缀区分，如 
+全部小写，采用下划线命名法，加前缀区分，如
 
 1. 按钮	 btn_main_home.png
 2. 分割线 div_maket_white.png
