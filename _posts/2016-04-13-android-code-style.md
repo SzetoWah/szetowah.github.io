@@ -12,11 +12,11 @@ tags:
     - code style
 ---
 
-## 设置 code style
+## Anroid Code Style
 
-Code Style 可参考 suare 和 google 的规范
+通常，Code Style 可参考 suare 或 google 的规范
 
-### Square Style
+### 1. Square Style
 
 [java-code-styles](https://github.com/square/java-code-styles)
 
@@ -39,7 +39,7 @@ cd java-code-styles
 
 >Square 规范中，tab 默认2个字符，可以逐一点击，进行更改，Tab size : 4
 
-* Google Style [styleguide](https://github.com/google/styleguide)
+### 2. Google Style [styleguide](https://github.com/google/styleguide)
 
 ```
 styleguide/intellij-java-google-style.xml

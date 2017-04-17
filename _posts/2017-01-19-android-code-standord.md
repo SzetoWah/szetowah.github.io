@@ -12,7 +12,7 @@ tags:
     - standard
 ---
 
-# Android 代码规范
+# Android Code Standard
 
 编码规范在团队协作项目中十分重要，符合规范的代码可以让人简单快速地理解代码的意图。
 
