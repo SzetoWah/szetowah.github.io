@@ -9,7 +9,7 @@ catalog: true
 tags:
     - Notes
     - Android
-    - standard
+    - code standard
 ---
 
 # Android Code Standard
