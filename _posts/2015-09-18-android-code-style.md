@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "Anroid Code Style"
-subtitle:   "Android Studio设置code-style"
-date:       2016-04-13
+title:      "Android Studio 代码格式设置"
+subtitle:   "Anroid Code Style"
+date:       2015-09-18
 author:     "StuartHua"
-header-img: "img/post-bg-2016.jpg"
+header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:
     - Notes

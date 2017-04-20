@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "NextCloud私有云"
-subtitle:   "NextCloud 私有云"
+title:      "NextCloud 私有云"
+subtitle:   "NextCloud"
 date:       2017-04-13
 author:     "StuartHua"
 header-img: "img/post-bg-2017.jpg"
@@ -10,6 +10,8 @@ tags:
     - Notes
     - nextcloud
 ---
+
+## NextCloud
 
 
 

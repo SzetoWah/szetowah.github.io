@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "Android Code Standard"
-subtitle:   "Android 代码规范"
-date:       2017-01-19
+title:      "Android 代码规范"
+subtitle:   "Android Code Standard"
+date:       2015-10-02
 author:     "StuartHua"
-header-img: "img/post-bg-2017.jpg"
+header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:
     - Notes

@@ -1,14 +1,15 @@
 ---
 layout:     post
-title:      "Android Signature"
-subtitle:   "Android 签名"
-date:       2017-01-16
+title:      "Android 签名"
+subtitle:   "Android Signature"
+date:       2015-09-13
 author:     "StuartHua"
-header-img: "img/post-bg-2017.jpg"
+header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:
     - Notes
     - Android
+    - signature
 ---
 
 ## Android Signature
