@@ -17,4 +17,4 @@ header-img: "img/about-bg.jpg"
 ## Career
 2013 - 至今   |   Android Developer
 
->– Enjoy work, fight for <a id="freedom" onclick="_hmt.push(['_trackEvent', 'freedom', 'click', 'free']);" href="http://baike.baidu.com/subview/31798/7231288.htm" target="_blank">freedom</a>.
+>– Enjoy work, fight for <a href="https://zh.wikipedia.org/zh-hans/%E5%8B%87%E6%95%A2%E7%9A%84%E5%BF%83" target="_blank">freedom</a>.
