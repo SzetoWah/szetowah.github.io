@@ -9,7 +9,7 @@ catalog: true
 tags:
     - Notes
     - Android
-    - rx-android-java
+    - rx android java
 ---
 
 ## Rx-Android-Java
