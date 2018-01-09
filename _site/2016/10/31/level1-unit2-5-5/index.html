@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于Android、生活、思考 | Stuard Hua，Android Engineer">
+    <meta name="keywords"  content="stuart, stuarthua, Stuart Hua, @stuarthua, @StuartHua, Stuart Hua's Blog, android, Android, 博客, 个人网站, 互联网">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Level 1-Unit 2 5/5 - Stuart Hua's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2016/10/31/level1-unit2-5-5/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Stuart Hua's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-2016.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/post-bg-2016.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#英语流利说" title="英语流利说">英语流利说</a>
+                        
+                    </div>
+                    <h1>Level 1-Unit 2 5/5</h1>
+                    
+                    
+                    <h2 class="subheading">英语流利说 - 懂你英语</h2>
+                    
+                    <span class="meta">Posted by StuartHua on October 31, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				<h1 id="level-1-unit-2-55">Level 1-Unit 2 5/5</h1>
+
+<!-- more -->
+
+<h2 id="listening">Listening</h2>
+
+<p>This is Lisa Jackson.</p>
+
+<p>Her full name is Lisa Marie Jackson.</p>
+
+<p>Lisa is her first name.</p>
+
+<p>Her middle name is Marie.</p>
+
+<p>Her last name is Jackson.</p>
+
+<p>Lisa’s mother comes from France.</p>
+
+<p>She can speak two languages, English and French.</p>
+
+<p>And now she’s studying Chinese.</p>
+
+<p>Lisa’s father comes from the US.</p>
+
+<p>He can speak English and a little Spanish.</p>
+
+<p>And now he’s studying Chinese.</p>
+
+<p>Lisa and her sister go to the same school.</p>
+
+<p>In school they speak Chinese.</p>
+
+<p>Their Chinese is very good.</p>
+
+<p>At home they speak English.</p>
+
+<p>Their parent’s Chinese isn’t very good.</p>
+
+<p>They study many subjects in school.</p>
+
+<p>They study science and math.</p>
+
+<p>science <code class="highlighter-rouge">英  ['saɪəns]   美  ['saɪəns]
+n. 科学；技术；学科；理科</code></p>
+
+<p>They study English and Chinese.</p>
+
+<p>They study other subjects too.</p>
+
+<p>Angela is good at math and science.</p>
+
+<p>She’s also good at sports.</p>
+
+<p>She can run very fast.</p>
+
+<p>She can jump rope.</p>
+
+<p>rope <code class="highlighter-rouge">英  [rəʊp]   美  [rop]
+n. 绳，绳索
+vt. 捆，绑
+vi. 拧成绳状</code></p>
+
+<p>She isn’t good at art.</p>
+
+<p>Her drawings aren’t very good.</p>
+
+<p>Lisa likes languages and books.</p>
+
+<p>She also likes music.</p>
+
+<p>She loves music.</p>
+
+<p>She can play the violin a little.</p>
+
+<p>violin <code class="highlighter-rouge">英  [vaɪə'lɪn; 'vaɪəlɪn]   美  [,vaɪə'lɪn]
+n. 小提琴；小提琴手</code></p>
+
+<p>She doesn’t like math.</p>
+
+<p>Angela can’t play the violin.</p>
+
+<p>She can’t play the piano.</p>
+
+<p>But she can sing.</p>
+
+<p>She can sing very well.</p>
+
+<p>She and Lisa are both good singers.</p>
+
+<p>They like to sing.</p>
+
+<h2 id="vocabulary">Vocabulary</h2>
+
+<p>It’s windy today.</p>
+
+<p>The wind is blowing.</p>
+
+<p>It’s raining.</p>
+
+<p>It is raining, so take an umbrella.</p>
+
+<p>It’s cloudy weather.</p>
+
+<p>It’s cloudy, so we can’t see the sun.</p>
+
+<p>It’s cold today.</p>
+
+<p>It’s cold so wear a coat.</p>
+
+<p>smog <code class="highlighter-rouge">英  [smɒg]   美  [smɑːɡ]
+n. 烟雾</code></p>
+
+<p>It’s smoggy, so wear a mask.</p>
+
+<p>smoggy <code class="highlighter-rouge">美  ['smɔɡi]
+adj. 烟雾弥漫的</code></p>
+
+<p>a black coat.</p>
+
+<p>This coat is black.</p>
+
+<p>a yellow umbrella.</p>
+
+<p>This umbrella is yellow.</p>
+
+<p>a blue scarf.</p>
+
+<p>scarf <code class="highlighter-rouge">英  [skɑːf]   美  [skɑrf]
+n. 围巾；嵌接，嵌接处；头巾领巾
+vt. 披嵌接；用围巾围</code></p>
+
+<p>This is a blue scarf.</p>
+
+<p>a brown hat.</p>
+
+<p>brown ` 英  [braʊn]   美  [braʊn]
+adj. 棕色的，褐色的；太阳晒黑的
+vi. 变成褐色
+n. 褐色，棕色
+vt. 使变成褐色`</p>
+
+<p>This hat is brown.</p>
+
+<p>black gloves.</p>
+
+<p>glove <code class="highlighter-rouge">英  [glʌv]   美  [ɡlʌv]
+n. 手套</code></p>
+
+<p>These gloves are black.</p>
+
+<p>sitting on a bench.</p>
+
+<p>bench <code class="highlighter-rouge">英  [ben(t)ʃ]   美  [bɛntʃ]
+n. 长凳；工作台；替补队员
+vt. 给…以席位；为…设置条凳</code></p>
+
+<p>She’s sitting on a bench.</p>
+
+<p>standing in an elevator.</p>
+
+<p>He’s standing in an elevator.</p>
+
+<p>pushing the door open.</p>
+
+<p>She’s pushing the door open.</p>
+
+<p>pulling the door open.</p>
+
+<p>She’s pulling the door open.</p>
+
+<p>sitting at a table.</p>
+
+<p>He is sitting at a table.</p>
+
+<p>go in to the bathroom.</p>
+
+<p>come out of the bathroom.</p>
+
+<h2 id="dialogue">Dialogue</h2>
+
+<p>Good morning, Lisa.</p>
+
+<p>Hi, Tom.</p>
+
+<p>What’s your first class?</p>
+
+<p>My first class is math.</p>
+
+<p>What’s yours?</p>
+
+<p>My first class is science.</p>
+
+<p>What’s your second class?</p>
+
+<p>My second class is English.</p>
+
+<p>Do you like your English teacher?</p>
+
+<p>Yeath. She is a good teacher.</p>
+
+<p>You have English class too, right?</p>
+
+<p>Yes, I have English class.</p>
+
+<p>When is your English class?</p>
+
+<p>It’s in the afternoon at 1:00.</p>
+
+<p>I have math class at the same time.</p>
+
+<p>Ok, Great after lunch.</p>
+
+<p>What’s your last class?</p>
+
+<p>My last class is Chinese.</p>
+
+<p>Me too.</p>
+
+<p>So we are in the same class.</p>
+
+<p>Great!</p>
+
+<p>Ok, see you when class.</p>
+
+<p>Do you know that man?</p>
+
+<p>No, I don’t know who he is.</p>
+
+<p>Don’t you?</p>
+
+<p>No, I don’t. Do you?</p>
+
+<p>Yes, I do.</p>
+
+<p>That’s Albert Goalms.</p>
+
+<p>Who is Albert Goalms.</p>
+
+<p>He is a singer.</p>
+
+<p>He’s from Maxico, but he lives in Turkey.</p>
+
+<p>Turkey <code class="highlighter-rouge">英  ['tɜːkɪ]   美  ['tɝki]
+n. 土耳其（横跨欧亚两洲的国家）</code></p>
+
+<p>Oh, that’s interesting.</p>
+
+<p>It’s yet a good singer?</p>
+
+<p>Yes, I think so.</p>
+
+<p>Ok, bye for now.</p>
+
+<h2 id="letters--numberes">Letters &amp; Numberes</h2>
+
+<p>a bench</p>
+
+<p>a shirt <code class="highlighter-rouge">衬衫</code></p>
+
+<p>a thumb</p>
+
+<p>thumb <code class="highlighter-rouge">英  [θʌm]   美  [θʌm]
+vt. 翻阅；以拇指拨弄；作搭车手势；笨拙地摆弄
+vi. 用拇指翻书页；竖起拇指要求搭车
+n. 拇指</code></p>
+
+<p>black</p>
+
+<p>brown</p>
+
+<p>a cloud</p>
+
+<p>a dress <code class="highlighter-rouge">连衣裙</code></p>
+
+<p>a crosswalk <code class="highlighter-rouge">人行道</code></p>
+
+<p>shoes</p>
+
+<p>a duck</p>
+
+<p>a brain</p>
+
+<p>brain <code class="highlighter-rouge">英  [breɪn]   美  [bren]
+n. 头脑，智力；脑袋
+vt. 猛击…的头部</code></p>
+
+<p>a piece of paper</p>
+
+<p>piece <code class="highlighter-rouge">英  [piːs]   美  [pis]
+n. 块；件；篇；硬币
+vt. 修补；接合；凑合</code></p>
+
+<p>turn right</p>
+
+<p>a line</p>
+
+<p>a mouth</p>
+
+<p>a crow</p>
+
+<p>crow <code class="highlighter-rouge">n. [鸟] 乌鸦；鸡鸣</code></p>
+
+<p>quarter <code class="highlighter-rouge">英  ['kwɔːtə]   美  ['kwɔrtɚ]
+n. 四分之一；地区；季度；一刻钟；两角五分；节
+vi. 住宿；驻扎
+vt. 将…四等分；供某人住宿
+num. 四分之一</code></p>
+
+<p>8*5 <code class="highlighter-rouge">eight times five</code></p>
+
+<p>8/5 <code class="highlighter-rouge">eight divided by five</code></p>
+
+<p>8-2 <code class="highlighter-rouge">eight minus two</code></p>
+
+<p>minus <code class="highlighter-rouge">英  ['maɪnəs]   美  ['maɪnəs]
+prep. 减，减去
+n. 负号，减号；不足；负数
+adj. 减的；负的</code></p>
+
+<p>8+2 <code class="highlighter-rouge">eight plus two</code></p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/10/29/level1-unit2-4-5/" data-toggle="tooltip" data-placement="top" title="Level 1-Unit 2 4/5">
+                        Previous<br>
+                        <span>Level 1-Unit 2 4/5</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/11/01/level2-unit1-1-5/" data-toggle="tooltip" data-placement="top" title="Level 2-Unit 1 1/5">
+                        Next<br>
+                        <span>Level 2-Unit 1 1/5</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+
+                
+
+            </div>
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Notes" title="Notes" rel="17">
+                                    Notes
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#Android" title="Android" rel="13">
+                                    Android
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#英语流利说" title="英语流利说" rel="40">
+                                    英语流利说
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://twitter.com/stuarthua_sir">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/stuarthua.sir">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/stuarthua">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Stuart Hua's Blog 2018
+                    <br>
+                    Theme by <a href="https://github.com/huxpro">Hux</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+<!-- jekyll-search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签 | title date tag" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

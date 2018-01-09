@@ -2,6 +2,4 @@
 .deploy_git
 node_modules/
 public/
-db.json
-themes/next/
-themes/material/
+_site/

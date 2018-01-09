@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于Android、生活、思考 | Stuard Hua，Android Engineer">
+    <meta name="keywords"  content="stuart, stuarthua, Stuart Hua, @stuarthua, @StuartHua, Stuart Hua's Blog, android, Android, 博客, 个人网站, 互联网">
+    <meta name="theme-color" content="#000000">
+    
+    <title>Stuart Hua's Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/page6/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Stuart Hua's Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Stuart Hua's Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">Think Less, Think Better</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/2016/10/19/level1-unit1-2-5/">
+        <h2 class="post-title">
+            Level 1-Unit 1 2/5
+        </h2>
+        
+        <h3 class="post-subtitle">
+            英语流利说 - 懂你英语
+        </h3>
+        
+        <div class="post-content-preview">
+            Level 1-Unit 1 2/5
+
+
+
+Listening
+
+This is Dan.
+
+Hello, my name is Dan.
+
+Dan is a man.
+
+This is Tina.
+
+Hi, my name is Tina.
+
+Tina is a woman.
+
+This is Ben.
+
+Hi, my name is Ben.
+
+Ben is a boy.
+
+This i...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on October 19, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2016/10/18/level1-unit1-1-5/">
+        <h2 class="post-title">
+            Level 1-Unit 1 1/5
+        </h2>
+        
+        <h3 class="post-subtitle">
+            英语流利说 - 懂你英语
+        </h3>
+        
+        <div class="post-content-preview">
+            Level 1-Unit 1 1/5
+
+
+
+Listening
+
+This is Dan.
+
+Dan is a man.
+
+This is Tina.
+
+Tina is a woman.
+
+This is Ben.
+
+Ben is a boy.
+
+This is Lisa.
+
+Lisa is a girl.
+
+This is Dan. This is Ben.
+
+Dan is a man a...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on October 18, 2016
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/10/02/android-code-standord/">
+        <h2 class="post-title">
+            Android 代码规范
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Android Code Standard
+        </h3>
+        
+        <div class="post-content-preview">
+            Android Code Standard
+
+编码规范在团队协作项目中十分重要，符合规范的代码可以让人简单快速地理解代码的意图。
+
+通用规范
+
+首先，界定一些通用规范
+
+
+  建议使用Unix系列环境进行开发
+  源文件编码格式为 UTF-8
+  把密码和敏感数据放在 gradle.properties
+  layout中使用tools命名空间，便于布局预览
+  图片的.9处理
+  类注释 ...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on October 2, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/09/18/android-code-style/">
+        <h2 class="post-title">
+            Android Studio 代码格式设置
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Anroid Code Style
+        </h3>
+        
+        <div class="post-content-preview">
+            Anroid Code Style
+
+通常，Code Style 可参考 suare 或 google 的规范
+
+1. Square Style
+
+java-code-styles
+
+安装
+
+cd java-code-styles
+./install.sh
+
+
+打开 Android Studio， Android Studio -&gt; Preferences
+
+
+
+找到 Editor -...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on September 18, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/09/13/android-signature/">
+        <h2 class="post-title">
+            Android 签名
+        </h2>
+        
+        <h3 class="post-subtitle">
+            Android Signature
+        </h3>
+        
+        <div class="post-content-preview">
+            Android Signature
+
+keytool、zipalign、apksigner、jarsigner 等命令的使用
+
+
+
+keytool
+
+keytool是一个秘钥和证书的管理工具，可以用于管理对称加密和非对称加密，将秘钥和证书存储在keystore中。
+
+使用 keytool 生成一个私钥
+
+keytool -genkey -v -keystore my-release-key....
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on September 13, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/08/20/adb/">
+        <h2 class="post-title">
+            ADB 常用操作
+        </h2>
+        
+        <h3 class="post-subtitle">
+            ADB Usage
+        </h3>
+        
+        <div class="post-content-preview">
+            ADB
+
+ADB，即 Android Debug Bridge
+
+
+
+SDK Update
+
+添加代理
+
+--proxy-host android-mirror.bugly.qq.com --proxy-port 8080 -s
+
+
+查看更新
+
+## list
+android list sdk --all --proxy-host android-mirror.bugly.qq.com --...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on August 20, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/07/16/ssh-keys/">
+        <h2 class="post-title">
+            关于 SSH 的那些事儿
+        </h2>
+        
+        <h3 class="post-subtitle">
+            ssh、ssh-keygen、ssh-add
+        </h3>
+        
+        <div class="post-content-preview">
+            SSH
+
+ssh 命令是openssh套件中的客户端连接工具，可以给予ssh加密协议实现安全的远程登录服务器。
+
+
+
+ssh 公钥认证 是ssh认证的方式之一。通过公钥认证可实现ssh免密码登陆，git的ssh方式也是通过公钥进行认证的。
+
+
+  
+    ssh-keygen 可用来生成ssh公钥认证所需的公钥和私钥文件
+  
+  
+    ssh-add 可用来添加公钥到ssh中
+  
+...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on July 16, 2015
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/2015/04/06/vagrant-qing-ming-festival/">
+        <h2 class="post-title">
+            流浪似的清明节
+        </h2>
+        
+        <h3 class="post-subtitle">
+            See the world!
+        </h3>
+        
+        <div class="post-content-preview">
+            太棒了，鸽子
+
+我已经记不清这是第几次在广兰路折返了，只是生生的记得出门的时候时间是17：00，而现在，时间分明走在21：07！
+
+
+
+坦白讲，我确实已经慵懒地要睡着了，如果对面坐的妹子不漂亮的话。
+
+能预见的是，匆忙定行程赶往杭州，即便是轻身徒步，未必有此刻的惬意。
+
+这样的风格有点孔乙己了，倒也受用。
+
+被放鸽子，清明假期的第一天，折返的地铁、行人、图书馆；
+
+元素这物件，单一的令人发指...
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by StuartHua on April 6, 2015
+    </p>
+</div>
+<hr>
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/page5">&larr; Newer Posts</a>
+    </li>
+    
+    
+</ul>
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Notes" title="Notes" rel="17">
+                                    Notes
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#Android" title="Android" rel="13">
+                                    Android
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                                <a href="/tags/#英语流利说" title="英语流利说" rel="40">
+                                    英语流利说
+                                </a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+                        
+                            <img src="/img/avatar-stuart.jpg" />
+                        
+                        
+                            <p>Rethink to be better!</p>
+                        
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://twitter.com/stuarthua_sir">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://www.facebook.com/stuarthua.sir">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li>
+                                <a target="_blank" href="https://github.com/stuarthua">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </section>
+                <!-- Friends Blog -->
+                
+    		</div>
+        
+	</div>
+</div>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://twitter.com/stuarthua_sir">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+
+                    
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/stuarthua.sir">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/stuarthua">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Stuart Hua's Blog 2018
+                    <br>
+                    Theme by <a href="https://github.com/huxpro">Hux</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+<!-- jekyll-search -->
+<div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签 | title date tag" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/search/css/cb-search.css">
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
