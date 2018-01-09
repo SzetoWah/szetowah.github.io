@@ -4,4 +4,4 @@ StuartHua's Blog
 
 git push 
 
-自动化构建jekyll
+自动化构建jekyll blog
