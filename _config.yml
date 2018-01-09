@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: SzetoWah's Blog
+title: StuartHua's Blog
 subtitle:
 description: Are you asking me the way?
-author: szetowah
+author: StuartHua
 language:
 - en
 - zh-Hans
@@ -14,7 +14,7 @@ timezone: Asia/Hong_Kong
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://szetowah.com
+url: http://stuarthua.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
