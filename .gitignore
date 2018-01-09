@@ -1,6 +1,7 @@
-_site
-node_modules
 .DS_Store
-*/.DS_Store
-*/*/.DS_Store
-*.sh
+.deploy_git
+node_modules/
+public/
+db.json
+themes/next/
+themes/material/
