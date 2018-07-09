@@ -1,7 +1,7 @@
 {
-  "name": "Stuart Hua's Blog",
-  "short_name": "Stuart Blog",
-  "description": "A programmer's blog",
+  "name": "Hux Blog",
+  "short_name": "Hux Blog",
+  "description": "About an engineer & designer who loves web.",
   "icons": [{
     "src": "icons/128.png",
     "sizes": "128x128",

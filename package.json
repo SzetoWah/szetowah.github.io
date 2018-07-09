@@ -1,10 +1,9 @@
 {
     "name": "Stuart Hua",
     "title": "Stuart Hua's Blog",
-    "version": "1.0.0",
-    "homepage": "http://stuarthua.github.io",
     "author": "Stuart Hua <stuarthua.cn@gmail.com>",
     "version": "1.7.0",
+    "homepage": "http://stuarthua.github.io",
     "repository": {
         "type": "git",
         "url": "https://github.com/stuarthua/stuarthua.github.io"
