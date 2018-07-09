@@ -12,7 +12,7 @@
 
 ### 职业
 
-2013 - 至今   |   Android Developer
+2013 - 至今 | Android Developer
 
 >Enjoy work, fight for [freedom](https://zh.wikipedia.org/zh-hans/%E5%8B%87%E6%95%A2%E7%9A%84%E5%BF%83)
 

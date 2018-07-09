@@ -12,7 +12,7 @@ Turned 30, I know that I don't need to give up somethings. But it's right time t
 
 ### Career
 
-2013 - now   |   Android Developer
+2013 - now | Android Developer
 
 >Enjoy work, fight for [freedom](https://zh.wikipedia.org/zh-hans/%E5%8B%87%E6%95%A2%E7%9A%84%E5%BF%83)
 
