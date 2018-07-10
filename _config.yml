@@ -49,11 +49,11 @@ kramdown:
 
 
 # Disqus settings
-# disqus_username: stuarthua
+disqus_username: stuarthua
 
 
 # Netease settings
-netease_comment: false
+# netease_comment: false
 
 
 # Analytics settings

@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "CentOS 常用软件"
-subtitle:   "CentOS Software"
+title:      "CentOS 服务器环境搭建"
+subtitle:   "CentOS Cloud Environment Setup"
 date:       2017-07-12
 author:     "StuartHua"
 header-img: "img/post-bg-centos.jpg"
@@ -9,6 +9,7 @@ catalog: true
 tags:
     - Notes
     - centos
+    - environment
 ---
 
 ## CentOS 常用软件
@@ -74,7 +75,7 @@ echo $SHELL
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
-### 安装 oh-my-zsh 插件：
+### 安装 oh-my-zsh 插件
 
 在 `.zshrc` 文件中，启用插件：
 
