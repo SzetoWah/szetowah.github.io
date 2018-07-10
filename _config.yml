@@ -46,7 +46,7 @@ plugins: [jekyll-paginate, rouge]
 markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
-
+highlighter: rouge
 
 # Disqus settings
 disqus_username: stuarthua
