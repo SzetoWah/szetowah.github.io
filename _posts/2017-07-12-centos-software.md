@@ -18,6 +18,16 @@ tags:
 
 ## git
 
+### 安装 git
+
+```
+$ sudo yum install git 
+```
+
+### 安装最新版 git
+
+>此版本 git 有可能于其他库冲突，谨慎选择
+
 CentOS 7.3 的 yum base repository 提供的 git 版本只有到 1.8.3，沒辦法使用 git 2 的一些新功能。若要安裝 git 2 但不想自己 compile 原始碼，想用 yum 來管理的話，可以使用 IUS 提供的 git2u 套件，安裝方式如下：
 
 1. 若本來已有安裝 git，須先將之移除：
@@ -26,15 +36,15 @@ CentOS 7.3 的 yum base repository 提供的 git 版本只有到 1.8.3，沒辦�
     ```
 2. 安裝 epel-release repository 以免找不到必要的相依套件：
     ```
-    sudo yum install epel-release
+    $ sudo yum install epel-release
     ```
 3. 安裝 IUS repository (for RHEL/CentOS 7)：
     ```
-    $ sudo yum install https://centos7.iuscommunity.org/ius-release.rpm 
+    $ sudo yum install https://centos7.iuscommunity.org/ius-release.rpm
     ```
 4. 安裝 git2u：
     ```
-    $ sudo yum install git2u
+    $ sudo yum --enablerepo=ius-archive install git2u
     ```
 
 提示：如果使用 CentOS 6 有同样的需求，只要把第 3 步网址中的 centos7 改成 centos 6 即可
