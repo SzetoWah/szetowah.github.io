@@ -29,11 +29,11 @@ cd java-code-styles
 
 打开 Android Studio， Android Studio -> Preferences
 
-![code-style-for-mac-5](http://7o50rs.com1.z0.glb.clouddn.com/2017-04-18-code-style-for-mac-5.png)
+![code-style-for-mac-5](http://res.stuarthua.com/2017-04-18-code-style-for-mac-5.png)
 
 找到 Editor -> Code Style -> Java,在 Scheme 下拉框中选择 SquareAndroid，点击 ok
 
-![code-style-for-mac-6](http://7o50rs.com1.z0.glb.clouddn.com/2017-04-18-code-style-for-mac-6.png)
+![code-style-for-mac-6](http://res.stuarthua.com/2017-04-18-code-style-for-mac-6.png)
 
 快捷键 `Command + Alt + L`， 即可对之前的代码进行格式化
 
@@ -47,7 +47,7 @@ styleguide/intellij-java-google-style.xml
 
 打开 Android Studio，Android Studio -> Preferences
 
-![code-google-style](http://7o50rs.com1.z0.glb.clouddn.com/2017-04-18-code-google-style.png)
+![code-google-style](http://res.stuarthua.com/2017-04-18-code-google-style.png)
 
 找到 Editor -> Code Style -> Java，点击Manage -> Import，选中 `styleguide/intellij-java-google-style.xml`，即可
 

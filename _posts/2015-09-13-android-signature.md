@@ -20,7 +20,7 @@ keytool, zipalign, apksigner, jarsigner 等命令的使用
 
 ## keytool
 
-keytool 是 JDK 自带的工具, 是 Java 秘钥和证书的管理工具，可以用于管理对称加密和非对称加密，将秘钥和证书存储在keystore中。
+keytool 是 JDK 自带的工具，是 Java 秘钥和证书的管理工具，可以用于管理对称加密和非对称加密，将秘钥和证书存储在 keystore 中。
 
 ### 使用 keytool 生成一个私钥
 
@@ -45,6 +45,7 @@ keystore（或jks）文件有一个密钥，内部可以添加多个alias，而a
 ### 查看 keystore 信息
 
 * 查看keystore参数信息
+
     ```
     keytool -list -v -keystore my-release.jks
     ```
@@ -76,6 +77,7 @@ keystore（或jks）文件有一个密钥，内部可以添加多个alias，而a
     keytool -changealias -keystore keystore.jks -alias alias_name -destalias new_alias_name
     ```
 * 修改 alias 密码
+    
     ```
     keytool -keypasswd -keystore keystore.jks -alias alias_name
     ```
@@ -103,26 +105,24 @@ zipalign -v 4 source.apk destination.apk
 
 ## 签署 APK
 
-jarsigner是JDK提供的针对jar包签名的通用工具,
-位于JDK/bin/jarsigner.exe
+jarsigner 是JDK提供的针对jar包签名的通用工具， 位于 `JDK/bin/jarsigner.exe`
 
-apksigner是Google官方提供的针对Android apk签名及验证的专用工具,
-位于Android SDK/build-tools/SDK版本/apksigner.bat
+apksigner 是 Google 官方提供的针对 Android apk 签名及验证的专用工具，位于 `Android SDK/build-tools/SDK版本/apksigner.bat`
 
-不管是apk包,还是jar包,本质都是zip格式的压缩包,所以它们的签名过程都差不多(仅限V1签名), 这两个工具都可以对Android apk包进行签名.
+不管是apk包，还是jar包，本质都是zip格式的压缩包，所以它们的签名过程都差不多(仅限V1签名)，这两个工具都可以对Android apk包进行签名。
 
 ### V1和V2签名的区别
 
-在Android Studio中点击菜单 Build->Generate signed apk... 打包签名过程中, 可以看到两种签名选项 V1(Jar Signature)  V2(Full APK Signature)
+在 Android Studio 中点击菜单 `Build->Generate signed apk...` 打包签名过程中，可以看到两种签名选项 V1(Jar Signature)、V2(Full APK Signature)
 
-从Android 7.0开始, 谷歌增加新签名方案 V2 Scheme (APK Signature);
-但Android 7.0以下版本, 只能用旧签名方案 V1 scheme (JAR signing)
+* 从 Android 7.0 开始，谷歌增加新签名方案 V2 Scheme (APK Signature);
+* 但 Android 7.0 以下版本，只能用旧签名方案 V1 scheme (JAR signing)
 
-#### V1签名:
-来自JDK(jarsigner), 对zip压缩包的每个文件进行验证, 签名后还能对压缩包修改(移动/重新压缩文件), 对V1签名的apk/jar解压,在META-INF存放签名文件(MANIFEST.MF, CERT.SF, CERT.RSA), 其中MANIFEST.MF文件保存所有文件的SHA1指纹(除了META-INF文件), 由此可知: V1签名是对压缩包中单个文件签名验证
+#### V1签名
+来自JDK(jarsigner)，对zip压缩包的每个文件进行验证，签名后还能对压缩包修改(移动/重新压缩文件)，对V1签名的apk/jar解压,在META-INF存放签名文件(MANIFEST.MF, CERT.SF, CERT.RSA)，其中MANIFEST.MF文件保存所有文件的SHA1指纹(除了META-INF文件)，由此可知: V1签名是对压缩包中单个文件签名验证
 
-#### V2签名:
-来自Google(apksigner), 对zip压缩包的整个文件验证, 签名后不能修改压缩包(包括zipalign), 对V2签名的apk解压,没有发现签名文件,重新压缩后V2签名就失效, 由此可知: V2签名是对整个APK签名验证
+#### V2签名
+来自 ，Google(apksigner)，对zip压缩包的整个文件验证，签名后不能修改压缩包(包括zipalign)，对V2签名的apk解压,没有发现签名文件,重新压缩后V2签名就失效，由此可知: V2签名是对整个APK签名验证
 
 V2签名优点:
 
@@ -159,7 +159,7 @@ jarsigner -verbose -keystore my-release-key.jks -signedjar signed.apk unsigned.a
 * -digestalg  摘要算法
 * -sigalg     签名算法
 
-从JDK7开始, jarsigner默认算法是SHA256, 但Android 4.2以下不支持该算法, 所以需要修改算法, 添加参数 -digestalg SHA1 -sigalg SHA1withRSA
+从JDK7开始，jarsigner默认算法是SHA256，但Android 4.2以下不支持该算法，所以需要修改算法，添加参数 -digestalg SHA1 -sigalg SHA1withRSA
 
 ```
 jarsigner -keystore 密钥库名 -digestalg SHA1 -sigalg SHA1withRSA xxx.apk 密钥别名
