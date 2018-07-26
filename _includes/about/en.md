@@ -1,6 +1,6 @@
 ### About Me
 
-> Life Lovers ／ Poet / Android
+> Life Lovers / Poet / Android
 
 I always feel that blog should have such a sequence.
 
