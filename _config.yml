@@ -96,3 +96,10 @@ service-worker: true
 #         href: "#"
 #     }
 # ]
+
+
+# Exclude from processing.
+exclude:
+  - Gruntfile.js
+  - LICENSE
+  - README.md
