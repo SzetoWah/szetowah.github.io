@@ -101,5 +101,6 @@ service-worker: true
 # Exclude from processing.
 exclude:
   - Gruntfile.js
+  - package.json
   - LICENSE
   - README.md
