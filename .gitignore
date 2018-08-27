@@ -12,3 +12,4 @@ npm-debug.log
 
 .htaccess
 .user.ini
+.well-known/
