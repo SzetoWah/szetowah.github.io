@@ -1,8 +1,11 @@
-.MWebMetaData
-_site
-node_modules
-npm-debug.log
 .DS_Store
 */.DS_Store
 */*/.DS_Store
-*.sh
+
+*.swp
+_site
+.sass-cache
+.jekyll-metadata
+.MWebMetaData
+node_modules
+npm-debug.log
