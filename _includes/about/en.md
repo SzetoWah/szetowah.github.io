@@ -12,4 +12,4 @@ Simple, as a programmer.
 
 >Enjoy work, fight for [freedom](https://en.wikipedia.org/wiki/Braveheart)
 
-![freedom](http://7o50rs.com1.z0.glb.clouddn.com/2017-04-20-Braveheart_imp.jpg)
+![freedom](http://res.stuarthua.com/braveheart.jpg)
