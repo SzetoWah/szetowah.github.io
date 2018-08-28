@@ -13,27 +13,16 @@ body, html {
 .main a{
 	color:#0085a1;
 }
-.main a:hover {
-	/*color: #000;*/
-	/*text-decoration: none;*/
-}
+/* .main a:hover {
+	color: #000;
+	text-decoration: none;
+} */
 
 .main, .container > header {
 	width: 90%;
 	max-width: 69em;
 	margin: 0 auto;
 }
-
-@font-face {
-	font-family: 'huxico';
-	src:url('../fonts/huxico.eot');
-	src:url('../fonts/huxico.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/huxico.woff') format('woff'),
-		url('../fonts/huxico.ttf') format('truetype'),
-		url('../fonts/huxico.svg#huxico') format('svg');
-	font-weight: normal;
-	font-style: normal;
-} /* Made with http://icomoon.io/ */
 
 .cbp_tmtimeline {
 	padding: 0;
@@ -95,93 +84,7 @@ body, html {
 	display: no;
 }
 
-/* The icons */
-.cbp_tmtimeline > li .cbp_tmicon {
-	width: 40px;
-	height: 40px;
-	font-family: 'huxico';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	font-size: 1.4em;
-	line-height: 40px;
-	-webkit-font-smoothing: antialiased;
-	position: absolute;
-	color: #fff;
-	background: #46a4da;
-	border-radius: 50%;
-	box-shadow: 0 0 0 8px #afdcf8;
-	text-align: center;
-	left: 20%;
-	top: 0;
-	margin: 0 0 0 -25px;
-}
-
-.cbp_tmicon-phone:before {
-	content: "\e004";
-	font-family: 'huxico';
-}
-
-.cbp_tmicon-screen:before {
-	content: "\e005";
-	font-family: 'huxico';
-}
-
-.cbp_tmicon-html:before {
-	content: "\e001";
-	font-family: 'huxico';
-}
-
-.cbp_tmicon-video:before {
-	content: "\e002";
-	font-family: 'huxico';
-}
-
-.cbp_tmicon-font:before {
-	content: "\e003";
-	font-family: 'huxico';
-}
-
-/** Venders Logo **/
-.i-vue:before {
-	content: "";
-    display: block;
-    width: 40px;
-    height: 40px;
-    background: url("../images/logo-vue.png") 50% 50% no-repeat;
-    background-size: 20px;
-}
-
-.i-kissy:before {
-	content: "";
-	display: block;
-	width: 40px;
-	height: 40px;
-	background: url("../images/logo-kissy.png") 50% 50% no-repeat;
-	background-size: 20px;
-}
-
-.i-jquery:before {
-	content: "";
-	display: block;
-	width: 40px;
-	height: 40px;
-	background: url("../images/logo-jquery.png") 50% 50% no-repeat;
-	background-size: 20px;
-}
-
-.i-react:before {
-	content: "";
-	display: block;
-	width: 40px;
-	height: 40px;
-	background: url("../images/logo-react.png") 50% 50% no-repeat;
-	background-size: 22px;
-}
-
-/******* Hux Branch *****/
+/******* Branch *****/
 
 /* navbar - dark mode */
 .navbar-custom .nav li a,
@@ -278,9 +181,9 @@ header img{
 	background: rgba(0,0,0,0.05);
 	border-radius: 50%;
 }
-.cbp_tmlabel ul li.skill>span:nth-child(1){
+/* .cbp_tmlabel ul li.skill>span:nth-child(1){
 	margin-left: -7px;
-}
+} */
 .cbp_tmlabel ul li.skill span:before{
     line-height: 40px;
 }
