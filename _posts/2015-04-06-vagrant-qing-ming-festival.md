@@ -4,7 +4,7 @@ title:      "流浪似的清明节"
 subtitle:   "See the world!"
 date:       2015-04-06
 author:     "StuartHua"
-header-img: "img/post-bg-2015.jpg"
+header-img: "assets/theme/post-bg-2015.jpg"
 catalog: true
 tags:
     - Daily
