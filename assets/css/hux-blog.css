@@ -433,7 +433,7 @@ pre code {
 }
 .post-container ul,
 .post-container ol {
-  margin-bottom: 40px;
+  margin: 20px 0px;
 }
 @media screen and (max-width: 768px) {
   .post-container ul,
