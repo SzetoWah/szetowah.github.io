@@ -64,7 +64,7 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 
 ### 常用插件
 
-官方插件：[Plugins-Overview](https://link.jianshu.com/?t=https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview)
+官方插件：[Plugins-Overview](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview)
 
 #### 插件安装方法
 
