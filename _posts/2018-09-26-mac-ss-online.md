@@ -12,38 +12,43 @@ tags:
 
 [TOC]
 
-科学上网的最佳方式，是使用路由器上网，其次是使用客户端或命令行。部署代理服务的话，可以考虑 shadowsocks、v2ray
+科学上网的最佳方式，是使用路由器上网，其次是使用客户端或命令行。部署代理服务的话，可以考虑 shadowsocks、shadowsocksrr、v2ray
 
-## Shadowsocks
+## Shadowsocks & Shadowsocksrr
 
-官网：[shadowsocks](https://shadowsocks.org/)
+官网：[shadowsocks](https://shadowsocks.org/)，[shadowsocksrr](https://github.com/shadowsocksrr)
 
-自行购买 VPS，如 [搬瓦工](https://bandwagonhost.com/)、[vultr](https://www.vultr.com/)。VPS 超过 3 个的话，可以考虑使用 [shadowsocks-manager](https://github.com/shadowsocks/shadowsocks-manager)，以订阅方式提供代理服务。
+自行购买 VPS，如 [搬瓦工](https://bandwagonhost.com/)、[vultr](https://www.vultr.com/)。VPS 超过 3 个的话，可以考虑使用 [shadowsocks-manager](https://github.com/shadowsocks/shadowsocks-manager)、[ss-panel](https://github.com/search?q=ss+panel)，以订阅方式提供代理服务。
 
-服务搭建比较简单，可以参考 [shadowsocks-go](https://github.com/shadowsocks/shadowsocks-go)、[shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev)、[shadowsocks-manager](https://github.com/shadowsocks/shadowsocks-manager)
+服务搭建比较简单，可以参考官网
 
 ## v2ray
 
 官网：[v2ray](https://www.v2ray.com/)
 
-使用 v2ray，一定几率可以解救因使用 shadowsocks 而被识别封锁的 IP。
+使用 v2ray，一定几率可以解救因使用 shadowsocks 而被识别，遭到封锁的 IP。
 
-服务搭建也比较简单，可以参考 [v2ray](https://www.v2ray.com/)
+服务搭建也比较简单，可以参考官网
 
 ## 路由器
 
-路由器代理的方式因不同平台路由器而有所差异，此处，推荐使用 [梅林固件](http://koolshare.cn/)。
+路由器代理的方式因不同平台路由器而有所差异，推荐使用 [梅林固件](http://koolshare.cn/)。
 
 * -> [http://koolshare.cn/](http://koolshare.cn/)
 * -> [固件下载](http://firmware.koolshare.cn/) 
 * -> 选择相应路由器的型号，刷入固件 
 * -> 安装 `科学上网` 插件，[Merlin_Shadowsocks](https://github.com/heweiye/Merlin_Shadowsocks)([koolshare 官网](https://github.com/koolshare/koolshare.github.io) 已下线 ss 插件)
-* 配置，参考论坛即可
+* -> 配置，参考论坛即可
 
 ## 客户端
 
-
-
+* [ShadowsocksX-NG](https://github.com/shadowsocks/ShadowsocksX-NG) 不支持订阅
+* [ShadowsocksX-NG-R](https://github.com/qinyuhang/ShadowsocksX-NG-R/releases) 支持订阅
 * [Proxifier](https://www.proxifier.com/)
-* [SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif)，[备用下载](https://github.com/FelisCatus/SwitchyOmega/releases)
+* [SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif)，[Github 下载](https://github.com/FelisCatus/SwitchyOmega/releases)
 
+## 机场
+
+* ~~[海豚湾](https://cove.cloud/)~~ 需要邀请码，暂不推荐
+* [酸奶](https://www.ssru.xyz/)
+* [糖客](https://tangke.party/)
