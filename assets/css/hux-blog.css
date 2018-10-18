@@ -311,7 +311,7 @@ body {
   overflow-x: hidden;
 }
 p {
-  margin: 30px 0;
+  margin: 20px 0;
 }
 h1,
 h2,
@@ -413,7 +413,7 @@ pre code {
 .post-container h4,
 .post-container h5,
 .post-container h6 {
-  margin: 30px 0 10px;
+  margin: 30px 0 10px 30px;
 }
 .post-container h5 {
   font-size: 19px;
