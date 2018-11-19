@@ -21,12 +21,12 @@ facebook_username: stuarthua.sir
 
 
 # Friends settings
-friends: [
-    {
-        title: "Stuart Hua's Site",
-        href: "https://www.stuarthua.com"
-    }
-]
+# friends: [
+#     {
+#         title: "Stuart Hua's Site",
+#         href: "https://www.stuarthua.com"
+#     }
+# ]
 
 
 # Disqus settings
