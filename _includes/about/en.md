@@ -7,7 +7,6 @@ Like a book, like a lifetime, also like a poem.
 ### Contact
 
 * [Email](mailto:stuarthua.cn@gmail.com)
-* <a target="_blank" href="https://t.me/stuarthua">Telegram</a>
 
 ### Freedom
 

@@ -7,7 +7,6 @@
 ### 联系
 
 * [Email](mailto:stuarthua.cn@gmail.com)
-* <a target="_blank" href="https://t.me/stuarthua">Telegram</a>
 
 ### 自由
 
