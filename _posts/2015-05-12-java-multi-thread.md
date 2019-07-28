@@ -188,26 +188,26 @@ volatile 修饰符用来保证可见性。使用 volatile 修饰的变量是一�
 3. 因此每次使用该域就要重新计算，而不是使用寄存器中的值
 4. volatile 不会提供任何原子操作，它也不能用来修饰 final 类型的变量
 
-## 线程 Thread
+### 线程 Thread
 
-### Thread 类中 start() 和 run() 
+#### Thread 类中 start() 和 run() 
 
 start() 用来启动一个线程，当调用 start 方法后，系统才会开启一个新的线程，进而调用 run() 方法来执行任务，而单独的调用run() 就跟调用普通方法是一样的，已经失去线程的特性了。因此在启动一个线程的时候一定要使用 start() 而不是 run()。
 
-### Thread 类中 sleep() 和 wait() 
+#### Thread 类中 sleep() 和 wait() 
 
 sleep() 方法是线程类（Thread）的静态方法，作用是使调用线程暂停执行一段指定时间，将执行机会给其他线程。但其监视状态依然保持，暂停时间结束后，会回复到就绪状态，所以调用 sleep() 不会释放对象锁。
 
 wait() 是 Object 类的方法，对此对象调用 wait() 方法导致本线程放弃对象锁(线程暂停执行)，进入等待此对象的等待锁定池，只有针对此对象发出 notify（或 notifyAll）后本线程才进入对象锁定池准备获得对象锁，从而进入就绪状态。
 
-### Thread 类中 sleep() 和 yield()
+#### Thread 类中 sleep() 和 yield()
 
 * sleep() 方法给其他线程运行机会时不考虑线程的优先级，因此会给低优先级的线程以运行的机会；yield() 方法只会给相同优先级或更高优先级的线程以运行的机会；
 * 线程执行 sleep() 方法后转入阻塞（blocked）状态，而执行 yield() 方法后转入就绪（ready）状态；
 * sleep() 方法声明抛出 InterruptedException，而 yield() 方法没有声明任何异常；
 * sleep() 方法比 yield() 方法（跟操作系统相关）具有更好的可移植性。
 
-### 线程的状态
+#### 线程的状态
 
 * 就绪(Runnable):线程准备运行，不一定立马就能开始执行。
 * 运行中(Running)：进程正在执行线程的代码。
@@ -217,8 +217,8 @@ wait() 是 Object 类的方法，对此对象调用 wait() 方法导致本线程
 * 同步阻塞(Blocked on Synchronization)：等待获取锁。
 * 死亡(Dead)：线程完成了执行。
 
-参考资料：
+### 参考资料
 
-[https://blog.csdn.net/luoweifu/article/details/46613015](https://blog.csdn.net/luoweifu/article/details/46613015)
-[https://www.jianshu.com/p/6542c8a96392](https://www.jianshu.com/p/6542c8a96392)
-[https://juejin.im/post/5a2e8af8f265da430e4f1d7e](https://juejin.im/post/5a2e8af8f265da430e4f1d7e)
+* [Java中Synchronized的用法](https://blog.csdn.net/luoweifu/article/details/46613015)
+* [Java实现线程同步的几种方式](https://www.jianshu.com/p/6542c8a96392)
+* [Java—线程同步](https://juejin.im/post/5a2e8af8f265da430e4f1d7e)
