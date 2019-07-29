@@ -57,15 +57,11 @@
 
     <!-- Google AdSense -->
     {% if site.google_ad_client %}
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
-      // dynamic User
-      var _ga_client = '{{ site.google_ad_client }}'
-      
-      // Originial
       (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: _ga_client,
-        enable_page_level_ads: true
+          google_ad_client: "ca-pub-6137478455292280",
+          enable_page_level_ads: true
       });
     </script>
     {% endif %}
