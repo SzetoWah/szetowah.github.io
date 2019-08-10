@@ -10,8 +10,6 @@ tags:
     - mac
 ---
 
-[TOC]
-
 ## zsh
 
 官网：[zsh](http://www.zsh.org/)
