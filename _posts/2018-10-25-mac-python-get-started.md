@@ -243,7 +243,7 @@ table th:nth-of-type(1) {
 |pyenv shell --unset <br> pyenv local --unset|重置版本设置，只有 pyenv shell 和 pyenv local 命令有--unset参数|
 |pyenv rehash|创建垫片路径(为所有已安装的可执行文件创建 shims，如：~/.pyenv/versions/*/bin/*，因此，每当你增删了 Python 版本或带有可执行文件的包（如 pip）以后，都应该执行一次本命令)|
 
-##### pyenv-virtualenv
+* pyenv-virtualenv
 
 [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) 是 pyenv 的插件，为 pyenv 设置的 Python 版本提供隔离的虚拟环境，设置虚拟环境后，在当前目录下面安装的第三方库都不会影响其他环境
 
