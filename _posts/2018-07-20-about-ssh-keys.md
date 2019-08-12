@@ -256,4 +256,10 @@ $ sudo launchctl start com.openssh.sshd
 $ ssh-add -K ~/.ssh/id_coding_rsa
 ```
 
+查看 keychain 中已存储的私钥：
+
+```
+$ ssh-add -A
+```
+
 同理，在 linux 系统中，也有类似的解决方案 -- [Keychain](http://www.funtoo.org/Keychain)
