@@ -172,7 +172,7 @@ $ git clone git@cat.github:cat/CatPorgect.git
 至此，我们可以使用不同的私钥来操作我们不同 git 平台的项目。
 
 * 提示：  
-  配置多个 Host 后，可以尝试使用类似 `ssh dog.github` 来验证连接，其效果等同于 `ssh -T git@github.com`
+  配置多个 Host 后，可以尝试使用类似 `ssh dog.github` 来验证连接，其效果等同于 `ssh git@github.com`，当然，使用 `-T` 参数来禁用伪终端得到的返回会更加简洁 `ssh -T git@github.com`。
 
 #### SSH-agent
 
