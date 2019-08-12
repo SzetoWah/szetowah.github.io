@@ -151,8 +151,9 @@ $ sudo ln -s /usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions
 # 移除 python 当前版本软链接，建立名为 python 指向 brew 版 python2.7 的软链接
 $ sudo rm -rf /usr/local/bin/python
 $ sudo ln -s /usr/local/Cellar/python@2/2.7.16/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /usr/local/bin/python
+
 # 重置 pip，使其指向 pip2
-sudo easy_install-2.7 pip
+$ sudo easy_install-2.7 pip
 ```
 
 切换 Python 版本的过程比较繁琐，可以考虑将其放入 `~/.zshrc` 函数中：
@@ -180,6 +181,8 @@ function switch2python3() {
 ```
 
 更改完，记得 `source ~/.zshrc` 使配置生效。
+
+至此，当需要系统默认 Python 版本为 2.7 时，我们只需执行 `switch2python2` 即可；同样，`switch2python3` 可快速切换系统默认 Python 版本为 3.7
 
 #### 后记
 
