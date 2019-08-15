@@ -497,9 +497,11 @@ blogspot.com
 
 ### 参考
 
+* [gfwlist/gfwlist](https://github.com/gfwlist/gfwlist)
 * [查找冗余的过滤规则](https://adblockplus.org/zh_CN/redundancy_check)
 * [How to write filters](https://help.eyeo.com/en/adblockplus/how-to-write-filters)
 * [ABP规则语法](https://www.jianshu.com/p/40fde927ae7d)
 * [AdBlock Plus 过滤规则介绍](http://blog.yzautop.com/it/787.html)
 * [AutoProxy 代理规则](https://github.com/yinheli/gfwlist2dnsmasq/blob/master/autoproxy.md)
 * [PAC/GFWList自定义列表](https://patriot.ninja/index.php?rp=/knowledgebase/17/PACorGFWList.html)
+* [rigious/gfwlist](https://github.com/rigious/gfwlist)
