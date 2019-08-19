@@ -96,11 +96,11 @@ ssh 有关的目录及文件权限：
 * `~/.ssh/id_rsa.pub`、`~/.ssh/known_hosts` - 设置 644 权限
 * 阿里云密钥对 `aliyun-key-pair.pem` -  设置 400 权限（非服务器设置，在本地电脑处设置）
 
-#### 管理多组密钥对
+### 管理多组密钥对
 
 平时，用户会使用 github、coding、阿里云 ECS，这些都有用到 ssh 的密钥对来认证身份。可以创建 `~/.ssh/config` 来管理多组密钥对，每一个 SSH 服务器对应一组密钥对，也可以多个 SSH 服务器公用一组密钥对。
 
-##### 使用 SSH 登录阿里云 ECS：
+#### 使用 SSH 登录阿里云 ECS：
 
 ```
 # 通用配置
@@ -132,7 +132,7 @@ $ ssh -p 1602 -i ~/.ssh/aliyun-key-pair.pem stuart@110.110.110.110
 
 至此，我们可以方便的管理多台服务器，而无需繁琐的记忆每个服务器的端口、地址等信息。
 
-##### 使用 SSH 管理多个 github 账户：
+#### 使用 SSH 管理多个 github 账户：
 
 假设，我们已经拥有一个默认的 gihub 账户 stuart，使用默认 id_rsa 私钥，除此之外，我们还拥有额外的两个 github 账户 dog、cat，分别使用 id_rsa_dog、id_rsa_cat 这两个不同的私钥。
 
@@ -174,7 +174,7 @@ $ git clone git@cat.github:cat/CatPorgect.git
 * 提示：  
   配置多个 Host 后，可以尝试使用类似 `ssh dog.github` 来验证连接，其效果等同于 `ssh git@github.com`，当然，使用 `-T` 参数来禁用伪终端得到的返回会更加简洁 `ssh -T git@github.com`。
 
-#### SSH-agent
+### SSH-agent
 
 如果在使用 `ssh-keygen`生成私钥的过程中，我们设置了密码，那么在每一次使用密钥进行登录的时候，系统都会提示我们输入密码，这确实比较繁琐。而 SSH agent 程序能够将我们已解密的私钥缓存起来，在需要的时候提供给 SSH 客户端。这样，我们就只需要将私钥加入 SSH agent 缓存的时候输入一次密码就可以了。经常使用 SSH 连接的话，这一点确实方便了很多。
 
@@ -203,7 +203,7 @@ $ git clone git@cat.github:cat/CatPorgect.git
 * -X：对ssh-agent进行解锁
 * -x：对ssh-agent进行加锁
 
-#### ssh-agent 自动启动及密码保存
+#### ssh-agent 自动启动
 
 通俗来讲，`ssh-agent` 就是一个密钥管理器，运行 `ssh-agent` 以后，使用 `ssh-add` 将私钥交给 `ssh-agent` 保管，其他程序需要身份验证的时候可以将验证申请交给 `ssh-agent` 来完成整个认证过程。
 
@@ -232,6 +232,8 @@ ssh-add -l > /dev/null || ssh-add ~/.ssh/id_rsa
 ```
 
 当然，这会在 `~/.ssh` 目录下，生成 `~/.ssh/ssh_auth_sock` 文件，这是用于持久化的，记得不要删除即可。
+
+#### ssh-agent 密码保存
 
 解决了 `ssh agent` 的自动启动，我们现在来看私钥密码需要重复输入的问题。在 Mac 中，可以很方便地将密码保存到系统 keychain 里。编辑 `~/.ssh/config`，输入：
 
