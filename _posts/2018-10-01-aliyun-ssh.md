@@ -367,7 +367,7 @@ Host aliyun
 
 此时，只需 `ssh aliyun` 即可实现 stuart 用户免密登录，并拥有管理员权限，需要安装软件时，只需 `sudo su` 切换到 root 用户，进行安装即可。
 
-本地 ssh 配置说明：
+#### 参考
 
 * 参考 `man ssh_config` 查看更多配置项的涵义
 * 参考 [保持SSH连接](http://einverne.github.io/post/2017/05/ssh-keep-alive.html)  设置通用配置
