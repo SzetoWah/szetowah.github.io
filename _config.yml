@@ -46,12 +46,12 @@ disqus_username: stuarthua
 
 
 # Google Analytics
-# ga_track_id: 'UA-xxxxxxx-xx'            # Format: UA-xxxxxx-xx
-# ga_domain: xxxxx.com
+ga_track_id: 'UA-55082727-2'
 
 
 # Google Adsense settings
-# google_ad_client: 'xxxxxxx-xxxxx-xx'
+google_ad_client: 'ca-pub-6137478455292280'
+
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
@@ -107,4 +107,3 @@ service-worker: false
 
 # MathJax rendering for layout:page (e.g. post preview)
 page-mathjax: false
-theme: jekyll-theme-cayman
