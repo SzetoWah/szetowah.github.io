@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# 部署到 github pages 脚本
+
+# 错误时终止脚本
+set -e
+
+# 删除打包文件夹
+rm -rf public
+
+# 打包
+hugo -t puff
+
+# 进入打包文件夹
+cd public
+
+# Git init & add files
+git init
+git add -A
+
+# Git commit changes
+msg="building site `date`"
+if [ $# -eq 1 ]
+  then msg="$1"
+fi
+git commit -m "$msg"
+
+# 推送到 github
+# stuarthua.github.io 只能使用 master 分支
+git push -f git@github.com:stuarthua/stuarthua.github.io.git master
+
+# 回到原文件夹
+cd ..
