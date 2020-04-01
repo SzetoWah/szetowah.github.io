@@ -1,0 +1,9 @@
+<!-- switch language -->
+{{ $curLanguageName := .Site.Language.LanguageName }}
+{{ range .Site.Languages -}}
+{{ if ne .LanguageName $curLanguageName }}
+  <div class="language-item">
+    <a href="/{{ .Lang }}/">{{ .LanguageName }}</a>
+  </div>
+{{ end }}
+{{ end }}

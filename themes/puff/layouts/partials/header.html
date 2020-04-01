@@ -1,0 +1,19 @@
+<header class="nav">
+  <div class="nav-container">
+    <a href="{{ "/" | relURL }}">
+      <h2 class="nav-title">{{ .Site.Title }}</h2>
+    </a>
+    <ul>
+      {{ $currentPage := . }}
+      {{ range .Site.Menus.main }}
+        <li>
+          <a href="{{ .URL | absLangURL }}">
+            {{ .Pre }}
+            <span>{{ .Name }}</span>
+            {{ .Post }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>    
+  </div>
+</header>

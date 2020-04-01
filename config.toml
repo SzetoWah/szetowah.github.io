@@ -1,0 +1,60 @@
+baseURL = "https://blog.stuarthua.com"
+languageCode = "en-us"
+title = "StuartHua's Blog"
+theme = "puff"
+DefaultContentLanguage = "cn"
+enableRobotsTXT = false
+canonifyURLs = false
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[author]
+  name = "Stuart Hua"
+  homepage = "https://stuarthua.com/"
+
+[languages]
+  [languages.en]
+    contentDir = "content/en"
+    languageName = "English"
+    weight = 1
+  [languages.cn]
+    contentDir = "content/cn"
+    languageName = "简体中文"
+    weight = 2
+
+[permalinks]
+  post = "/blog/:title/"
+
+[params]
+  disqus = "stuarthua"
+  mainSections = ["posts", "categories", "tags"]
+  lazyImage = true
+  headTitle = "Stuart Hua"
+  description = "Software Developer, Life Adventurer"
+  favicon = "/logo.png"
+  postFooterContent = '<br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>'
+
+[[params.socials]]
+  name = "Travel"
+  link = "/travel/"
+
+[[params.socials]]
+  name = "EN"
+  link = "/en/"
+
+[[params.socials]]
+  name = "RSS"
+  link = "/index.xml"
+
+[menu]
+  [[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 1
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 0
