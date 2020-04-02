@@ -54,19 +54,21 @@
         </div>
 
         {{ if in .Site.Params.mainSections .Type }}
-        {{ partial "related.html" . }}
-        {{ if .Site.Params.postAds }}
-        <div class="post-ads">{{ .Site.Params.postAds | safeHTML }}</div>
+          {{ partial "related.html" . }}
+          {{ if .Site.Params.postAds }}
+            <div class="post-ads">{{ .Site.Params.postAds | safeHTML }}</div>
+          {{ end }}
+          <!-- google adsnese -->
+          {{ partial "google-adsense.html" . }}
+          <!-- split -->
+          <div style="height: 50px;"></div>
+          {{ if .Site.Params.disqus }}
+            <div class="post-comments">
+              {{ partial "disqus.html" . }}
+            </div>
+          {{ end }}
         {{ end }}
-        <!-- split -->
-        <div style="height: 50px;"></div>
-        {{ if .Site.Params.disqus }}
-        <div class="post-comments">
-          {{ partial "disqus.html" . }}
-        </div>
-        {{ end }}
-        {{ end }}
-
+        
         {{ partial "footer.html" . }}
       </div>
     </div>
@@ -75,7 +77,7 @@
   {{ partial "scripts.html" . }}
 
   {{ if .Site.Params.extraBody }}
-  {{ .Site.Params.extraBody | safeHTML }}
+    {{ .Site.Params.extraBody | safeHTML }}
   {{ end }}
 
 </body>
