@@ -5,6 +5,7 @@ theme = "puff"
 DefaultContentLanguage = "cn"
 enableRobotsTXT = false
 canonifyURLs = false
+googleAnalytics = "UA-55082727-2"
 
 [markup]
   [markup.goldmark]
@@ -30,11 +31,12 @@ canonifyURLs = false
 
 [params]
   disqus = "stuarthua"
+  favicon = "/logo.png"
   mainSections = ["posts", "categories", "tags"]
   lazyImage = true
   headTitle = "Stuart Hua"
   description = "Software Developer, Life Adventurer"
-  favicon = "/logo.png"
+  postHeaderContent = ""
   postFooterContent = '<br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>'
 
 [[params.socials]]

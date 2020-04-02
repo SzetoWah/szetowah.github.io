@@ -54,5 +54,8 @@
     (function (undefined) { }).call('object' === typeof window && window || 'object' === typeof self && self || 'object' === typeof global && global || {});
   </script> -->
 
-  {{ .Site.Params.extraHead | safeHTML }}
+  <!-- Google Analytics -->
+  {{ if not .Site.IsServer }}
+    {{ template "_internal/google_analytics_async.html" . }}
+  {{ end }}
 </head>
