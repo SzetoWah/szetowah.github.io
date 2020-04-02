@@ -18,7 +18,7 @@ git init
 git add -A
 
 # Git commit changes
-msg="building site `date`"
+msg="building site `date +%F`"
 if [ $# -eq 1 ]
   then msg="$1"
 fi
