@@ -55,7 +55,5 @@
   </script> -->
 
   <!-- Google Analytics -->
-  {{ if not .Site.IsServer }}
-    {{ template "_internal/google_analytics_async.html" . }}
-  {{ end }}
+  {{ template "_internal/google_analytics_async.html" . }}
 </head>
