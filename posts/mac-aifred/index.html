@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Stuart Hua" />
+  <meta property="og:url" content="https://blog.stuarthua.com/posts/mac-aifred/" />
+  <link rel="canonical" href="https://blog.stuarthua.com/posts/mac-aifred/" /><link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="shortcut" href="/logo.png" /><link rel="alternate" type="application/atom+xml" href="https://blog.stuarthua.comindex.xml" title="StuartHua&#39;s Blog">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/blog.stuarthua.com"
+      },
+      "articleSection" : "posts",
+      "name" : "Mac 高效使用指南（四）：Alfred 使用",
+      "headline" : "Mac 高效使用指南（四）：Alfred 使用",
+      "description" : "Alfred 一款提供基本搜索、快速启动和使用自定义插件的工作流功能。除了软件自带的功能外，它还允许用户自己开发 workflow 并分享出来。\nGeneral 界面  开机自启动 快速启动 Option \x2b Space Where are you：你在哪个国家。Alfred内置了常用网站搜索功能，在搜索时打开对应国家的网站。  Features 特性界面 免费版能够体验到的服务界面，Alfred 里所有的搜索功能都在这里设置。\nDefault Results Alfred 建议用户使用 Find \x2b Space \x2b文件名 来查询文件或文件夹，活着使用 Open \x2b Space \x2b文件名\nWeb Search 点击右下角的 Add Custom Search\n根据示意图在弹出界面中输入对应信息，其中网站图标可忽略，然后保存即可。 (\/assets\/img\/media\/ 常用网站：\n 百度：https:\/\/www.baidu.com\/s?ie=utf-8\x26amp;f=8\x26amp;wd={query} 简书：https:\/\/www.jianshu.com\/search?utf8=%E2%9C%93\x26amp;q={query} 淘宝：https:\/\/s.taobao.com\/search?oe=utf-8\x26amp;f=8\x26amp;q={query} 京东：https:\/\/search.jd.com\/Search?keyword={query}\x26amp;enc=utf-8\x26amp;wq={query} 微信文章：https:\/\/weixin.sogou.com\/weixin?type=2\x26amp;query={query} stackoverflow：https:\/\/www.stackoverflow.com\/search?q={query} github：https:\/\/github.com\/search?utf8=%E2%9C%93\x26amp;q={query} Android API Search：https:\/\/developer.android.com\/reference\/classes.html#q={query}  Dictionary 设置词典的关键词 di：\nClipboard 开启Alfred的剪切板功能\n查看 Alfred 剪切板历史记录：\n双击 Option\nSystem 「清空回收站」的关键字设置为 em，勾选 Confirm\nTerminal\/Shell 更改默认终端，配置为 iTerm2。",
+      "inLanguage" : "en-US",
+      "author" : "Stuart Hua",
+      "creator" : "Stuart Hua",
+      "publisher": "Stuart Hua",
+      "accountablePerson" : "Stuart Hua",
+      "copyrightHolder" : "Stuart Hua",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-09-04 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-09-04 00:00:00 \x2b0000 UTC",
+      "url" : "https:\/\/blog.stuarthua.com\/posts\/mac-aifred\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>Mac 高效使用指南（四）：Alfred 使用 - StuartHua&#39;s Blog</title>
+  <meta property="og:title" content="Mac 高效使用指南（四）：Alfred 使用 - StuartHua&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="Alfred 一款提供基本搜索、快速启动和使用自定义插件的工作流功能。除了软件自带的功能外，它还允许用户自己开发 workflow 并分享出来。
+General 界面  开机自启动 快速启动 Option &#43; Space Where are you：你在哪个国家。Alfred内置了常用网站搜索功能，在搜索时打开对应国家的网站。  Features 特性界面 免费版能够体验到的服务界面，Alfred 里所有的搜索功能都在这里设置。
+Default Results Alfred 建议用户使用 Find &#43; Space &#43;文件名 来查询文件或文件夹，活着使用 Open &#43; Space &#43;文件名
+Web Search 点击右下角的 Add Custom Search
+根据示意图在弹出界面中输入对应信息，其中网站图标可忽略，然后保存即可。 (/assets/img/media/ 常用网站：
+ 百度：https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;wd={query} 简书：https://www.jianshu.com/search?utf8=%E2%9C%93&amp;q={query} 淘宝：https://s.taobao.com/search?oe=utf-8&amp;f=8&amp;q={query} 京东：https://search.jd.com/Search?keyword={query}&amp;enc=utf-8&amp;wq={query} 微信文章：https://weixin.sogou.com/weixin?type=2&amp;query={query} stackoverflow：https://www.stackoverflow.com/search?q={query} github：https://github.com/search?utf8=%E2%9C%93&amp;q={query} Android API Search：https://developer.android.com/reference/classes.html#q={query}  Dictionary 设置词典的关键词 di：
+Clipboard 开启Alfred的剪切板功能
+查看 Alfred 剪切板历史记录：
+双击 Option
+System 「清空回收站」的关键字设置为 em，勾选 Confirm
+Terminal/Shell 更改默认终端，配置为 iTerm2。" />
+  <meta name="description" content="Alfred 一款提供基本搜索、快速启动和使用自定义插件的工作流功能。除了软件自带的功能外，它还允许用户自己开发 workflow 并分享出来。
+General 界面  开机自启动 快速启动 Option &#43; Space Where are you：你在哪个国家。Alfred内置了常用网站搜索功能，在搜索时打开对应国家的网站。  Features 特性界面 免费版能够体验到的服务界面，Alfred 里所有的搜索功能都在这里设置。
+Default Results Alfred 建议用户使用 Find &#43; Space &#43;文件名 来查询文件或文件夹，活着使用 Open &#43; Space &#43;文件名
+Web Search 点击右下角的 Add Custom Search
+根据示意图在弹出界面中输入对应信息，其中网站图标可忽略，然后保存即可。 (/assets/img/media/ 常用网站：
+ 百度：https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;wd={query} 简书：https://www.jianshu.com/search?utf8=%E2%9C%93&amp;q={query} 淘宝：https://s.taobao.com/search?oe=utf-8&amp;f=8&amp;q={query} 京东：https://search.jd.com/Search?keyword={query}&amp;enc=utf-8&amp;wq={query} 微信文章：https://weixin.sogou.com/weixin?type=2&amp;query={query} stackoverflow：https://www.stackoverflow.com/search?q={query} github：https://github.com/search?utf8=%E2%9C%93&amp;q={query} Android API Search：https://developer.android.com/reference/classes.html#q={query}  Dictionary 设置词典的关键词 di：
+Clipboard 开启Alfred的剪切板功能
+查看 Alfred 剪切板历史记录：
+双击 Option
+System 「清空回收站」的关键字设置为 em，勾选 Confirm
+Terminal/Shell 更改默认终端，配置为 iTerm2。" />
+  <meta property="og:locale" content="en-us" />
+
+  <link rel="stylesheet" href="/css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet" href="/css/github-markdown.css" />
+  <link rel="stylesheet" href="/css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="StuartHua&#39;s Blog">
+  
+  
+  
+  
+  
+  
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-55082727-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <article class="post 简体中文" id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          <header class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">StuartHua&#39;s Blog</h2>
+    </a>
+    <ul>
+      
+      
+        <li>
+          <a href="/categories/">
+            
+            <span>Categories</span>
+            
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about/">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+      
+    </ul>    
+  </div>
+</header>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">Mac 高效使用指南（四）：Alfred 使用</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2018-09-04 00:00:00 UTC">
+                04 Sep 2018
+              </time>
+              
+            </div>
+            
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <p>Alfred 一款提供基本搜索、快速启动和使用自定义插件的工作流功能。除了软件自带的功能外，它还允许用户自己开发 workflow 并分享出来。</p>
+<h2 id="general-界面">General 界面</h2>
+<ul>
+<li>开机自启动</li>
+<li>快速启动 <code>Option + Space</code></li>
+<li>Where are you：你在哪个国家。Alfred内置了常用网站搜索功能，在搜索时打开对应国家的网站。</li>
+</ul>
+<p><img src="/assets/img/media/1537895027027.jpg" alt="1537895027027"></p>
+<h2 id="features-特性界面">Features 特性界面</h2>
+<p>免费版能够体验到的服务界面，Alfred 里所有的搜索功能都在这里设置。</p>
+<h4 id="default-results">Default Results</h4>
+<p>Alfred 建议用户使用 <code>Find + Space +文件名</code> 来查询文件或文件夹，活着使用 <code>Open + Space +文件名</code></p>
+<h4 id="web-search">Web Search</h4>
+<p>点击右下角的 <code>Add Custom Search</code></p>
+<p>根据示意图在弹出界面中输入对应信息，其中网站图标可忽略，然后保存即可。
+(/assets/img/media/
+<img src="/assets/img/media/1537889221332.jpg" alt="1537889221332"></p>
+<p>常用网站：</p>
+<ul>
+<li>百度：https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;wd={query}</li>
+<li>简书：https://www.jianshu.com/search?utf8=%E2%9C%93&amp;q={query}</li>
+<li>淘宝：https://s.taobao.com/search?oe=utf-8&amp;f=8&amp;q={query}</li>
+<li>京东：https://search.jd.com/Search?keyword={query}&amp;enc=utf-8&amp;wq={query}</li>
+<li>微信文章：https://weixin.sogou.com/weixin?type=2&amp;query={query}</li>
+<li>stackoverflow：https://www.stackoverflow.com/search?q={query}</li>
+<li>github：https://github.com/search?utf8=%E2%9C%93&amp;q={query}</li>
+<li>Android API Search：https://developer.android.com/reference/classes.html#q={query}</li>
+</ul>
+<h4 id="dictionary">Dictionary</h4>
+<p>设置词典的关键词 di：</p>
+<p><img src="/assets/img/media/1537889425327.jpg" alt="1537889425327"></p>
+<h4 id="clipboard">Clipboard</h4>
+<p>开启Alfred的剪切板功能</p>
+<p><img src="/assets/img/media/1537889380835.jpg" alt="1537889380835"></p>
+<p>查看 Alfred 剪切板历史记录：</p>
+<p>双击 Option</p>
+<p><img src="/assets/img/media/1537889775902.jpg" alt="1537889775902"></p>
+<h4 id="system">System</h4>
+<p>「清空回收站」的关键字设置为 em，勾选 <code>Confirm</code></p>
+<p><img src="/assets/img/media/1537890029060.jpg" alt="1537890029060"></p>
+<p><img src="/assets/img/media/1537890045764.jpg" alt="1537890045764"></p>
+<h4 id="terminalshell">Terminal/Shell</h4>
+<p>更改默认终端，配置为 iTerm2。</p>
+<p>在 Application 中选择 <code>custom</code>，配置如下内容：</p>
+<pre><code>on write_to_file(this_data, target_file, append_data)
+    try
+        set the target_file to the target_file as string
+        set the open_target_file to open for access file target_file with write permission
+        if append_data is false then set eof of the open_target_file to 0
+        write this_data to the open_target_file starting at eof
+        close access the open_target_file
+        return true
+    on error
+        try
+            close access file target_file
+        end try
+        return false
+    end try
+end write_to_file
+
+
+on alfred_script(q)
+    
+    -- Write the command to run to a file. This is done because Applescript quoting is impossible to get right, esp. for backslashes.
+    set tmp_dir to path to temporary items as string from user domain
+    set applescript_alfred_file to tmp_dir &amp; &quot;alfredscript&quot;
+    set alfred_file to POSIX path of applescript_alfred_file
+    write_to_file(q &amp; return, applescript_alfred_file, false)
+    
+    -- Create this file, which prevents iTerm2 from restoring a saved window arrangement.
+    do shell script &quot;touch ~/Library/Application' Support/iTerm/quiet'&quot;
+    
+    -- Test cases:
+    -- 1. iTerm2 running, has windows open. Should open a new window for Alfred command.
+    -- 2. iTerm2 running, no windows open. Should open a new window for Alfred command.
+    -- 3. iTerm2 not running, set to restores arrangement. Should not restore arrangement but open a new window for the Afred command.
+    -- 4. iTerm2 not running. No windows to restore. Should open a single window for the Alfred command.
+    -- 5. iTerm2 not running. Has windows to restore. Restores windows and then opens a new window for the Alfred command.
+    
+    -- Compose a script. This is necessary because compiling in a 'tell application' command causes the app to be launched, which would happen prior to the creation of the quiet file.
+    set theScript to &quot;tell application \&quot;iTerm2.app\&quot;
+    if (exists current window) then
+        tell current window to create tab with default profile
+        tell current session of current window
+            write contents of file \&quot;&quot; &amp; alfred_file &amp; &quot;\&quot;
+        end tell
+    else
+        create window with default profile
+        tell current session of current window
+            write contents of file \&quot;&quot; &amp; alfred_file &amp; &quot;\&quot;
+        end tell
+    end if
+    activate
+end tell&quot;
+    
+    -- Invoke the script.
+    run script theScript
+    
+    -- Clean up
+--    do shell script &quot;rm -f ~/Library/Application' Support/iTerm/quiet' /tmp/alfredscript&quot;
+end alfred_script
+</code></pre><blockquote>
+<p>iTerm2 版本不同的话，此项配置有可能不生效，此处，iTerm2 版本 &gt; 3.0</p>
+</blockquote>
+<h2 id="appearance">Appearance</h2>
+<p>Appearance 面板除了设置输入窗口的外观外，还有一些外观相关的设置，在这里可以设置默认展示行数等</p>
+<p><img src="/assets/img/media/appearance.png" alt="appearance"></p>
+<h2 id="advanced">Advanced</h2>
+<p>配置同步，在 Advanced 选项右下角，选择同步目录：</p>
+<p><img src="/assets/img/media/15378898397583.jpg" alt="-w486"></p>
+<p>其他设置：</p>
+<p><img src="/assets/img/media/alfred-advanced.png" alt="alfred-advanced"></p>
+<h2 id="workflow">Workflow</h2>
+<p>一些常用的 Alfred workflow：</p>
+<ul>
+<li>
+<p><a href="https://github.com/xudaolong/CodeVar">codeVar</a></p>
+<blockquote>
+<p>生成变量名，支持大小驼峰、常量、下划线</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="/assets/img/media/1537891723497.jpg" alt="1537891723497"></p>
+<ul>
+<li>
+<p><a href="https://github.com/Kapeli/Dash-Alfred-Workflow">Dash</a></p>
+<blockquote>
+<p>安装 Dash -&gt; Preferences &gt; Integration &gt; Alfred</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="/assets/img/media/1537891846281.jpg" alt="1537891846281"></p>
+<ul>
+<li><a href="https://github.com/liszd/whyliam.workflows.youdao">有道翻译</a></li>
+</ul>
+<p><img src="/assets/img/media/1537892346922.jpg" alt="1537892346922"></p>
+<ul>
+<li>
+<p><a href="https://github.com/logic1988/AlfredHiddenFilesToggle">AlfredHiddenFilesToggle</a></p>
+<blockquote>
+<p>macOS 显示隐藏文件</p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://github.com/roylez/alfred_kuaidi">alfred_kuaidi</a></p>
+<blockquote>
+<p>查询快递</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="/assets/img/media/kuaidi.png" alt="kuaidi"></p>
+<h3 id="workflow-插件搜索">workflow 插件搜索</h3>
+<ul>
+<li><a href="http://www.packal.org/">http://www.packal.org/</a></li>
+<li><a href="http://www.alfredworkflow.com/">http://www.alfredworkflow.com/</a></li>
+<li><a href="https://github.com/search?q=alfred-workflows">github</a></li>
+</ul>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+            <div class="post-category">
+              <a href="/categories/%e6%8a%80%e6%9c%af/">
+                技术
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>
+          </div>
+        </div>
+
+        
+          
+
+          <div style="height: 50px;"></div>
+          
+            <div class="post-comments">
+              <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://stuarthua.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+            </div>
+          
+          
+          
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6137478455292280"
+     data-ad-slot="9229994044"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+        <footer class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://stuarthua.com" target="_blank">Home</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/travel/" target="_blank">Travel</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/en/" target="_blank">EN</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+  
+</footer>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script src="/js/highlight.pack.js"></script>
+
+
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+
+  
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>StuartHua&#39;s Blog</title>
+    <link>https://blog.stuarthua.com/en/</link>
+    <description>Recent content on StuartHua&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Apr 2020 02:16:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.stuarthua.com/en/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://blog.stuarthua.com/en/about/</link>
+      <pubDate>Thu, 02 Apr 2020 02:16:05 +0800</pubDate>
+      
+      <guid>https://blog.stuarthua.com/en/about/</guid>
+      <description> Software Developer, Life Adventurer
+ Contact  Email Telegram  Freedom  Enjoy work, fight for freedom
+ </description>
+    </item>
+    
+    <item>
+      <title>Reading</title>
+      <link>https://blog.stuarthua.com/en/posts/articles/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/en/posts/articles/</guid>
+      <description>How To Be Successful  Compound yourself Have almost too much self-belief Learn to think independently Get good at &amp;ldquo;sales&amp;rdquo; Make it easy to take risks Focus Work hard Be bold Be willful Be hard to compete with Build a network You get rich by owning things Be internally driven  </description>
+    </item>
+    
+  </channel>
+</rss>

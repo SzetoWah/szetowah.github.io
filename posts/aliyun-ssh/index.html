@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Stuart Hua" />
+  <meta property="og:url" content="https://blog.stuarthua.com/posts/aliyun-ssh/" />
+  <link rel="canonical" href="https://blog.stuarthua.com/posts/aliyun-ssh/" /><link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="shortcut" href="/logo.png" /><link rel="alternate" type="application/atom+xml" href="https://blog.stuarthua.comindex.xml" title="StuartHua&#39;s Blog">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/blog.stuarthua.com"
+      },
+      "articleSection" : "posts",
+      "name" : "使用 SSH 免密登录阿里云",
+      "headline" : "使用 SSH 免密登录阿里云",
+      "description" : "前言 环境：\n 一台阿里云 ECS、CentOS 7 系统  愿景：\n非 root 用户 stuart（此处以 stuart 为示例进行说明），使用 ssh 免密登录阿里云，并可以使用 sudo su 获取 root 权限操作服务器\n操作过程 以下步骤，建议按照先后顺序执行，防止发生 重启 sshd 服务后，无法登录 的问题。\n创建新用户 一般而言，不推荐直接使用 root 登录和操作服务器，多数情况下，会新建一个或多个用户作为日常使用和维护。\n新建用户 stuart 登录阿里云网页控制台，选中自己的实例 -\x26gt; 远程连接，在网页控制台进行操作\n$ adduser stuart 为新用户设置密码：\n$ passwd stuart 更改管理员组 wheel 中的配置，允许获得 root 权限：\n$ vi \/etc\/sudoers \/\/ 红帽系的系统默认都有一个管理员组 wheel，一般建议把 sudo 用户添加到这个组 ## Allows people in group wheel to run all commands %wheel ALL=(ALL) ALL 赋予新用户 stuart 管理员权限：",
+      "inLanguage" : "en-US",
+      "author" : "Stuart Hua",
+      "creator" : "Stuart Hua",
+      "publisher": "Stuart Hua",
+      "accountablePerson" : "Stuart Hua",
+      "copyrightHolder" : "Stuart Hua",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-10-01 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-10-01 00:00:00 \x2b0000 UTC",
+      "url" : "https:\/\/blog.stuarthua.com\/posts\/aliyun-ssh\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>使用 SSH 免密登录阿里云 - StuartHua&#39;s Blog</title>
+  <meta property="og:title" content="使用 SSH 免密登录阿里云 - StuartHua&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="前言 环境：
+ 一台阿里云 ECS、CentOS 7 系统  愿景：
+非 root 用户 stuart（此处以 stuart 为示例进行说明），使用 ssh 免密登录阿里云，并可以使用 sudo su 获取 root 权限操作服务器
+操作过程 以下步骤，建议按照先后顺序执行，防止发生 重启 sshd 服务后，无法登录 的问题。
+创建新用户 一般而言，不推荐直接使用 root 登录和操作服务器，多数情况下，会新建一个或多个用户作为日常使用和维护。
+新建用户 stuart 登录阿里云网页控制台，选中自己的实例 -&gt; 远程连接，在网页控制台进行操作
+$ adduser stuart 为新用户设置密码：
+$ passwd stuart 更改管理员组 wheel 中的配置，允许获得 root 权限：
+$ vi /etc/sudoers // 红帽系的系统默认都有一个管理员组 wheel，一般建议把 sudo 用户添加到这个组 ## Allows people in group wheel to run all commands %wheel ALL=(ALL) ALL 赋予新用户 stuart 管理员权限：" />
+  <meta name="description" content="前言 环境：
+ 一台阿里云 ECS、CentOS 7 系统  愿景：
+非 root 用户 stuart（此处以 stuart 为示例进行说明），使用 ssh 免密登录阿里云，并可以使用 sudo su 获取 root 权限操作服务器
+操作过程 以下步骤，建议按照先后顺序执行，防止发生 重启 sshd 服务后，无法登录 的问题。
+创建新用户 一般而言，不推荐直接使用 root 登录和操作服务器，多数情况下，会新建一个或多个用户作为日常使用和维护。
+新建用户 stuart 登录阿里云网页控制台，选中自己的实例 -&gt; 远程连接，在网页控制台进行操作
+$ adduser stuart 为新用户设置密码：
+$ passwd stuart 更改管理员组 wheel 中的配置，允许获得 root 权限：
+$ vi /etc/sudoers // 红帽系的系统默认都有一个管理员组 wheel，一般建议把 sudo 用户添加到这个组 ## Allows people in group wheel to run all commands %wheel ALL=(ALL) ALL 赋予新用户 stuart 管理员权限：" />
+  <meta property="og:locale" content="en-us" />
+
+  <link rel="stylesheet" href="/css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet" href="/css/github-markdown.css" />
+  <link rel="stylesheet" href="/css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="StuartHua&#39;s Blog">
+  
+  
+  
+  
+  
+  
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-55082727-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <article class="post 简体中文" id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          <header class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">StuartHua&#39;s Blog</h2>
+    </a>
+    <ul>
+      
+      
+        <li>
+          <a href="/categories/">
+            
+            <span>Categories</span>
+            
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about/">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+      
+    </ul>    
+  </div>
+</header>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">使用 SSH 免密登录阿里云</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2018-10-01 00:00:00 UTC">
+                01 Oct 2018
+              </time>
+              
+            </div>
+            
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <h3 id="前言">前言</h3>
+<p>环境：</p>
+<ul>
+<li>一台阿里云 ECS、CentOS 7 系统</li>
+</ul>
+<p>愿景：</p>
+<p>非 root 用户 stuart（此处以 stuart 为示例进行说明），使用 ssh 免密登录阿里云，并可以使用 <code>sudo su</code> 获取 root 权限操作服务器</p>
+<h3 id="操作过程">操作过程</h3>
+<p>以下步骤，建议按照先后顺序执行，防止发生 <code>重启 sshd 服务后，无法登录</code> 的问题。</p>
+<h4 id="创建新用户">创建新用户</h4>
+<p>一般而言，不推荐直接使用 root 登录和操作服务器，多数情况下，会新建一个或多个用户作为日常使用和维护。</p>
+<h5 id="新建用户-stuart">新建用户 stuart</h5>
+<p>登录<a href="https://homenew.console.aliyun.com">阿里云网页控制台</a>，选中自己的实例 -&gt; 远程连接，在网页控制台进行操作</p>
+<pre><code>$ adduser stuart
+</code></pre><p>为新用户设置密码：</p>
+<pre><code>$ passwd stuart
+</code></pre><p>更改管理员组 wheel 中的配置，允许获得 root 权限：</p>
+<pre><code>$ vi /etc/sudoers
+
+// 红帽系的系统默认都有一个管理员组 wheel，一般建议把 sudo 用户添加到这个组
+## Allows people in group wheel to run all commands
+%wheel        ALL=(ALL)       ALL
+</code></pre><p>赋予新用户 stuart 管理员权限：</p>
+<pre><code>$ usermod -aG wheel stuart
+</code></pre><p>重新登录即可生效，使用 stuart 用户登录后，如需切换到 root 用户，只需：</p>
+<pre><code># 此命令需要输入 stuart 用户的密码
+$ sudo su
+</code></pre><p>此时，我们已经拥有了日常操作用户 stuart，并可获得 root 权限管理服务器。但登录时，仍需要输入密码，较为繁琐。</p>
+<h4 id="使用-ssh-密钥对">使用 SSH 密钥对</h4>
+<p>登录<a href="https://homenew.console.aliyun.com">阿里云网页控制台</a>，参考 <a href="https://help.aliyun.com/document_detail/51793.html?spm=a2c4g.11186623.6.861.3d3d11c8D4PApU">官方文档 - 使用SSH密钥对</a>，为自己的 ECS 创建并绑定 SSH 密钥对（注意，对密钥对的操作需要重启阿里云 ECS 实例才可生效）。</p>
+<p>保存获得的证书文件 <code>aliyun-key-pair.pem</code> 于本地电脑 <code>~/.ssh</code> 目录下，设置其权限：</p>
+<pre><code>chmod 400 ~/.ssh/aliyun-key-pair.pem
+</code></pre><h5 id="公钥设置">公钥设置</h5>
+<p>第一次配置密钥对，没有特别更改配置的情况下，在阿里云网页控制台操作并重启 ECS 后，即可使用 ssh 密钥对登录服务器。但有时，可能重启 ECS 实例后，依然不可以使用密钥进行登录，此时，需要我们手动将公钥设置到服务器 <code>~/.ssh/authorized_keys</code> 文件中。</p>
+<p>查看公钥信息：</p>
+<pre><code>ssh-keygen -y -f /path_to_key_pair/my-key-pair.pem
+</code></pre><p>返回公钥信息，类似如下所示：</p>
+<pre><code>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDdlrdZwV3+GF9q7rhc6vYrExwT4WU4fsaRcVXGV2Mg9RHex21hl1au77GkmnIgukBZjywlQOT4GDdsJy2nBOdJPrCEBIP6t0Mk5aPkK/fctNuKjcmMMOA8YUT+sJKn3l7rCLkesE+S5880yNdRjBiiUy40kyr7Y+fqGVdSOHGMXZQPpkBtojcV14uAy0yV6/htEqGa/Jq4fH7bR6CYQ2XgH/hCap29Mdi/G5Tx1nbUKuIHdMWOPvjGACGcXclex+lHtTGiAIRG1riyNRVC47ZEVCxxxxxx
+</code></pre><blockquote>
+<p><strong>说明</strong> 如果该命令失败，请运行 <code>chmod 400 my-key-pair.pem</code> 命令更改权限，确保只有自己才能查看该文件。</p>
+</blockquote>
+<p>登录<a href="https://homenew.console.aliyun.com">阿里云网页控制台</a>，选中自己的实例 -&gt; 远程连接，在网页控制台进行操作</p>
+<p>默认是使用 root 用户登录，此处需要切换到 stuart 用户：</p>
+<pre><code>$ su stuart -
+</code></pre><p>将上述公钥信息复制到 <code>/home/stuart/.ssh/authorized_keys</code> 文件（如果文件及目录提示不存在，手动创建即可）中：</p>
+<pre><code>$ mkdir ~/.ssh
+$ chmod 700 ~/.ssh
+$ vi ~/.ssh/authorized_keys
+$ chmod 600 ~/.ssh/authorized_keys
+</code></pre><h5 id="权限设置">权限设置</h5>
+<blockquote>
+<p><strong>说明</strong> 如果 SSH 相关目录及文件的权限设置错误，可能导致无法登录服务器</p>
+</blockquote>
+<pre><code>$ chmod 700 ~/.ssh
+$ chmod 600 ~/.ssh/authorized_keys
+</code></pre><p><strong>注意</strong>：与 ssh 有关的目录及文件权限：</p>
+<ul>
+<li><code>~/.ssh</code> - 设置 700 权限</li>
+<li><code>~/.ssh/id_rsa</code>、<code>~/.ssh/authorized_keys</code>、<code>~/.ssh/config</code> - 设置 600 权限</li>
+<li><code>~/.ssh/id_rsa.pub</code>、<code>~/.ssh/known_hosts</code> - 设置 644 权限</li>
+<li><code>aliyun-key-pair.pem</code> -  设置 400 权限（非服务器设置，在本地电脑处设置）</li>
+</ul>
+<h4 id="配置-sshd_config">配置 sshd_config</h4>
+<p>root 用户使用密码在阿里云网页控制台登录 ECS</p>
+<p>编辑 <code>/etc/ssh/sshd_config</code>（注意区分 <code>ssh_config</code>，<code>sshd_config</code>，后者是服务端配置）</p>
+<p>清空初始设置：</p>
+<pre><code>$ echo &gt; /etc/ssh/sshd_config
+</code></pre><p>覆盖配置 <code>/etc/ssh/sshd_config</code>：</p>
+<pre><code>#	$OpenBSD: sshd_config,v 1.100 2016/08/15 12:32:04 naddy Exp $
+
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/local/bin:/usr/bin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
+# If you want to change the port on a SELinux system, you have to tell
+# SELinux about this change.
+# semanage port -a -t ssh_port_t -p tcp #PORTNUMBER
+#
+#Port 22
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+
+HostKey /etc/ssh/ssh_host_rsa_key
+#HostKey /etc/ssh/ssh_host_dsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+# Ciphers and keying
+#RekeyLimit default none
+
+# Logging
+#SyslogFacility AUTH
+SyslogFacility AUTHPRIV
+#LogLevel INFO
+
+# Authentication:
+
+#LoginGraceTime 2m
+#PermitRootLogin yes
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+
+#PubkeyAuthentication yes
+
+# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
+# but this is overridden so installations will only check .ssh/authorized_keys
+AuthorizedKeysFile	.ssh/authorized_keys
+
+#AuthorizedPrincipalsFile none
+
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandUser nobody
+
+# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
+#HostbasedAuthentication no
+# Change to yes if you don't trust ~/.ssh/known_hosts for
+# HostbasedAuthentication
+#IgnoreUserKnownHosts no
+# Don't read the user's ~/.rhosts and ~/.shosts files
+#IgnoreRhosts yes
+
+# To disable tunneled clear text passwords, change to no here!
+#PasswordAuthentication yes
+#PermitEmptyPasswords no
+#PasswordAuthentication yes
+
+# Change to no to disable s/key passwords
+#ChallengeResponseAuthentication yes
+ChallengeResponseAuthentication no
+
+# Kerberos options
+#KerberosAuthentication no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+#KerberosGetAFSToken no
+#KerberosUseKuserok yes
+
+# GSSAPI options
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials no
+#GSSAPIStrictAcceptorCheck yes
+#GSSAPIKeyExchange no
+#GSSAPIEnablek5users no
+
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of &quot;PermitRootLogin without-password&quot;.
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+# WARNING: 'UsePAM no' is not supported in Red Hat Enterprise Linux and may cause several
+# problems.
+UsePAM yes
+
+#AllowAgentForwarding yes
+#AllowTcpForwarding yes
+#GatewayPorts no
+X11Forwarding yes
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+#PermitTTY yes
+#PrintMotd yes
+#PrintLastLog yes
+#TCPKeepAlive yes
+#UseLogin no
+#UsePrivilegeSeparation sandbox
+#PermitUserEnvironment no
+#Compression delayed
+#ClientAliveInterval 0
+#ClientAliveCountMax 3
+#ShowPatchLevel no
+#UseDNS yes
+#PidFile /var/run/sshd.pid
+#MaxStartups 10:30:100
+#PermitTunnel no
+#ChrootDirectory none
+#VersionAddendum none
+
+# no default banner path
+#Banner none
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+# override default of no subsystems
+Subsystem	sftp	/usr/libexec/openssh/sftp-server
+
+# Example of overriding settings on a per-user basis
+#Match User anoncvs
+#	X11Forwarding no
+#	AllowTcpForwarding no
+#	PermitTTY no
+#	ForceCommand cvs server
+
+# 自定义配置（Port 推荐注释初始 22 端口的设置）
+Port 1602
+UseDNS no
+PermitRootLogin no
+PasswordAuthentication no
+</code></pre><p>说明：</p>
+<ul>
+<li>Port - 指定 ssh 端口</li>
+<li>UseDNS - 用来控制在登录阶段是否执行客户端主机名查询。默认为&quot;yes&rdquo;，DNS 查询阶段超时，有可能导致登录慢</li>
+<li>RSAAuthentication - 是否允许使用纯 RSA 公钥认证。仅用于SSH-1。默认值是&quot;yes&rdquo;</li>
+<li>PubkeyAuthentication - 是否允许公钥认证。仅可以用于SSH-2。默认值为&quot;yes&rdquo;</li>
+<li>AuthorizedKeysFile - 存放该用户可以用来登录的 RSA/DSA 公钥，默认为&rdquo;.ssh/authorized_keys&rdquo;</li>
+<li>PermitRootLogin - 是否允许 root 远程登录。默认为 &ldquo;yes&rdquo;</li>
+<li>PasswordAuthentication - 是否允许使用基于密码的认证。默认为&quot;yes&rdquo;</li>
+</ul>
+<p>自定义 ssh 端口：</p>
+<pre><code>Port 1602
+</code></pre><p>禁用 DNS 查询，加快连接登录速度：</p>
+<pre><code>UseDNS no
+</code></pre><p>禁止 root 用户远程登录：</p>
+<pre><code>PermitRootLogin no
+</code></pre><p>禁止使用密码登录：</p>
+<pre><code>PasswordAuthentication no
+</code></pre><p>重启 sshd 服务：</p>
+<pre><code>systemctl restart sshd
+</code></pre><p>退出并重新连接服务器，查看配置是否生效：</p>
+<pre><code>$ exit
+$ ssh -p 1602 -i ~/.ssh/aliyun-key-pair.pem stuart@xxx.xxx.xxx.xxx
+</code></pre><p>此时，我们禁用了密码登录、root 远程登录，仅提供 stuart 用户免密登录服务器，且 stuart 用户拥有管理员权限，可以进行日常管理。但每次登录，都需要指定端口号、证书、IP地址，仍然较为繁琐。</p>
+<h4 id="本地电脑配置">本地电脑配置</h4>
+<p>编辑本地电脑 <code>~/.ssh/config</code> 设置别名登录：</p>
+<pre><code># 通用配置
+Host *
+    ForwardAgent yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 60
+    TCPKeepAlive no
+    ControlMaster auto
+    ControlPath ~/.ssh/%h-%p-%r
+    ControlPersist 4h
+    Compression yes
+    AddKeysToAgent yes
+
+# 阿里云 ECS
+Host aliyun
+    HostName xxxxxx
+    User stuart
+    Port 1602
+    IdentityFile ~/.ssh/aliyun-key-pair.pem
+</code></pre><p>此时，只需 <code>ssh aliyun</code> 即可实现 stuart 用户免密登录，并拥有管理员权限，需要安装软件时，只需 <code>sudo su</code> 切换到 root 用户，进行安装即可。</p>
+<h4 id="参考">参考</h4>
+<ul>
+<li>参考 <code>man ssh_config</code> 查看更多配置项的涵义</li>
+<li>参考 <a href="http://einverne.github.io/post/2017/05/ssh-keep-alive.html">保持SSH连接</a>  设置通用配置</li>
+<li>参考 <a href="https://superuser.com/questions/325662/how-to-make-ssh-agent-automatically-add-the-key-on-demand">How to make ssh-agent automatically add the key on demand</a> 配置 AddKeysToAgent</li>
+<li>参考 <a href="https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH key and adding it to the ssh-agent</a> 查看 mac、linux、windows、all 等各个平台下 ssh-key 的设置及添加</li>
+</ul>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+            <div class="post-category">
+              <a href="/categories/%e6%8a%80%e6%9c%af/">
+                技术
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>
+          </div>
+        </div>
+
+        
+          
+
+          <div style="height: 50px;"></div>
+          
+            <div class="post-comments">
+              <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://stuarthua.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+            </div>
+          
+          
+          
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6137478455292280"
+     data-ad-slot="9229994044"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+        <footer class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://stuarthua.com" target="_blank">Home</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/travel/" target="_blank">Travel</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/en/" target="_blank">EN</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+  
+</footer>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script src="/js/highlight.pack.js"></script>
+
+
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+
+  
+
+</body>
+
+</html>

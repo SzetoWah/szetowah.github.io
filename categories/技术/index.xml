@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术 on StuartHua&#39;s Blog</title>
+    <link>https://blog.stuarthua.com/categories/%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 技术 on StuartHua&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 26 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.stuarthua.com/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>操作系统的历史</title>
+      <link>https://blog.stuarthua.com/posts/system/</link>
+      <pubDate>Fri, 26 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/system/</guid>
+      <description>前言 一般来说，市面上常见的操作系统有 Windows、MacOS、Linux。实际上大多数操作系统可以被划分为两类:
+ 一类是，微软的基于 Dos 的 Windows NT 系统; 另一类是，“类Unix” 操作系统。这其中包括了 BSD，Linux，Mac OS X，Android，iOS，Chrome OS，PlayStaion 4 上运行的 Orbis OS，以及运行在路由器上的各种固件，这些操作系统通常都被称为 “类Unix” 操作系统  Windows DOS，是磁盘操作系统（英文：Disk Operating System）的缩写，是个人计算机上的一类操作系统。从 1981年 直到 1995年 的 15 年间，DOS 在 IBM PC 兼容机市场中占有举足轻重的地位。而且，若是把部分以 DOS 为基础的 Microsoft Windows版本，如Windows 95、98 和 Me 等都算进去的话，那么其商业寿命至少可以算到 2000年。
+微软的 DOS 也成为众多 DOS 系统中最成功的一个。DOS 完全没有参照 Unix，这也是为什么 Windows 使用反斜杠划分文件路径，而其他所有系统都使用正斜杠。这个决定是在早期的 DOS 系统中做出的，而之后的 Windows 版本继承了这一设定，就像 BSD，Linux，Mac OS X，和其他类 Unix 操作系统继承了许多 Unix 设计因素一样。
+Windows 3.1，Windows 95，Windows 98，和 Windows ME 都是建立在 DOS 的基础上。当时微软已经在开发一个更现代更稳定的操作系统，叫做 Windows NT－意思是 “Windows新技术”。Windows NT 最终通过 Windows XP 应用到普通计算机用户中，但是之前它都只用于针对企业用户的 Windows 2000 和 Windows NT。</description>
+    </item>
+    
+    <item>
+      <title>Mac 10.14.6 编译 Android 9.0 源码</title>
+      <link>https://blog.stuarthua.com/posts/mac-asop/</link>
+      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/mac-asop/</guid>
+      <description>前言 使用的硬件环境：
+ Mac 10.14.6 500G 移动硬盘  Android 源码编译的流程：
+ 源码下载 构建编译环境 编译源码 模拟器运行  附：
+ 在 Android Studio 中查看源码  准备工作 一般而言，Android 源码占据大约 100G 的空间，然而编译后，极有可能再占据我们 150G 的空间，所以，在小容量的 Mac 上编译 Android 源码，使用移动硬盘自然而然成为了必然。
+官网 - Android 开放源代码项目 (AOSP)
+硬件及软件要求 硬件：
+ Android 2.3 以上，需要使用 64 位系统编译，较低版本可以在 32 位系统中编译 拉取代码，至少需要 100G 磁盘空间，如果要进行编译，还需要 150G。如果要进行多次编译或使用 ccache，则需要更多空间 如果是在虚拟机中运行 Linux，则至少需要 16GB 的内存  软件：
+ Python 2.6 - 2.7 GNU Make 3.81 - 3.82 Git 1.</description>
+    </item>
+    
+    <item>
+      <title>自定义 gfwlist</title>
+      <link>https://blog.stuarthua.com/posts/custom-gfwlist/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/custom-gfwlist/</guid>
+      <description>前言 不可否认，gfwlist 是一个非常优秀的公益项目，涵盖了众多网友整理的一些黑名单网址。但实际使用过程中，由于 gfwlist 更新慢，用户总是会碰到一些没有覆盖的网址、或者使用了一些老旧的网址，体验上差强人意。再者，每一个人的浏览习惯都不尽相同，使用公共版的 list 并不能满足个人的自定义需求。因此，这里记录一下自己的解决方式，指定一份可自定义的 gfwlist。
+自定义的 gfwlist 以原版 gfwlist 为基础提炼出符合个人习惯的网址清单。
+ 了解 gfwlist 了解 gfwlist PAC 规则 自定义 gfwlist  了解 gfwlist 官网：gfwlist
+在原版 gfwlist 中，其最终提供的名单通过 Base 64 加密，形成文本文档。
+Mac 中 base64 命令使用示例：
+//1. 把 demo.json 文件 base64 加密 $ base64 demo.json -o abc.txt //加密, -o 后面跟着是输出目录 $ base64 -b 64 -i demo.json -o abc.txt //加密, -b 64 每64个字符换行, -i 后面跟要加密的文件, -o 后面跟着是输出目录 $ base64 -D abc.txt -o 123.</description>
+    </item>
+    
+    <item>
+      <title>Mac Python 入门</title>
+      <link>https://blog.stuarthua.com/posts/mac-python-get-started/</link>
+      <pubDate>Thu, 25 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/mac-python-get-started/</guid>
+      <description>Mac 安装 Python Mac 系统自带 Python 2.7，而 Python 3 早已面世良久。众所周知，Python 3 在设计的时候没有考虑向下兼容，所以很多使用 Python 2 开发的程序无法在 3.0 版本上运行。实际使用过程中，往往会不同程度地使用到 Python 2、3，故而此处记录两个版本安装共存的安装过程。
+安装 Homebrew Homebrew - 官网
+/usr/bin/ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot; Python 2 查看系统 Python：
+# 查看 python 命令路径 $ which python /usr/bin/python # 查看 python 版本 $ python -V Python 2.7.10 # 第一次使用 python $ python Python 2.7.10 (default, Feb 22 2019, 21:55:15) [GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.37.14)] on darwin Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot; for more information.</description>
+    </item>
+    
+    <item>
+      <title>使用 SSH 免密登录阿里云</title>
+      <link>https://blog.stuarthua.com/posts/aliyun-ssh/</link>
+      <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/aliyun-ssh/</guid>
+      <description>前言 环境：
+ 一台阿里云 ECS、CentOS 7 系统  愿景：
+非 root 用户 stuart（此处以 stuart 为示例进行说明），使用 ssh 免密登录阿里云，并可以使用 sudo su 获取 root 权限操作服务器
+操作过程 以下步骤，建议按照先后顺序执行，防止发生 重启 sshd 服务后，无法登录 的问题。
+创建新用户 一般而言，不推荐直接使用 root 登录和操作服务器，多数情况下，会新建一个或多个用户作为日常使用和维护。
+新建用户 stuart 登录阿里云网页控制台，选中自己的实例 -&amp;gt; 远程连接，在网页控制台进行操作
+$ adduser stuart 为新用户设置密码：
+$ passwd stuart 更改管理员组 wheel 中的配置，允许获得 root 权限：
+$ vi /etc/sudoers // 红帽系的系统默认都有一个管理员组 wheel，一般建议把 sudo 用户添加到这个组 ## Allows people in group wheel to run all commands %wheel ALL=(ALL) ALL 赋予新用户 stuart 管理员权限：</description>
+    </item>
+    
+    <item>
+      <title>Mac 高效使用指南（四）：Alfred 使用</title>
+      <link>https://blog.stuarthua.com/posts/mac-aifred/</link>
+      <pubDate>Tue, 04 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/mac-aifred/</guid>
+      <description>Alfred 一款提供基本搜索、快速启动和使用自定义插件的工作流功能。除了软件自带的功能外，它还允许用户自己开发 workflow 并分享出来。
+General 界面  开机自启动 快速启动 Option + Space Where are you：你在哪个国家。Alfred内置了常用网站搜索功能，在搜索时打开对应国家的网站。  Features 特性界面 免费版能够体验到的服务界面，Alfred 里所有的搜索功能都在这里设置。
+Default Results Alfred 建议用户使用 Find + Space +文件名 来查询文件或文件夹，活着使用 Open + Space +文件名
+Web Search 点击右下角的 Add Custom Search
+根据示意图在弹出界面中输入对应信息，其中网站图标可忽略，然后保存即可。 (/assets/img/media/ 常用网站：
+ 百度：https://www.baidu.com/s?ie=utf-8&amp;amp;f=8&amp;amp;wd={query} 简书：https://www.jianshu.com/search?utf8=%E2%9C%93&amp;amp;q={query} 淘宝：https://s.taobao.com/search?oe=utf-8&amp;amp;f=8&amp;amp;q={query} 京东：https://search.jd.com/Search?keyword={query}&amp;amp;enc=utf-8&amp;amp;wq={query} 微信文章：https://weixin.sogou.com/weixin?type=2&amp;amp;query={query} stackoverflow：https://www.stackoverflow.com/search?q={query} github：https://github.com/search?utf8=%E2%9C%93&amp;amp;q={query} Android API Search：https://developer.android.com/reference/classes.html#q={query}  Dictionary 设置词典的关键词 di：
+Clipboard 开启Alfred的剪切板功能
+查看 Alfred 剪切板历史记录：
+双击 Option
+System 「清空回收站」的关键字设置为 em，勾选 Confirm
+Terminal/Shell 更改默认终端，配置为 iTerm2。</description>
+    </item>
+    
+    <item>
+      <title>Mac 高效使用指南（三）：SSH 的配置与管理</title>
+      <link>https://blog.stuarthua.com/posts/mac-ssh/</link>
+      <pubDate>Mon, 03 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/mac-ssh/</guid>
+      <description>SSH，安全外壳协议，一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。SSH 最常见的用途是远程登录系统，人们通常利用 SSH 来传输命令行界面和远程执行命令。
+拓展阅读  百度百科：传统的网络服务程序，如：ftp、pop和telnet在本质上都是不安全的，因为它们在网络上用明文传送口令和数据，别有用心的人非常容易就可以截获这些口令和数据。而且，这些服务程序的安全验证方式也是有其弱点的， 就是很容易受到“中间人”（man-in-the-middle）这种方式的攻击。所谓“中间人”的攻击方式， 就是“中间人”冒充真正的服务器接收你传给服务器的数据，然后再冒充你把数据传给真正的服务器。服务器和你之间的数据传送被“中间人”一转手做了手脚之后，就会出现很严重的问题。通过使用SSH，你可以把所有传输的数据进行加密，这样&amp;quot;中间人&amp;quot;这种攻击方式就不可能实现了，而且也能够防止DNS欺骗和IP欺骗。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、PoP、甚至为PPP提供一个安全的&amp;quot;通道&amp;rdquo;。 维基百科：SSH 也被指出有被嗅探甚至解密的漏洞。早在2011年，中国的互联网审查机构已经有能力针对SSH连线的刺探及干扰。而后爱德华·斯诺登泄露的文件也指出，美国国家安全局有时能够把SSH协议传输的信息解密出来，从而读出SSH会话的传输内容。2017年7月6日，非营利组织维基解密确认美国中央情报局已经开发出能够在Windows或Linux操作系统中窃取SSH会话的工具。
+ 综上，境内使用 SSH 管理境外非法网站获益，理论上是透明的暴露在国家安全部门的监督范围内。
+使用 通常，我们使用如下方式建立 ssh 连接：
+ssh -p 54321 root@100.100.100.100 输入 root 密码后，便可以登录。
+免密登录 ssh-copy-id 可以把本地主机的公钥复制到远程主机的 authorized_keys 文件上，同时，也会给远程主机的用户主目录（home）和 ~/.ssh，和 ~/.ssh/authorized_keys 设置合适的权限。
+安装：
+brew install ssh-copy-id 生成私钥公钥：
+ssh-keygen -t rsa -b 4096 -C &amp;lt;your_email@example.com&amp;gt; -f &amp;lt;私钥公钥名&amp;gt; # 如： ssh-keygen -t rsa -b 4096 -C helloworld@app.com -f hello 将公钥上传致服务器（~/.ssh/authorized_keys）：
+ssh-copy-id -i hello.pub root@100.100.100.100 -p 54321 配置别名 配置免密登录后，再次登录时，还需要输入端口号和服务器 IP，繁琐且难以记忆，我们可以考虑使用 SSH 的配置文件来实现别名登录。</description>
+    </item>
+    
+    <item>
+      <title>Mac 高效使用指南（二）：打造高效终端 zsh、oh-my-zsh、iterm2、tumx</title>
+      <link>https://blog.stuarthua.com/posts/mac-bses-terminal/</link>
+      <pubDate>Sun, 02 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/mac-bses-terminal/</guid>
+      <description>zsh 官网：zsh
+Mac 系统自带了 zsh，但一般不是最新版，如果需要最新版可通过 Homebrew 来安装。
+brew info zsh brew install zsh  使用 /bin/zsh --version 查看系统 zsh 版本 Homebrew 安装 zsh 后，使用 zsh --version 查看 zsh 版本  修改默认 Shell：
+ 在 /etc/shells 文件中加入如下一行 $ sudo vi /etc/shells ## 增加 /usr/local/bin/zsh  然后运行命令： chsh -s /usr/local/bin/zsh  重启当前 Tab 验证是否生效，echo $SHELL   小提示： 还原默认 Shell ：chsh -s /bin/bash
+ oh-my-zsh 官网：oh-my-zsh
+oh-my-zsh 用来管理 zsh 配置的，节省用户时间。
+Curl 安装：</description>
+    </item>
+    
+    <item>
+      <title>Mac 高效使用指南（一）：系统配置优化</title>
+      <link>https://blog.stuarthua.com/posts/mac-java/</link>
+      <pubDate>Sat, 01 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/mac-java/</guid>
+      <description>简单是有成本的。即便如此，面对重复繁琐的低效工作流程，我们还是应该 Say No。 本文旨在整理 Mac 高效使用技巧、提高程序员效率
+ Mac 系统配置优化 触摸板优化  开启轻按点击功能  系统偏好设置 -&amp;gt; 触摸板 -&amp;gt; 光标与点按 -&amp;gt; 选中 轻点来点按
+ 开启三指拖移  系统偏好设置 -&amp;gt; 辅助功能 -&amp;gt; 互动 鼠标与触控板 -&amp;gt; 触控板选项 -&amp;gt; 勾选 启用拖移，选中 三指拖移
+ 设置屏幕保护程序  初衷是保护离开屏幕时被窥探，可选择设置
+系统偏好设置 -&amp;gt; 桌面与屏幕保护程序 -&amp;gt; 屏幕保护程序 -&amp;gt; 触发角 -&amp;gt; 活跃的屏幕角，选择一个角设置为 将显示器置于睡眠状态
+F1 - F12 标准按键 默认情况下，键盘最上面一排的 F1- F12 都有各自的作用，从图标上就能看出。比如 F1 和 F2 用来调节屏幕亮度，F5 和 F6 调节键盘灯亮度灯。程序员频繁使用 Debug，要使用 F1 - F12，便需要多按键盘左下角的 fn 键，所以，建议将 F1 - F12 改为标准按键</description>
+    </item>
+    
+    <item>
+      <title>关于 SSH keys</title>
+      <link>https://blog.stuarthua.com/posts/about-ssh-keys/</link>
+      <pubDate>Fri, 20 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/about-ssh-keys/</guid>
+      <description>在 WIki - SSH keys (简体中文) 一文中，有详细介绍 SSH key 的一些概念及管理操作，以下，记录一些自己的理解及常用操作。
+常用命令：
+ ssh-keygen ssh-agent ssh-add  生成密钥对 ssh-keygen 选项说明（man:ssh-keygen）：
+ -b：指定密钥长度； -e：读取openssh的私钥或者公钥文件； -C：添加注释； -f：指定用来保存密钥的文件名； -i：读取未加密的ssh-v2兼容的私钥/公钥文件，然后在标准输出设备上显示openssh兼容的私钥/公钥； -l：显示公钥文件的指纹数据； -N：提供一个新密语； -P：提供（旧）密语； -q：静默模式； -t：指定要创建的密钥类型。  生成 rsa 默认密钥对 使用 ssh-keygen 命令生成密钥对
+# 以 github 官方帮助文档为例 ssh-keygen -t rsa -b 4096 -C &amp;quot;your_email@example.com&amp;quot; 上例中，我们使用 ssh-keygen 生成了一对长度为 4096 bit (-b 4096) 的 rsa 加密的密钥对，描述 comment 为 -C &amp;quot;your_email@example.com&amp;quot;，密钥对默认存储在 ~/.ssh 目录中
+如何选取合适对加密方式 从 -t (type) 结合 RSA算法与DSA算法的区别 ，整理出 SSH 用到的加密方式：</description>
+    </item>
+    
+    <item>
+      <title>Java: 多线程基础概念</title>
+      <link>https://blog.stuarthua.com/posts/java-multi-thread/</link>
+      <pubDate>Tue, 12 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stuarthua.com/posts/java-multi-thread/</guid>
+      <description>并发 多线程编程有时也被称为并发编程，但其实多线程编程只是并发编程的一种实现方式，并发编程还有其他的实现途径，如：函数式编程，单多线程编程往往是并发编程的基础模型。
+ 区分 “并行”
+ 并行是指两个或多个线程在 同一时刻 执行 并发是指两个或多个线程在 同一时间间隔内 发生。 如果程序同时开启的线程数小于CPU的核数，那么不同进程的线程就可以分配给不同的CPU来运行，这就是并行；如果线程数多于CPU的核数，那就需要并发技术。通俗一点可以这样理解，并行表示两个线程同时做事情；并发表示一会做这个，一会做那个，存在着调度（单核 CPU 不可能存在并行）   线程同步  同步：一个任务执行完成后才能执行下一个任务，单线程只能执行一个任务。 线程同步：线程同步不是说让一个线程执行完了再执行其它线程，一般是指让线程中的某一些操作进行同步，从而避免多线程访问同一数据时产生线程安全问题  线程和线程之间内存共享，当多线程对共享内存进行操作时，难免会出现 竞态条件 和 内存可见性 的问题
+竞态条件 Java 允许多线程并发控制，但当多线程同时操作一个可共享的资源变量时，将会导致数据的不准确，相互之间产生冲突，此时，应该避免当前线程没有完成操作之前资源被其他线程调用，保证该变量的准确性和唯一性。常见的解决方法有：
+ 使用 synchronized 关键字 使用显式锁（Lock） 使用原子变量（java.util.concurrent.atomic）  内存可见性 内存是一个硬件，执行速度比CPU慢几百倍，所以在计算机中，CPU在执行运算的时候，不会每次运算都和内存进行数据交互，而是先把一些数据写入CPU中的缓存区（寄存器和各级缓存），在结束之后写入内存。这个过程是很快的，单线程下并没有任何问题。但是在多线程下就出现了问题，一个线程对内存中的一个数据做出了修改，但是并没有及时写入内存（暂时存放在缓存中）；这时候另一个线程对同样的数据进行修改的时候拿到的就是内存中还没有被修改的数据，也就是说一个线程对一个共享变量的修改，另一个线程不能马上看到，甚至永远看不到。常见的解决方法有：
+ 使用 volatile 关键字 使用 synchronized 关键字 使用显式锁（Lock）同步  传统锁 synchronized 一般说的 synchronized 用来做多线程同步功能，其实 synchronized 只是提供多线程互斥，而对象的 wait() 和 notify() 方法才提供线程的同步功能。
+一般说 synchronized 是加锁，或者说是加对象锁。其实对象锁只是 synchronized 在实现锁机制中的一种锁（重量锁，用这种方式互斥线程开销大所以叫重量锁，或者叫对象 monitor ），而 synchronized 的锁机制会根据线程竞争情况在运行会有偏向锁、轻量锁、对象锁，自旋锁（或自适应自旋锁）等。
+总之，synchronized 可以认为是一个几种锁过程的封装。</description>
+    </item>
+    
+  </channel>
+</rss>

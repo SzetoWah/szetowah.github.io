@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Stuart Hua" />
+  <meta property="og:url" content="https://blog.stuarthua.com/posts/mac-ssh/" />
+  <link rel="canonical" href="https://blog.stuarthua.com/posts/mac-ssh/" /><link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="shortcut" href="/logo.png" /><link rel="alternate" type="application/atom+xml" href="https://blog.stuarthua.comindex.xml" title="StuartHua&#39;s Blog">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/blog.stuarthua.com"
+      },
+      "articleSection" : "posts",
+      "name" : "Mac 高效使用指南（三）：SSH 的配置与管理",
+      "headline" : "Mac 高效使用指南（三）：SSH 的配置与管理",
+      "description" : "SSH，安全外壳协议，一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。SSH 最常见的用途是远程登录系统，人们通常利用 SSH 来传输命令行界面和远程执行命令。\n拓展阅读  百度百科：传统的网络服务程序，如：ftp、pop和telnet在本质上都是不安全的，因为它们在网络上用明文传送口令和数据，别有用心的人非常容易就可以截获这些口令和数据。而且，这些服务程序的安全验证方式也是有其弱点的， 就是很容易受到“中间人”（man-in-the-middle）这种方式的攻击。所谓“中间人”的攻击方式， 就是“中间人”冒充真正的服务器接收你传给服务器的数据，然后再冒充你把数据传给真正的服务器。服务器和你之间的数据传送被“中间人”一转手做了手脚之后，就会出现很严重的问题。通过使用SSH，你可以把所有传输的数据进行加密，这样\x26quot;中间人\x26quot;这种攻击方式就不可能实现了，而且也能够防止DNS欺骗和IP欺骗。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、PoP、甚至为PPP提供一个安全的\x26quot;通道\x26rdquo;。 维基百科：SSH 也被指出有被嗅探甚至解密的漏洞。早在2011年，中国的互联网审查机构已经有能力针对SSH连线的刺探及干扰。而后爱德华·斯诺登泄露的文件也指出，美国国家安全局有时能够把SSH协议传输的信息解密出来，从而读出SSH会话的传输内容。2017年7月6日，非营利组织维基解密确认美国中央情报局已经开发出能够在Windows或Linux操作系统中窃取SSH会话的工具。\n 综上，境内使用 SSH 管理境外非法网站获益，理论上是透明的暴露在国家安全部门的监督范围内。\n使用 通常，我们使用如下方式建立 ssh 连接：\nssh -p 54321 root@100.100.100.100 输入 root 密码后，便可以登录。\n免密登录 ssh-copy-id 可以把本地主机的公钥复制到远程主机的 authorized_keys 文件上，同时，也会给远程主机的用户主目录（home）和 ~\/.ssh，和 ~\/.ssh\/authorized_keys 设置合适的权限。\n安装：\nbrew install ssh-copy-id 生成私钥公钥：\nssh-keygen -t rsa -b 4096 -C \x26lt;your_email@example.com\x26gt; -f \x26lt;私钥公钥名\x26gt; # 如： ssh-keygen -t rsa -b 4096 -C helloworld@app.com -f hello 将公钥上传致服务器（~\/.ssh\/authorized_keys）：\nssh-copy-id -i hello.pub root@100.100.100.100 -p 54321 配置别名 配置免密登录后，再次登录时，还需要输入端口号和服务器 IP，繁琐且难以记忆，我们可以考虑使用 SSH 的配置文件来实现别名登录。",
+      "inLanguage" : "en-US",
+      "author" : "Stuart Hua",
+      "creator" : "Stuart Hua",
+      "publisher": "Stuart Hua",
+      "accountablePerson" : "Stuart Hua",
+      "copyrightHolder" : "Stuart Hua",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-09-03 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-09-03 00:00:00 \x2b0000 UTC",
+      "url" : "https:\/\/blog.stuarthua.com\/posts\/mac-ssh\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>Mac 高效使用指南（三）：SSH 的配置与管理 - StuartHua&#39;s Blog</title>
+  <meta property="og:title" content="Mac 高效使用指南（三）：SSH 的配置与管理 - StuartHua&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="SSH，安全外壳协议，一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。SSH 最常见的用途是远程登录系统，人们通常利用 SSH 来传输命令行界面和远程执行命令。
+拓展阅读  百度百科：传统的网络服务程序，如：ftp、pop和telnet在本质上都是不安全的，因为它们在网络上用明文传送口令和数据，别有用心的人非常容易就可以截获这些口令和数据。而且，这些服务程序的安全验证方式也是有其弱点的， 就是很容易受到“中间人”（man-in-the-middle）这种方式的攻击。所谓“中间人”的攻击方式， 就是“中间人”冒充真正的服务器接收你传给服务器的数据，然后再冒充你把数据传给真正的服务器。服务器和你之间的数据传送被“中间人”一转手做了手脚之后，就会出现很严重的问题。通过使用SSH，你可以把所有传输的数据进行加密，这样&quot;中间人&quot;这种攻击方式就不可能实现了，而且也能够防止DNS欺骗和IP欺骗。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、PoP、甚至为PPP提供一个安全的&quot;通道&rdquo;。 维基百科：SSH 也被指出有被嗅探甚至解密的漏洞。早在2011年，中国的互联网审查机构已经有能力针对SSH连线的刺探及干扰。而后爱德华·斯诺登泄露的文件也指出，美国国家安全局有时能够把SSH协议传输的信息解密出来，从而读出SSH会话的传输内容。2017年7月6日，非营利组织维基解密确认美国中央情报局已经开发出能够在Windows或Linux操作系统中窃取SSH会话的工具。
+ 综上，境内使用 SSH 管理境外非法网站获益，理论上是透明的暴露在国家安全部门的监督范围内。
+使用 通常，我们使用如下方式建立 ssh 连接：
+ssh -p 54321 root@100.100.100.100 输入 root 密码后，便可以登录。
+免密登录 ssh-copy-id 可以把本地主机的公钥复制到远程主机的 authorized_keys 文件上，同时，也会给远程主机的用户主目录（home）和 ~/.ssh，和 ~/.ssh/authorized_keys 设置合适的权限。
+安装：
+brew install ssh-copy-id 生成私钥公钥：
+ssh-keygen -t rsa -b 4096 -C &lt;your_email@example.com&gt; -f &lt;私钥公钥名&gt; # 如： ssh-keygen -t rsa -b 4096 -C helloworld@app.com -f hello 将公钥上传致服务器（~/.ssh/authorized_keys）：
+ssh-copy-id -i hello.pub root@100.100.100.100 -p 54321 配置别名 配置免密登录后，再次登录时，还需要输入端口号和服务器 IP，繁琐且难以记忆，我们可以考虑使用 SSH 的配置文件来实现别名登录。" />
+  <meta name="description" content="SSH，安全外壳协议，一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。SSH 最常见的用途是远程登录系统，人们通常利用 SSH 来传输命令行界面和远程执行命令。
+拓展阅读  百度百科：传统的网络服务程序，如：ftp、pop和telnet在本质上都是不安全的，因为它们在网络上用明文传送口令和数据，别有用心的人非常容易就可以截获这些口令和数据。而且，这些服务程序的安全验证方式也是有其弱点的， 就是很容易受到“中间人”（man-in-the-middle）这种方式的攻击。所谓“中间人”的攻击方式， 就是“中间人”冒充真正的服务器接收你传给服务器的数据，然后再冒充你把数据传给真正的服务器。服务器和你之间的数据传送被“中间人”一转手做了手脚之后，就会出现很严重的问题。通过使用SSH，你可以把所有传输的数据进行加密，这样&quot;中间人&quot;这种攻击方式就不可能实现了，而且也能够防止DNS欺骗和IP欺骗。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、PoP、甚至为PPP提供一个安全的&quot;通道&rdquo;。 维基百科：SSH 也被指出有被嗅探甚至解密的漏洞。早在2011年，中国的互联网审查机构已经有能力针对SSH连线的刺探及干扰。而后爱德华·斯诺登泄露的文件也指出，美国国家安全局有时能够把SSH协议传输的信息解密出来，从而读出SSH会话的传输内容。2017年7月6日，非营利组织维基解密确认美国中央情报局已经开发出能够在Windows或Linux操作系统中窃取SSH会话的工具。
+ 综上，境内使用 SSH 管理境外非法网站获益，理论上是透明的暴露在国家安全部门的监督范围内。
+使用 通常，我们使用如下方式建立 ssh 连接：
+ssh -p 54321 root@100.100.100.100 输入 root 密码后，便可以登录。
+免密登录 ssh-copy-id 可以把本地主机的公钥复制到远程主机的 authorized_keys 文件上，同时，也会给远程主机的用户主目录（home）和 ~/.ssh，和 ~/.ssh/authorized_keys 设置合适的权限。
+安装：
+brew install ssh-copy-id 生成私钥公钥：
+ssh-keygen -t rsa -b 4096 -C &lt;your_email@example.com&gt; -f &lt;私钥公钥名&gt; # 如： ssh-keygen -t rsa -b 4096 -C helloworld@app.com -f hello 将公钥上传致服务器（~/.ssh/authorized_keys）：
+ssh-copy-id -i hello.pub root@100.100.100.100 -p 54321 配置别名 配置免密登录后，再次登录时，还需要输入端口号和服务器 IP，繁琐且难以记忆，我们可以考虑使用 SSH 的配置文件来实现别名登录。" />
+  <meta property="og:locale" content="en-us" />
+
+  <link rel="stylesheet" href="/css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet" href="/css/github-markdown.css" />
+  <link rel="stylesheet" href="/css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="StuartHua&#39;s Blog">
+  
+  
+  
+  
+  
+  
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-55082727-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <article class="post 简体中文" id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          <header class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">StuartHua&#39;s Blog</h2>
+    </a>
+    <ul>
+      
+      
+        <li>
+          <a href="/categories/">
+            
+            <span>Categories</span>
+            
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about/">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+      
+    </ul>    
+  </div>
+</header>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">Mac 高效使用指南（三）：SSH 的配置与管理</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2018-09-03 00:00:00 UTC">
+                03 Sep 2018
+              </time>
+              
+            </div>
+            
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <p>SSH，安全外壳协议，一种加密的网络传输协议，可在不安全的网络中为网络服务提供安全的传输环境。SSH 最常见的用途是远程登录系统，人们通常利用 SSH 来传输命令行界面和远程执行命令。</p>
+<h2 id="拓展阅读">拓展阅读</h2>
+<blockquote>
+<p><code>百度百科</code>：传统的网络服务程序，如：ftp、pop和telnet在本质上都是不安全的，因为它们在网络上用明文传送口令和数据，别有用心的人非常容易就可以截获这些口令和数据。而且，这些服务程序的安全验证方式也是有其弱点的， 就是很容易受到“中间人”（man-in-the-middle）这种方式的攻击。所谓“中间人”的攻击方式， 就是“中间人”冒充真正的服务器接收你传给服务器的数据，然后再冒充你把数据传给真正的服务器。服务器和你之间的数据传送被“中间人”一转手做了手脚之后，就会出现很严重的问题。通过使用SSH，你可以把所有传输的数据进行加密，这样&quot;中间人&quot;这种攻击方式就不可能实现了，而且也能够防止DNS欺骗和IP欺骗。使用SSH，还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。SSH有很多功能，它既可以代替Telnet，又可以为FTP、PoP、甚至为PPP提供一个安全的&quot;通道&rdquo;。
+<code>维基百科</code>：SSH 也被指出有被嗅探甚至解密的漏洞。早在2011年，中国的互联网审查机构已经有能力针对SSH连线的刺探及干扰。而后爱德华·斯诺登泄露的文件也指出，美国国家安全局有时能够把SSH协议传输的信息解密出来，从而读出SSH会话的传输内容。2017年7月6日，非营利组织维基解密确认美国中央情报局已经开发出能够在Windows或Linux操作系统中窃取SSH会话的工具。</p>
+</blockquote>
+<p>综上，境内使用 SSH 管理境外非法网站获益，理论上是透明的暴露在国家安全部门的监督范围内。</p>
+<h2 id="使用">使用</h2>
+<p>通常，我们使用如下方式建立 ssh 连接：</p>
+<pre><code>ssh -p 54321 root@100.100.100.100
+</code></pre><p>输入 root 密码后，便可以登录。</p>
+<h3 id="免密登录">免密登录</h3>
+<p><code>ssh-copy-id</code> 可以把本地主机的公钥复制到远程主机的 authorized_keys 文件上，同时，也会给远程主机的用户主目录（home）和 <code>~/.ssh</code>，和 <code>~/.ssh/authorized_keys</code> 设置合适的权限。</p>
+<p>安装：</p>
+<pre><code>brew install ssh-copy-id
+</code></pre><p>生成私钥公钥：</p>
+<pre><code>ssh-keygen -t rsa -b 4096 -C &lt;your_email@example.com&gt; -f &lt;私钥公钥名&gt;
+
+# 如：
+ssh-keygen -t rsa -b 4096 -C helloworld@app.com -f hello
+</code></pre><p>将公钥上传致服务器（<code>~/.ssh/authorized_keys</code>）：</p>
+<pre><code>ssh-copy-id -i hello.pub root@100.100.100.100 -p 54321
+</code></pre><h3 id="配置别名">配置别名</h3>
+<p>配置免密登录后，再次登录时，还需要输入端口号和服务器 IP，繁琐且难以记忆，我们可以考虑使用 SSH 的配置文件来实现别名登录。</p>
+<p>全局 ssh 配置，编辑 <code>~/.ssh/config</code> 文件：</p>
+<pre><code>Host *
+    ForwardAgent yes
+    ServerAliveInterval 10
+    ServerAliveCountMax 10000
+    TCPKeepAlive no
+    ControlMaster auto
+    ControlPath ~/.ssh/%h-%p-%r
+    ControlPersist 4h
+    Compression yes
+</code></pre><ul>
+<li>ForwardAgent：假设我通过 SSH 连接上了服务器 A（通常在公司内部有跳板机时格外有用），又从服务器 A 连接到服务器 B，如果将 ForwardAgent 配置为 YES，在两台服务器之间传输数据就不会经过本机。</li>
+<li>ServerAliveInterval 和 ServerAliveCountMax：表示客户端定期向服务端发送心跳包，使得服务端不会断开 SSH 的连接。这里表示 10 秒发一次，发 1W 次。</li>
+<li>Contro***：每次建立远程连接，在 ~/.ssh 目录下都会建立一个 socket 文件。这三个配置连用，表示缓存 socket 文件，并保留 4 小时，这样可以加快下次连接的速度。</li>
+</ul>
+<p>配置免密登录 VPS，编辑 <code>~/.ssh/config</code> 文件：</p>
+<pre><code>Host hellohost
+    HostName 100.100.100.100
+    User root
+    Port 54321
+    IdentityFile ~/.ssh/hello
+</code></pre><p>这样，我们就为 IP 是 100.100.100.100，端口为 54321，用户名为 root 的远程主机设置了一个别名，然后就可以使用别名连接了：</p>
+<pre><code>ssh hellohost
+</code></pre><h3 id="git-多用户">git 多用户</h3>
+<p>编辑 <code>~/.ssh/config</code> 文件：</p>
+<pre><code># github 1
+Host github.git1
+	Hostname github.com
+	User username1
+	Identityfile ~/.ssh/id_rsa_1
+
+# github 2
+Host github.git2
+	Hostname github.com
+	User username2
+	Identityfile ~/.ssh/id_rsa_2
+</code></pre><p>测试 git 多用户配置：</p>
+<pre><code>ssh git@github.git1
+# 正常，返回 username1
+
+ssh git@github.git2
+# 正常，返回 username2
+</code></pre><h3 id="ssh-add-和-ssh-agent">ssh-add 和 ssh-agent</h3>
+<p>在使用 git 拉取代码时，如果使用类似 <code>git@github.com:hello/FirstProject.git</code> 的仓库地址，通常需要我们事先将 ssh 私钥添加到 <code>ssh-agent</code> 中。</p>
+<p>后台开启 ssh-agent：</p>
+<pre><code>$ eval &quot;$(ssh-agent -s)&quot;
+&gt; Agent pid 59566
+</code></pre><p>添加 ssh 私钥：</p>
+<pre><code>$ ssh-add ~/.ssh/id_rsa
+</code></pre><p>查看已加载的私钥：</p>
+<pre><code>$ ssh-add -l
+</code></pre><p>删除某个特定加载的私钥：</p>
+<pre><code>$ ssh-add -d ~/.ssh/id_rsa
+</code></pre><p>删除加载的全部私钥：</p>
+<pre><code>$ ssh-add -D
+</code></pre><h3 id="示例">示例</h3>
+<p>一份 ssh config 示例：</p>
+<pre><code>
+Host *
+    ForwardAgent yes
+    ServerAliveInterval 10
+    ServerAliveCountMax 10000
+    TCPKeepAlive no
+    ControlMaster auto
+    ControlPath ~/.ssh/%h-%p-%r
+    ControlPersist 4h
+    Compression yes
+
+## git 多用户
+
+# github 1
+Host github.git1
+	Hostname github.com
+	User username1
+	Identityfile ~/.ssh/id_rsa_1
+
+# github 2
+Host github.git2
+	Hostname github.com
+	User username2
+	Identityfile ~/.ssh/id_rsa_2
+
+# aliyun
+Host aliyun.git
+	Hostname code.aliyun.com
+	User username
+ 	Identityfile ~/.ssh/id_rsa
+
+# coding
+Host coding.git
+	Hostname git.coding.net
+	User username
+ 	Identityfile ~/.ssh/id_rsa
+
+# oschina
+Host oschina.git
+	Hostname git.oschina.net
+	User username
+ 	Identityfile ~/.ssh/id_rsa
+
+# bitbucket
+Host bitbucket.git
+	Hostname bitbucket.org
+	User username
+ 	Identityfile ~/.ssh/id_rsa
+
+## ssh 服务器
+
+# hellohost
+Host hellohost
+    HostName 100.100.100.100
+    User root
+    Port 54321
+    IdentityFile ~/.ssh/hello
+</code></pre>
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+            <div class="post-category">
+              <a href="/categories/%e6%8a%80%e6%9c%af/">
+                技术
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>
+          </div>
+        </div>
+
+        
+          
+
+          <div style="height: 50px;"></div>
+          
+            <div class="post-comments">
+              <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://stuarthua.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+            </div>
+          
+          
+          
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6137478455292280"
+     data-ad-slot="9229994044"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+        <footer class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://stuarthua.com" target="_blank">Home</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/travel/" target="_blank">Travel</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/en/" target="_blank">EN</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+  
+</footer>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script src="/js/highlight.pack.js"></script>
+
+
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+
+  
+
+</body>
+
+</html>

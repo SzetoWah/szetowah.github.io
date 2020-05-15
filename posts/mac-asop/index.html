@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Stuart Hua" />
+  <meta property="og:url" content="https://blog.stuarthua.com/posts/mac-asop/" />
+  <link rel="canonical" href="https://blog.stuarthua.com/posts/mac-asop/" /><link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="shortcut" href="/logo.png" /><link rel="alternate" type="application/atom+xml" href="https://blog.stuarthua.comindex.xml" title="StuartHua&#39;s Blog">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/blog.stuarthua.com"
+      },
+      "articleSection" : "posts",
+      "name" : "Mac 10.14.6 编译 Android 9.0 源码",
+      "headline" : "Mac 10.14.6 编译 Android 9.0 源码",
+      "description" : "前言 使用的硬件环境：\n Mac 10.14.6 500G 移动硬盘  Android 源码编译的流程：\n 源码下载 构建编译环境 编译源码 模拟器运行  附：\n 在 Android Studio 中查看源码  准备工作 一般而言，Android 源码占据大约 100G 的空间，然而编译后，极有可能再占据我们 150G 的空间，所以，在小容量的 Mac 上编译 Android 源码，使用移动硬盘自然而然成为了必然。\n官网 - Android 开放源代码项目 (AOSP)\n硬件及软件要求 硬件：\n Android 2.3 以上，需要使用 64 位系统编译，较低版本可以在 32 位系统中编译 拉取代码，至少需要 100G 磁盘空间，如果要进行编译，还需要 150G。如果要进行多次编译或使用 ccache，则需要更多空间 如果是在虚拟机中运行 Linux，则至少需要 16GB 的内存  软件：\n Python 2.6 - 2.7 GNU Make 3.81 - 3.82 Git 1.",
+      "inLanguage" : "en-US",
+      "author" : "Stuart Hua",
+      "creator" : "Stuart Hua",
+      "publisher": "Stuart Hua",
+      "accountablePerson" : "Stuart Hua",
+      "copyrightHolder" : "Stuart Hua",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-07-25 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-07-25 00:00:00 \x2b0000 UTC",
+      "url" : "https:\/\/blog.stuarthua.com\/posts\/mac-asop\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>Mac 10.14.6 编译 Android 9.0 源码 - StuartHua&#39;s Blog</title>
+  <meta property="og:title" content="Mac 10.14.6 编译 Android 9.0 源码 - StuartHua&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="前言 使用的硬件环境：
+ Mac 10.14.6 500G 移动硬盘  Android 源码编译的流程：
+ 源码下载 构建编译环境 编译源码 模拟器运行  附：
+ 在 Android Studio 中查看源码  准备工作 一般而言，Android 源码占据大约 100G 的空间，然而编译后，极有可能再占据我们 150G 的空间，所以，在小容量的 Mac 上编译 Android 源码，使用移动硬盘自然而然成为了必然。
+官网 - Android 开放源代码项目 (AOSP)
+硬件及软件要求 硬件：
+ Android 2.3 以上，需要使用 64 位系统编译，较低版本可以在 32 位系统中编译 拉取代码，至少需要 100G 磁盘空间，如果要进行编译，还需要 150G。如果要进行多次编译或使用 ccache，则需要更多空间 如果是在虚拟机中运行 Linux，则至少需要 16GB 的内存  软件：
+ Python 2.6 - 2.7 GNU Make 3.81 - 3.82 Git 1." />
+  <meta name="description" content="前言 使用的硬件环境：
+ Mac 10.14.6 500G 移动硬盘  Android 源码编译的流程：
+ 源码下载 构建编译环境 编译源码 模拟器运行  附：
+ 在 Android Studio 中查看源码  准备工作 一般而言，Android 源码占据大约 100G 的空间，然而编译后，极有可能再占据我们 150G 的空间，所以，在小容量的 Mac 上编译 Android 源码，使用移动硬盘自然而然成为了必然。
+官网 - Android 开放源代码项目 (AOSP)
+硬件及软件要求 硬件：
+ Android 2.3 以上，需要使用 64 位系统编译，较低版本可以在 32 位系统中编译 拉取代码，至少需要 100G 磁盘空间，如果要进行编译，还需要 150G。如果要进行多次编译或使用 ccache，则需要更多空间 如果是在虚拟机中运行 Linux，则至少需要 16GB 的内存  软件：
+ Python 2.6 - 2.7 GNU Make 3.81 - 3.82 Git 1." />
+  <meta property="og:locale" content="en-us" />
+
+  <link rel="stylesheet" href="/css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet" href="/css/github-markdown.css" />
+  <link rel="stylesheet" href="/css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="StuartHua&#39;s Blog">
+  
+  
+  
+  
+  
+  
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-55082727-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <article class="post 简体中文" id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          <header class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">StuartHua&#39;s Blog</h2>
+    </a>
+    <ul>
+      
+      
+        <li>
+          <a href="/categories/">
+            
+            <span>Categories</span>
+            
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about/">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+      
+    </ul>    
+  </div>
+</header>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">Mac 10.14.6 编译 Android 9.0 源码</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2019-07-25 00:00:00 UTC">
+                25 Jul 2019
+              </time>
+              
+            </div>
+            
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <h3 id="前言">前言</h3>
+<p>使用的硬件环境：</p>
+<ul>
+<li>Mac 10.14.6</li>
+<li>500G 移动硬盘</li>
+</ul>
+<p>Android 源码编译的流程：</p>
+<ul>
+<li>源码下载</li>
+<li>构建编译环境</li>
+<li>编译源码</li>
+<li>模拟器运行</li>
+</ul>
+<p>附：</p>
+<ul>
+<li>在 Android Studio 中查看源码</li>
+</ul>
+<h3 id="准备工作">准备工作</h3>
+<p>一般而言，Android 源码占据大约 100G 的空间，然而编译后，极有可能再占据我们 150G 的空间，所以，在小容量的 Mac 上编译 Android 源码，使用移动硬盘自然而然成为了必然。</p>
+<p>官网 - <a href="https://android.googlesource.com/">Android 开放源代码项目 (AOSP)</a></p>
+<h4 id="硬件及软件要求">硬件及软件要求</h4>
+<p>硬件：</p>
+<ul>
+<li>Android 2.3 以上，需要使用 64 位系统编译，较低版本可以在 32 位系统中编译</li>
+<li>拉取代码，至少需要 100G 磁盘空间，如果要进行编译，还需要 150G。如果要进行多次编译或使用 ccache，则需要更多空间</li>
+<li>如果是在虚拟机中运行 Linux，则至少需要 16GB 的内存</li>
+</ul>
+<p>软件：</p>
+<ul>
+<li>Python 2.6 - 2.7</li>
+<li>GNU Make 3.81 - 3.82</li>
+<li>Git 1.7 或更高版本</li>
+<li>Command_Line_Tools_macOS_10.13_for_Xcode_9.4 或更低版本</li>
+</ul>
+<p>AOSP 的 <code>master</code> 分支都是在 Ubuntu (LTS) 版本中进行开发和测试，所以在其他系统上编译有一些特殊问题的话，切换到 Ubuntu 中应该可以解决。另外，AOSP 中 Android 的 master 分支带有预编译版本的 OpenJDK，无需额外安装；编译较低的版本则需要单独进行安装 OpenJDK。详见 <a href="https://source.android.google.cn/source/requirements">官方 - 要求</a></p>
+<h4 id="格式化移动硬盘">格式化移动硬盘</h4>
+<p>移动硬盘插到电脑后，格式化：</p>
+<ul>
+<li>主引导记录</li>
+<li>EXFAT</li>
+</ul>
+<p>这样做，可以使 Mac/Linux/Windows 都能识别并读取移动硬盘。这里，所使用的移动硬盘被命名为 <code>StuartDrive</code>，其路径即为：<code>/Volumes/StuartDrive</code>，后续我们在这个路径下创建磁盘映像。</p>
+<h4 id="创建区分大小写的磁盘映像">创建区分大小写的磁盘映像</h4>
+<p>Mac OS 默认会在不区分大小写的文件系统中运行，但由于 Git 并不支持此类文件系统，所以需要在 Mac OS 上建立一个区分大小写的磁盘分区。</p>
+<p>有两种方法可以帮助我们创建磁盘映像</p>
+<ul>
+<li>方法一：命令行</li>
+<li>方法二：系统自带的磁盘工具</li>
+</ul>
+<p>两种方法没有太大的差别，按照个人使用习惯创建即可，这里，使用命令行方式创建：</p>
+<pre><code>$ hdiutil create -type SPARSE -fs 'Case-sensitive Journaled HFS+' -size 200g /Volumes/StuartDrive/android.dmg
+</code></pre><p>此时，在移动硬盘 <code>/Volumes/StuartDrive/</code> 目录下生成一个 200G 大小的<code>android.dmg.sparseimage</code> 文件，可简单理解为该文件是编译源码所需要的驱动盘。</p>
+<p>如果后期还是觉得容量太小，可以使用 <code>resize</code> 来调整分区大小：</p>
+<pre><code>$ hdiutil resize -size 300g /Volumes/StuartDrive/android.dmg.sparseimage
+</code></pre><h4 id="修改系统资源使用限制">修改系统资源使用限制</h4>
+<p>编译过程十分漫长，可以视作是对机器性能的一个考验，合理的修改系统资源使用限制能在一定程度上帮助我们减少编译时间。</p>
+<p>使用 <code>launchctl limit</code> 查看系统资源限制参数：</p>
+<pre><code>$ launchctl limit
+	cpu         unlimited      unlimited
+	filesize    unlimited      unlimited
+	data        unlimited      unlimited
+	stack       8388608        67104768
+	core        0              unlimited
+	rss         unlimited      unlimited
+	memlock     unlimited      unlimited
+	maxproc     709            1064
+	maxfiles    256            unlimited
+</code></pre><p>使用 <code>sysctl -a | grep kern.max</code> 查看系统硬件层次资源限制：</p>
+<pre><code>$ sysctl -a | grep kern.maxfiles
+kern.maxvnodes: 132096
+kern.maxproc: 1064
+kern.maxfiles: 12288
+kern.maxfilesperproc: 10240
+kern.maxprocperuid: 709
+kern.maxnbuf: 16384
+</code></pre><p>得到上述参考结果后，使用 <code>ulimit -a</code> 可以查看当前的设置参数，再根据个人电脑的具体情况进行设定。</p>
+<p>这里，进行如下设置，编辑 <code>~/.bash_profile</code>：</p>
+<pre><code># ulimit settings
+ulimit -S -n 10240
+</code></pre><p>记得 <code>source ~/.bash_profile</code> 使配置生效。</p>
+<blockquote>
+<p><strong>注意：</strong> 不要将 <code>ulimit</code> 的设置写在 <code>~/.zshrc</code> 文件中，编译中使用 <code>zsh</code> 可能出错，官方更推荐使用 <code>bash</code>.</p>
+</blockquote>
+<h3 id="源码下载">源码下载</h3>
+<p>首先，装载我们新创建的区分大小写的磁盘映像，用于后续操作：</p>
+<pre><code>$ hdiutil attach /Volumes/StuartDrive/android.dmg.sparseimage -mountpoint /Volumes/android
+</code></pre><p>此时，我们在 Finder 中，可以看到 <code>/Volumes/android</code> 已经装载成功。</p>
+<blockquote>
+<p>需要卸载的磁盘映像的话，则执行：<code>hdiutil detach /Volumes/android</code></p>
+</blockquote>
+<p>切换到 <code>/Volumes/android</code> 目录下，并且创建一个 <code>aosp</code> 的工作目录：</p>
+<pre><code>$ cd /Volumes/android/
+$ mkdir aosp
+$ cd aosp
+</code></pre><p>稍后，我们会把 Android 源代码下载并保存到 <code>/Volumes/android/aosp</code> 目录。</p>
+<blockquote>
+<p><strong>注意：</strong> 如果电脑中同时安装了多个版本 Python 的话，记得切换系统 Python 版本为 Python 2，使用 Python 3 的话，使用 repo 会报错。</p>
+</blockquote>
+<h4 id="安装-repo">安装 Repo</h4>
+<p>Repo 是一款帮助我们在 Android 环境中更轻松地使用 Git 的工具。这里，没有使用官方推荐的方式下载按照 repo，而是使用 <code>Homebrew</code> 安装。使用帮助可以查看 <a href="https://source.android.google.cn/setup/develop/repo">官方 - Repo 命令参考资料</a>。</p>
+<pre><code>$ brew install repo
+</code></pre><h4 id="初始化-repo-客户端">初始化 Repo 客户端</h4>
+<p>源地址的选择可以视个人网络情况而定，列出三种常用源，使用时记得要与后文中源码下载的源地址保持一致：</p>
+<ul>
+<li>官方源：<code>https://android.googlesource.com/platform/manifest</code></li>
+<li>清华源：<code>https://aosp.tuna.tsinghua.edu.cn/platform/manifest</code></li>
+<li>科大源：<code>git://mirrors.ustc.edu.cn/aosp/platform/manifest</code></li>
+</ul>
+<p>如果对自己的网络环境足够自信，可以直接使用官方源下载源码（这会十分漫长，且意味着要翻墙下载超过 50G 的文件）。不想翻墙的话，可以跳过这一章节直接参考下一节中关于 <code>国内方法</code> 的介绍进行源码的下载。</p>
+<p>在 <code>/Volumes/android/aosp</code> 目录下，运行 <code>repo init</code> 初始化，示例：</p>
+<pre><code># 下载全部分支（默认）
+$ repo init -u https://android.googlesource.com/platform/manifest
+
+# 指定分支下载，-b 参数指定分支
+$ repo init -u https://android.googlesource.com/platform/manifest -b android-9.0.0_r47
+</code></pre><p>这里，选择指定分支 <code>android-9.0.0_r47</code>（附上 <a href="https://source.android.com/setup/build-numbers.html#source-code-tags-and-builds">官方分支列表</a>，界面语言切换至英文后，可以看到全部版本，中文界面下版本可能显示不全）</p>
+<p>初始化成功后，系统将显示一条消息，告诉我们 Repo 已在工作目录中完成初始化。客户端目录中现在应包含一个 <code>.repo</code> 目录，清单等文件将保存在该目录下。注意，这里不是下载源码，所以过程并不会很久。</p>
+<h4 id="下载-android-源码">下载 Android 源码</h4>
+<p>参考：</p>
+<ul>
+<li><a href="https://source.android.com/setup/build/downloading">官方教程 - 下载源代码</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/">清华 - AOSP(Android) 镜像使用帮助</a></li>
+<li><a href="https://lug.ustc.edu.cn/wiki/mirrors/help/aosp">科大 - AOSP(Android) 镜像使用帮助</a></li>
+</ul>
+<h5 id="官方方法">官方方法</h5>
+<p>进入 <code>/Volumes/android/aosp</code> 目录，同步源码树（即下载更新源码，以后只需执行这条命令来同步）：</p>
+<pre><code>repo sync
+</code></pre><p>同步过程是可能意外中断的，此时可以直接继续执行 <code>repo sync</code> 来继续同步，同步过程会下载大概 30G 的文件，耗时比较久。如果挂机很久，依旧没有下载成功的话，可以尝试使用以下脚本：</p>
+<pre><code>#!/bin/bash 
+repo sync 
+while [ $? -e 1 ]; do 
+    repo sync 
+done
+echo success
+</code></pre><p>保存脚本为 <code>download.sh</code>，运行：<code>sh download.sh</code> 即可，上述脚本会帮助我们在因为某些原因中断后，自动继续同步。</p>
+<p>下载完成后会提示：</p>
+<pre><code>Syncing work tree: 100%(xxx/xxx), done.
+</code></pre><h5 id="国内方法">国内方法</h5>
+<p>此处介绍的方法是镜像站中比较推荐的 <code>下载每月初始化包</code> 的方式（一次性下载 aosp 版本控制信息仓库，而不需要耗费大量的时间缓慢地同步），故而可以忽略上一步中 <code>初始化 Repo 客户端</code> 的操作，直接删除 <code>aosp</code> 目录即可：</p>
+<pre><code>rm -rf Volumes/android/aosp
+</code></pre><ul>
+<li>第一次下载</li>
+</ul>
+<p>从 <a href="https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/">清华大学开源软件镜像站 - aosp-monthly</a> 中选择最新版本进行下载。此处，选择最新文件 <code>aosp-latest.tar.md5</code>、<code>aosp-latest.tar</code>（这是一份打包的 AOSP 镜像，为一个 tar 包，只保留了 <code>.repo</code> 目录，下载后解包，再 <code>repo sync</code> 一遍即可得到完整的目录）进行下载，保存至 <code>/Volumes/android/</code> 目录。</p>
+<p>先不着急解包，首先我们要做的是对比下载文件的 <code>checksum</code>，防止文件损坏导致的不能使用：</p>
+<pre><code># 由于文件比较大，计算时间相对较久，耐心等待即可
+$ md5 aosp-latest.tar
+</code></pre><p>将运行结果与 <code>aosp-latest.tar.md5</code> 中记录的值进行对比，一致的话即可进行下一步解包。</p>
+<p>解包我们下载的 <code>aosp-latest.tar</code> 文件至 <code>/Volumes/android/</code> 目录：</p>
+<pre><code># 用于查看进度
+$ brew install pv
+
+# 解包
+$ pv /Volumes/android/aosp-latest.tar | tar xf - -C /Volumes/android/
+</code></pre><p>解包完成后，我们得到 <code>/Volumes/android/aosp</code> 目录，进入此目录，执行 <code>ll -a</code> 即可查看到隐藏目录 <code>.repo</code>，这里包含了我们需要到源码。</p>
+<p>依旧不着急进行源码同步，先更改仓库源为 <strong>科大源</strong>（使用清华源同步也可以，但基于地域网络测试，科大源的下载速度比较好些，故而选择切换至科大源），并指定分支 <code>android-9.0.0_r47</code>：</p>
+<pre><code># 使用 科大源 重新初始化仓库，并指定分支 android-9.0.0_r47
+$ repo init -u git://mirrors.ustc.edu.cn/aosp/platform/manifest -b android-9.0.0_r47
+</code></pre><p>如果遇到仓库源地址未更新的情况，可以尝试手动修改源地址：</p>
+<pre><code>## 附：手动修改源地址的方法 - 修改配置文件（共四处地方）
+# 1. 修改 .repo/manifests.git/config
+# 将 url 替换为 git://mirrors.ustc.edu.cn/aosp/platform/manifest
+
+# 2. 修改 .repo/repo/config
+# 将 url 替换为 git://mirrors.ustc.edu.cn/aosp/platform/manifest
+
+# 3. 修改 .repo/manifests.git/.repo_config.json
+# 将 remote.origin.url 替换为 git://mirrors.ustc.edu.cn/aosp/platform/manifest
+
+# 4. 修改 .repo/repo/.repo_config.json
+# 将 remote.origin.url 替换为 git://mirrors.ustc.edu.cn/aosp/platform/manifest
+</code></pre><p>最后，使用 <code>repo sync</code> 进行代码同步：</p>
+<pre><code>$ repo sync
+</code></pre><p>同步完成后，依旧会提示：</p>
+<pre><code>Syncing work tree: 100%(xxx/xxx), done.
+</code></pre><ul>
+<li>之后的下载同步只需执行 <code>repo sync</code> 即可</li>
+</ul>
+<h3 id="构建编译环境">构建编译环境</h3>
+<h4 id="切换-bash">切换 bash</h4>
+<p>如果电脑配置了 <code>zsh</code> 为默认 <code>shell</code>，使用 <code>zsh</code> 初始化编译环境时会提示可能导致异常：</p>
+<pre><code>WARNING: Only bash is supported, use of other shell would lead to erroneous results
+</code></pre><p>建议切换至 <code>bash</code>，切换命令如下：</p>
+<pre><code>$ echo $SHELL
+$ chsh -s /bin/bash
+</code></pre><p>重启终端使其生效。</p>
+<h4 id="环境设置">环境设置</h4>
+<p>初始化环境：</p>
+<pre><code>$ source build/envsetup.sh
+</code></pre><h4 id="选择编译目标">选择编译目标</h4>
+<p>输入 <code>lunch</code>，会提示如下：</p>
+<pre><code>$ lunch 
+
+You're building on Darwin
+
+Lunch menu... pick a combo:
+     1. aosp_arm-eng
+     2. aosp_arm64-eng
+     3. aosp_mips-eng
+     4. aosp_mips64-eng
+     5. aosp_x86-eng
+     6. aosp_x86_64-eng
+
+......
+......
+......
+
+Which would you like? [aosp_arm-eng] 
+</code></pre><p>这里列出了所有的可编译的目标。所有编译目标都采用 <code>BUILD-BUILDTYPE</code> 形式，其中 <code>BUILD</code> 是表示特定功能组合的代号，<code>BUILDTYPE</code> 是以下类型之一，表示在什么环境下运行：</p>
+<table>
+<thead>
+<tr>
+<th>编译类型 (BUILDTYPE)</th>
+<th>使用情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>权限受限；适用于生产环境</td>
+</tr>
+<tr>
+<td>userdebug</td>
+<td>与 “user” 类似，但具有 <code>root</code> 权限和可调试性；是进行调试时的首选编译类型</td>
+</tr>
+<tr>
+<td>eng</td>
+<td>具有额外调试工具的开发配置</td>
+</tr>
+</tbody>
+</table>
+<p>比如 <code>aosp_arm-eng</code> 的 <code>BUILD</code> 为 aosp_arm，<code>BUILDTYPE</code> 为 eng，aosp 代表 Android 开源项目，arm 表示系统是运行在 arm 架构的处理器上，更多见 <a href="https://source.android.google.cn/source/running.html#selecting-device-build">官方 - 选择设备编译系统</a>。</p>
+<p>如果有 Pixel 或 Nexus 真机，选择对应的编译目标即可。这里选择 x86_64 模拟器（支持 HAXM，可以使模拟器更快运行），即 <code>6. aosp_x86_64-eng</code>。在上面的 <code>Which would you like? [aosp_arm-eng]</code> 后面输入 6 即可。也可在运行时直接指定：</p>
+<pre><code>$ lunch 6
+</code></pre><h3 id="编译源码">编译源码</h3>
+<p>在编译之前，通过输入以下命令，可以查看 Mac 的CPU核数：</p>
+<pre><code>$ sysctl -n machdep.cpu.core_count
+4
+</code></pre><p>上面输出的CPU核数为 4，则可以启动 4个 或 8个 线程来编译源码：</p>
+<pre><code>$ make -j4
+</code></pre><p>接下来就是漫长的编译过程，一般需要 2~3 个小时，如果看到下面的提示，则表示已经编译完成：</p>
+<pre><code>#### build completed successfully (02:15:52 (hh:mm:ss)) ####
+</code></pre><h4 id="遇到的问题">遇到的问题</h4>
+<p>如果遇到编译失败，Google 得到解决方案准备尝试时，建议使用 <code>make clobber</code> 清除一下构建产物，然后重新进行编译。</p>
+<ul>
+<li>Could not find a supported mac sdk: [“10.10” “10.11” “10.12” “10.13”]</li>
+</ul>
+<p>参考 <a href="https://stackoverflow.com/questions/50760701/could-not-find-a-supported-mac-sdk-10-10-10-11-10-12-10-13">stackoverflow</a>、<a href="https://www.cnblogs.com/larack/p/9646860.html">cnblogs</a>，编辑 <code>/Volumes/android/aosp/build/soong/cc/config/x86_darwin_host.go</code>，添加 <code>10.14</code> 的支持：</p>
+<pre><code>darwinSupportedSdkVersions = []string{
+	&quot;10.10&quot;,
+	&quot;10.11&quot;,
+	&quot;10.12&quot;,
+	&quot;10.13&quot;,
+	&quot;10.14&quot;,
+}
+</code></pre><p>执行 <code>make clobber</code> 清理上次构建，执行 <code>make -j4</code> 重新编译</p>
+<ul>
+<li>symbol(s) not found for architecture i386</li>
+</ul>
+<p>参考 <a href="https://developer.apple.com/documentation/xcode_release_notes/xcode_10_release_notes">Xcode 10 Release Notes</a>，Mac OS 自 10.14 开始，不在支持编译 32位程序。官方建议编译 32 位程序时使用 Xcode 9.4 或之前的版本。解决方法是使用降级的 <code>Command Line Tools</code>：</p>
+<pre><code># 下载带有 32位 链接库的 CommandLineTools，推荐 Command_Line_Tools_macOS_10.13_for_Xcode_9.4
+# 下载地址：https://download.developer.apple.com/Developer_Tools/Command_Line_Tools_macOS_10.13_for_Xcode_9.4/Command_Line_Tools_macOS_10.13_for_Xcode_9.4.dmg (需要 Apple ID 登录)
+# 安装完成后，切换至降级版本的 Command Line Tools
+$ sudo xcode-select -s /Library/Developer/CommandLineTools
+</code></pre><p>执行 <code>make clobber</code> 清理上次构建，执行 <code>make -j4</code> 重新编译</p>
+<blockquote>
+<p><strong>注意：</strong> 之后如需使用最新版 CommandLineTools，可以选择安装最新版 Xcode.app，使用其内置版本的 Command Line Tools，其目录为：/Applications/Xcode.app/Contents/Developer/Platform/MacOSX.platform/Developer/</p>
+<pre><code># 切换至最新版 CommandLineTools
+$ sudo xcode-select -r
+# 切换至降级版 CommandLineTools
+$ sudo xcode-select -s /Library/Developer/CommandLineTools
+</code></pre></blockquote>
+<ul>
+<li>Could not find command xz</li>
+</ul>
+<p>安装缺失的指令：</p>
+<pre><code>brew install xz
+</code></pre><h3 id="模拟器运行">模拟器运行</h3>
+<p>在编译完成后，终端里输入以下命令，便可使用模拟器来运行编译的版本：</p>
+<pre><code>$ set_stuff_for_environment
+$ emulator
+</code></pre><h3 id="在-android-studio-中查看源码">在 Android Studio 中查看源码</h3>
+<h4 id="编译-idegen-模块">编译 idegen 模块</h4>
+<p>上述编译完成后，运行以下命令，编译 <code>idegen</code> 模块：</p>
+<pre><code>$ mmm development/tools/idegen/
+</code></pre><p><code>idegen</code> 模块编译完成后会有如下提示：</p>
+<pre><code>#### make completed successfully (46 seconds) ####
+</code></pre><p>继续运行以下命令，在 <code>aosp</code> 根目录生成对应的 <code>android.ipr</code>、<code>android.iml</code> IDEA 工程配置文件：</p>
+<pre><code>$ development/tools/idegen/idegen.sh
+
+Read excludes: 17ms
+Traversed tree: 218013ms
+</code></pre><h4 id="导入源码">导入源码</h4>
+<p>启动 Android Studio，选择一个已存在的 Android Studio 项目，然后选中 <code>aosp</code> 根目录下的 <code>android.ipr</code> 文件，如果提示需要 convert，确认即可。首次导入大概需要 20~30 分钟。</p>
+<p>导入成功后，在 Project Structure 中，选择 <code>Modules</code>，删除所有的依赖，只保留 <code>&lt;Modules source&gt;</code>，<code>Android API Platform</code>。这样在查看源码跳转的时候，便不会进入 <code>android.jar</code>，而是直接跳转至本项目的文件中。</p>
+<blockquote>
+<p><strong>注意：</strong> 导入源码时，选择全部导入，Android Studio 难免会比较卡，可以尝试在 <code>android.iml</code> 中进行修改，以排除一部分代码。</p>
+</blockquote>
+<h3 id="推荐">推荐</h3>
+<ul>
+<li><a href="https://source.android.com/">AOSP</a></li>
+<li><a href="https://android.googlesource.com/">Git repositories on android</a></li>
+<li><a href="https://android-review.googlesource.com">Android Revice</a></li>
+<li><a href="http://androidxref.com">AndroidXRef</a></li>
+</ul>
+<h3 id="参考">参考</h3>
+<ul>
+<li><a href="https://source.android.google.cn/">AOSP</a></li>
+<li><a href="https://lug.ustc.edu.cn/wiki/mirrors/help/aosp">AOSP(Android) 镜像使用帮助</a></li>
+<li><a href="https://juejin.im/post/5cc5165fe51d456e781f2082#heading-12">Mac OS下载、编译及导入Android源码</a></li>
+<li><a href="https://www.jianshu.com/p/55623ebeca4c">Mac OS 在移动硬盘上下载并编译Android源码</a></li>
+<li><a href="http://tao93.top/2018/09/01/macOS%20%E7%B3%BB%E7%BB%9F%E7%BC%96%E8%AF%91%20Android%208.1.0%20%E6%BA%90%E7%A0%81%E5%85%A8%E8%BF%87%E7%A8%8B/">macOS 系统编译 Android 8.1.0 源码全过程</a></li>
+</ul>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+            <div class="post-category">
+              <a href="/categories/%e6%8a%80%e6%9c%af/">
+                技术
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>
+          </div>
+        </div>
+
+        
+          
+
+          <div style="height: 50px;"></div>
+          
+            <div class="post-comments">
+              <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://stuarthua.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+            </div>
+          
+          
+          
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6137478455292280"
+     data-ad-slot="9229994044"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+        <footer class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://stuarthua.com" target="_blank">Home</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/travel/" target="_blank">Travel</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/en/" target="_blank">EN</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+  
+</footer>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script src="/js/highlight.pack.js"></script>
+
+
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+
+  
+
+</body>
+
+</html>

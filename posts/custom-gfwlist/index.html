@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.70.0" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Stuart Hua" />
+  <meta property="og:url" content="https://blog.stuarthua.com/posts/custom-gfwlist/" />
+  <link rel="canonical" href="https://blog.stuarthua.com/posts/custom-gfwlist/" /><link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="icon" href="/logo.png" />
+  <link rel="shortcut" href="/logo.png" /><link rel="alternate" type="application/atom+xml" href="https://blog.stuarthua.comindex.xml" title="StuartHua&#39;s Blog">
+
+  <script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "https:\/\/blog.stuarthua.com"
+      },
+      "articleSection" : "posts",
+      "name" : "自定义 gfwlist",
+      "headline" : "自定义 gfwlist",
+      "description" : "前言 不可否认，gfwlist 是一个非常优秀的公益项目，涵盖了众多网友整理的一些黑名单网址。但实际使用过程中，由于 gfwlist 更新慢，用户总是会碰到一些没有覆盖的网址、或者使用了一些老旧的网址，体验上差强人意。再者，每一个人的浏览习惯都不尽相同，使用公共版的 list 并不能满足个人的自定义需求。因此，这里记录一下自己的解决方式，指定一份可自定义的 gfwlist。\n自定义的 gfwlist 以原版 gfwlist 为基础提炼出符合个人习惯的网址清单。\n 了解 gfwlist 了解 gfwlist PAC 规则 自定义 gfwlist  了解 gfwlist 官网：gfwlist\n在原版 gfwlist 中，其最终提供的名单通过 Base 64 加密，形成文本文档。\nMac 中 base64 命令使用示例：\n\/\/1. 把 demo.json 文件 base64 加密 $ base64 demo.json -o abc.txt \/\/加密, -o 后面跟着是输出目录 $ base64 -b 64 -i demo.json -o abc.txt \/\/加密, -b 64 每64个字符换行, -i 后面跟要加密的文件, -o 后面跟着是输出目录 $ base64 -D abc.txt -o 123.",
+      "inLanguage" : "en-US",
+      "author" : "Stuart Hua",
+      "creator" : "Stuart Hua",
+      "publisher": "Stuart Hua",
+      "accountablePerson" : "Stuart Hua",
+      "copyrightHolder" : "Stuart Hua",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-07-20 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-07-20 00:00:00 \x2b0000 UTC",
+      "url" : "https:\/\/blog.stuarthua.com\/posts\/custom-gfwlist\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>自定义 gfwlist - StuartHua&#39;s Blog</title>
+  <meta property="og:title" content="自定义 gfwlist - StuartHua&#39;s Blog" />
+  <meta property="og:type" content="article" />
+  <meta property="og:description" content="前言 不可否认，gfwlist 是一个非常优秀的公益项目，涵盖了众多网友整理的一些黑名单网址。但实际使用过程中，由于 gfwlist 更新慢，用户总是会碰到一些没有覆盖的网址、或者使用了一些老旧的网址，体验上差强人意。再者，每一个人的浏览习惯都不尽相同，使用公共版的 list 并不能满足个人的自定义需求。因此，这里记录一下自己的解决方式，指定一份可自定义的 gfwlist。
+自定义的 gfwlist 以原版 gfwlist 为基础提炼出符合个人习惯的网址清单。
+ 了解 gfwlist 了解 gfwlist PAC 规则 自定义 gfwlist  了解 gfwlist 官网：gfwlist
+在原版 gfwlist 中，其最终提供的名单通过 Base 64 加密，形成文本文档。
+Mac 中 base64 命令使用示例：
+//1. 把 demo.json 文件 base64 加密 $ base64 demo.json -o abc.txt //加密, -o 后面跟着是输出目录 $ base64 -b 64 -i demo.json -o abc.txt //加密, -b 64 每64个字符换行, -i 后面跟要加密的文件, -o 后面跟着是输出目录 $ base64 -D abc.txt -o 123." />
+  <meta name="description" content="前言 不可否认，gfwlist 是一个非常优秀的公益项目，涵盖了众多网友整理的一些黑名单网址。但实际使用过程中，由于 gfwlist 更新慢，用户总是会碰到一些没有覆盖的网址、或者使用了一些老旧的网址，体验上差强人意。再者，每一个人的浏览习惯都不尽相同，使用公共版的 list 并不能满足个人的自定义需求。因此，这里记录一下自己的解决方式，指定一份可自定义的 gfwlist。
+自定义的 gfwlist 以原版 gfwlist 为基础提炼出符合个人习惯的网址清单。
+ 了解 gfwlist 了解 gfwlist PAC 规则 自定义 gfwlist  了解 gfwlist 官网：gfwlist
+在原版 gfwlist 中，其最终提供的名单通过 Base 64 加密，形成文本文档。
+Mac 中 base64 命令使用示例：
+//1. 把 demo.json 文件 base64 加密 $ base64 demo.json -o abc.txt //加密, -o 后面跟着是输出目录 $ base64 -b 64 -i demo.json -o abc.txt //加密, -b 64 每64个字符换行, -i 后面跟要加密的文件, -o 后面跟着是输出目录 $ base64 -D abc.txt -o 123." />
+  <meta property="og:locale" content="en-us" />
+
+  <link rel="stylesheet" href="/css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet" href="/css/github-markdown.css" />
+  <link rel="stylesheet" href="/css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="/index.xml" rel="alternate" type="application/rss+xml"
+    title="StuartHua&#39;s Blog">
+  
+  
+  
+  
+  
+  
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-55082727-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+<body>
+  <article class="post 简体中文" id="article">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="site-header">
+          <header class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">StuartHua&#39;s Blog</h2>
+    </a>
+    <ul>
+      
+      
+        <li>
+          <a href="/categories/">
+            
+            <span>Categories</span>
+            
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about/">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+      
+    </ul>    
+  </div>
+</header>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">自定义 gfwlist</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2019-07-20 00:00:00 UTC">
+                20 Jul 2019
+              </time>
+              
+            </div>
+            
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+          <h3 id="前言">前言</h3>
+<p>不可否认，<a href="https://github.com/gfwlist/gfwlist">gfwlist</a> 是一个非常优秀的公益项目，涵盖了众多网友整理的一些黑名单网址。但实际使用过程中，由于 gfwlist 更新慢，用户总是会碰到一些没有覆盖的网址、或者使用了一些老旧的网址，体验上差强人意。再者，每一个人的浏览习惯都不尽相同，使用公共版的 list 并不能满足个人的自定义需求。因此，这里记录一下自己的解决方式，指定一份可自定义的 gfwlist。</p>
+<p>自定义的 gfwlist 以原版 gfwlist 为基础提炼出符合个人习惯的网址清单。</p>
+<ul>
+<li>了解 gfwlist</li>
+<li>了解 gfwlist PAC 规则</li>
+<li>自定义 gfwlist</li>
+</ul>
+<h3 id="了解-gfwlist">了解 gfwlist</h3>
+<p>官网：<a href="https://github.com/gfwlist/gfwlist">gfwlist</a></p>
+<p>在原版 gfwlist 中，其最终提供的名单通过 <code>Base 64</code> 加密，形成文本文档。</p>
+<p>Mac 中 <code>base64</code> 命令使用示例：</p>
+<pre><code>//1. 把 demo.json 文件 base64 加密
+$ base64 demo.json -o abc.txt //加密, -o 后面跟着是输出目录
+$ base64 -b 64 -i demo.json -o abc.txt //加密, -b 64 每64个字符换行, -i 后面跟要加密的文件, -o 后面跟着是输出目录
+$ base64 -D abc.txt -o 123.json //解密, -o 后面跟着是输出目录
+
+//2. 把 &quot;Man&quot; 字符串进行 base64 加密，并回显输出
+$ echo -n &quot;Man&quot; | base64
+TWFu
+
+//3. 把 &quot;TWFu&quot; 字符串通过 base64 解密，并回显输出
+$ echo -n &quot;TWFu&quot; | base64 -D
+Man%
+</code></pre><p>使用 <code>base64</code> 解密 <a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt">官方 gfwlist.txt</a> 文件，得到解密后的文件：</p>
+<pre><code>$ base64 -D gfwlist.txt -o list.txt
+</code></pre><p>现在，我们得到了一份看起来正常的网址列表清单，面对这众多的网址，熟悉一下 PAC 过滤规则便显得十分有必要了。</p>
+<h3 id="了解-gfwlist-pac-规则">了解 gfwlist PAC 规则</h3>
+<p><code>PAC</code> 全称 Proxy Auto Config File，用于根据 URL 选择不同代理服务器或是不代理直接访问，相比于传统代理可以加快速度，也减少代理服务器的流量。</p>
+<h4 id="pac-规则描述">PAC 规则描述</h4>
+<p>PAC 最早是 <code>Ad Block</code> 使用的一种规则，用于屏蔽网页各种广告，所以参数除了 URL 外还支持各种 DOM 元素，详细参数可以查看 <a href="https://adblockplus.org/en/filter-cheatsheet">Adblock Plus filters explained</a>。</p>
+<p>基本过滤规则：</p>
+<pre><code># 要匹配的 url 地址，如：
+
+http://example.com
+or
+http://example.com*
+</code></pre><p>基本的过滤器 <code>/</code>：</p>
+<pre><code># 匹配整站，如：
+
+http://example.com/
+
+# 匹配站点部分地址，如：
+
+http://example.com/ads/
+
+# 匹配站点部分资源，如：
+
+http://example.com/ads/banner*.gif
+</code></pre><p>使用 <code>!</code> 行注释符进行注释：</p>
+<pre><code># 使用！作为注释的开始，可以在注释中书写任何想些的文案，如：
+
+! Comment
+! Here is comment.
+! 我是注释
+</code></pre><p>使用 <code>|</code> 管线符号来表示地址的最前端或最末端，用于精确控制匹配的开始或结束：</p>
+<pre><code># PAC 默认会认为每个规则前后都有通配符，所以，ad 和 *ad* 没有任何区别。为了明确前后，可以加 |。
+# gif| 说明在 gif 后没有任何东西了。 |http://xxx 说明在前面没有了。
+# 示例：匹配以 http://www.example.com 开头的网址
+
+|http://www.example.com
+or
+|http://www.abc.com*
+</code></pre><p>使用 <code>||</code> 子域通配符匹配主域名下的所有子域：</p>
+<pre><code># 示例：匹配网址中包含 example.com 的全部站点，如：
+
+||example.com
+</code></pre><p>定义例外规则 <code>@@</code>：</p>
+<pre><code># 可以使用 @@ 表示后面的是例外，不会拦截；也可以配合 | 精确匹配。如：
+
+@@|http://example.com
+</code></pre><p>分隔符 <code>^</code>，匹配任何单个字符，同样用于精确匹配：</p>
+<pre><code># http://example.com/ 和 http://example.com:8000/ 已经能帮助我们匹配到这两个网址，
+# 但却不能匹配 http://example.com.ar/ 使用 http://example.com^ 即可实现我们的需求
+# 分隔符可以是除了字母、数字或者 _ - . % 之外的任何字符。地址的结尾默认也是一个分隔符。
+</code></pre><p>排除标识符 <code>~</code>，来修正匹配的地址</p>
+<p>字符通配符 <code>*</code>，匹配0长度或任意长度的字符串</p>
+<h4 id="gfwlist-pac-规则格式">gfwlist PAC 规则格式</h4>
+<p>了解了 PAC 的规则，我们看一下在 gfwlist 中的应用。目前在 gfwlist 中，有如下的规则格式：</p>
+<ul>
+<li>
+<pre><code>example.com
+</code></pre><ul>
+<li>匹配：http://www.example.com/foo</li>
+<li>匹配：http://www.google.com/search?q=www.example.com</li>
+<li>匹配：http://fakeexample.com/</li>
+<li>不匹配：https://www.example.com/</li>
+</ul>
+<p><strong>说明</strong>：用于表明字符串 <code>example.com</code> 为 URL 关键词。任何含关键词的 http 连接（不包括 https）皆会使用代理。
+<br></p>
+</li>
+<li>
+<pre><code>.example.com
+</code></pre><ul>
+<li>匹配：http://www.example.com/foo</li>
+<li>匹配：http://www.google.com/search?q=www.example.com</li>
+<li>不匹配：http://fakeexample.com/</li>
+<li>不匹配：https://www.example.com/</li>
+</ul>
+<p><strong>说明</strong>：用于表明字符串 <code>.example.com</code> 为 URL 关键词。任何含关键词的 http 连接（不包括 https）皆会使用代理。
+<br></p>
+</li>
+<li>
+<pre><code>||example.com
+</code></pre><ul>
+<li>匹配：http://example.com/foo</li>
+<li>匹配：https://subdomain.example.com/bar</li>
+<li>不匹配：http://www.google.com/search?q=example.com</li>
+</ul>
+<p><strong>说明</strong>：匹配整个域名（含子域名）（不论是 http 还是 https），一般用于该站点的 IP 被封锁的情况。
+<br></p>
+</li>
+<li>
+<pre><code>@@||example.com
+</code></pre><p><strong>说明</strong>：这种规则的优先级最高，表示所有匹配 <code>||example.com</code> 规则的网址均 <strong>禁止代理</strong>。一般用于特殊情况，比如禁止对国内的网站误用代理。
+<br></p>
+</li>
+<li>
+<pre><code>|https://ssl.example.com
+</code></pre><p><strong>说明</strong>：这种规则匹配的是所有以 <code>https://ssl.example.com</code> 开头的地址。一般用于某些 IP 的 HTTPS 访问被定点封锁的情况。
+<br></p>
+</li>
+<li>
+<pre><code>|http://example.com
+</code></pre><p><strong>说明</strong>：这种规则匹配的是所有以 <code>http://example.com</code> 开头的地址。一般用于某些域名较短的网站，例如短网址服务，可以防止出现慢规则。
+<br></p>
+</li>
+<li>
+<pre><code>/^https?:\/\/[^\/]+example\.com/
+</code></pre><p><strong>说明</strong>：这种规则匹配的是域名中含有 <code>example.com</code> 这个字符串的，是正则表达式，较不常见。一般用于该字符串被 DNS 污染的情况。
+<br></p>
+</li>
+<li>
+<pre><code>!Foo bar
+</code></pre><p><strong>说明</strong>：注释，以英文感叹号开头，解释说明，不起实际作用，可以在注释中书写任何想些的文案。</p>
+</li>
+</ul>
+<h3 id="自定义-gfwlist">自定义 gfwlist</h3>
+<p>在了解上述规则后，便可以根据自己的浏览习惯开始整理自定义的 gfwlist，如有需要可借鉴或者使用我的仓库 <a href="https://github.com/stuarthua/gfwlist">stuarthua/gfwlist</a>。</p>
+<p>以下给出一些常用网站的过滤规则，更多内容可以自行补充，或直接使用 <a href="https://raw.githubusercontent.com/stuarthua/gfwlist/master/gfwlist.txt">Stuart - gfwlist.txt</a> ：</p>
+<pre><code>[AutoProxy 0.2.9]
+
+
+!
+!--- HomePage: https://github.com/stuarthua/gfwlist ---
+!
+
+
+!---Facebook---
+cdninstagram.com
+||cdninstagram.com
+||facebook.br
+.facebook.com
+||facebook.com
+!--/^https?:\/\/[^\/]+facebook\.com/
+@@||v6.facebook.com
+||facebook.design
+||connect.facebook.net
+||facebook.hu
+||facebook.in
+||facebook.nl
+||facebook.se
+||facebookmail.com
+||fb.com
+||fb.me
+||fbcdn.net
+||fbsbx.com
+||fbaddins.com
+||fbworkmail.com
+.instagram.com
+||instagram.com
+||m.me
+||messenger.com
+||oculus.com
+||oculuscdn.com
+||rocksdb.org
+@@||ip6.static.sl-reverse.com
+||thefacebook.com
+||whatsapp.com
+||whatsapp.net
+
+
+!
+!---Linkedin---
+!
+
+
+!---Amazon(AWS、Prime)---
+||amazon.com
+||amazon.co.jp
+||amazon.co.uk
+||amazon.de
+||amazonaws.com
+||amazonvideo.com
+||primevideo.com
+!--- 第三方服务 ---!
+||media-amazon.com
+||cloudfront.net
+||amazon-adsystem.com
+
+
+!!---Google---
+!### https://www.google.com/supported_domains ###
+!...GFWList doesn't intend to support typosquatting...
+||1e100.net
+||466453.com
+||abc.xyz
+||about.google
+||admob.com
+||adsense.com
+||agoogleaday.com
+||ai.google
+||ampproject.org
+@@|https://www.ampproject.org
+@@|https://cdn.ampproject.org
+||amp.dev
+||android.com
+||androidify.com
+||androidtv.com
+||api.ai
+.appspot.com
+||appspot.com
+||autodraw.com
+||blog.google
+||blogblog.com
+blogspot.com
+/^https?:\/\/[^\/]+blogspot\.(.*)/
+.blogspot.hk
+.blogspot.jp
+.blogspot.tw
+!--||capitalg.com
+||certificate-transparency.org
+||chrome.com
+||chromecast.com
+||chromeexperiments.com
+||chromercise.com
+||chromestatus.com
+||chromium.org
+||com.google
+||crbug.com
+||creativelab5.com
+||crisisresponse.google
+||crrev.com
+||data-vocabulary.org
+||debug.com
+||deepmind.com
+||deja.com
+||design.google
+||digisfera.com
+||dns.google
+||domains.google
+||duck.com
+||environment.google
+||feedburner.com
+||firebaseio.com
+||g.co
+||gcr.io
+||get.app
+||get.dev
+||get.how
+||get.page
+||getmdl.io
+||getoutline.org
+||ggpht.com
+||gmail.com
+||gmodules.com
+||godoc.org
+||golang.org
+||goo.gl
+.google.ae
+.google.as
+.google.am
+.google.at
+.google.az
+.google.ba
+.google.be
+.google.bg
+.google.ca
+.google.cd
+.google.ci
+.google.co.id
+.google.co.jp
+.google.co.kr
+.google.co.ma
+.google.co.uk
+.google.com
+.google.de
+||google.dev
+.google.dj
+.google.dk
+.google.es
+.google.fi
+.google.fm
+.google.fr
+.google.gg
+.google.gl
+.google.gr
+.google.ie
+.google.is
+.google.it
+.google.jo
+.google.kz
+.google.lv
+.google.mn
+.google.ms
+.google.nl
+.google.nu
+.google.no
+.google.ro
+.google.ru
+.google.rw
+.google.sc
+.google.sh
+.google.sk
+.google.sm
+.google.sn
+.google.tk
+.google.tm
+.google.to
+.google.tt
+.google.vu
+.google.ws
+/^https?:\/\/([^\/]+\.)*google\.(ac|ad|ae|af|al|am|as|at|az|ba|be|bf|bg|bi|bj|bs|bt|by|ca|cat|cd|cf|cg|ch|ci|cl|cm|co.ao|co.bw|co.ck|co.cr|co.id|co.il|co.in|co.jp|co.ke|co.kr|co.ls|co.ma|com|com.af|com.ag|com.ai|com.ar|com.au|com.bd|com.bh|com.bn|com.bo|com.br|com.bz|com.co|com.cu|com.cy|com.do|com.ec|com.eg|com.et|com.fj|com.gh|com.gi|com.gt|com.hk|com.jm|com.kh|com.kw|com.lb|com.ly|com.mm|com.mt|com.mx|com.my|com.na|com.nf|com.ng|com.ni|com.np|com.om|com.pa|com.pe|com.pg|com.ph|com.pk|com.pr|com.py|com.qa|com.sa|com.sb|com.sg|com.sl|com.sv|com.tj|com.tr|com.tw|com.ua|com.uy|com.vc|com.vn|co.mz|co.nz|co.th|co.tz|co.ug|co.uk|co.uz|co.ve|co.vi|co.za|co.zm|co.zw|cv|cz|de|dj|dk|dm|dz|ee|es|eu|fi|fm|fr|ga|ge|gg|gl|gm|gp|gr|gy|hk|hn|hr|ht|hu|ie|im|iq|is|it|it.ao|je|jo|kg|ki|kz|la|li|lk|lt|lu|lv|md|me|mg|mk|ml|mn|ms|mu|mv|mw|mx|ne|nl|no|nr|nu|org|pl|pn|ps|pt|ro|rs|ru|rw|sc|se|sh|si|sk|sm|sn|so|sr|st|td|tg|tk|tl|tm|tn|to|tt|us|vg|vn|vu|ws)\/.*/
+!--||google-analytics.com
+!--||googleadservices.com
+||googleapis.cn
+||googleapis.com
+||googleapps.com
+||googleartproject.com
+||googleblog.com
+||googlebot.com
+!--||googlecapital.com
+||googlechinawebmaster.com
+||googlecode.com
+||googlecommerce.com
+||googledomains.com
+||googlearth.com
+||googleearth.com
+||googledrive.com
+||googlegroups.com
+||googlehosted.com
+||googleideas.com
+||googleinsidesearch.com
+||googlelabs.com
+||googlemail.com
+||googlemashups.com
+||googlepagecreator.com
+||googleplay.com
+||googleplus.com
+||googlescholar.com
+||googlesource.com
+!--||googlesyndication.com
+!--||googletagmanager.com
+!--||googletagservices.com
+||googleusercontent.com
+.googlevideo.com
+||googlevideo.com
+||googleweblight.com
+||googlezip.net
+||groups.google.cn
+||grow.google
+||gstatic.com
+!--||gv.com
+||gvt0.com
+||gvt1.com
+@@||redirector.gvt1.com
+||gvt3.com
+||gwtproject.org
+||html5rocks.com
+||iam.soy
+||igoogle.com
+||itasoftware.com
+||lers.google
+||like.com
+||madewithcode.com
+||material.io
+||nic.google
+||on2.com
+||panoramio.com
+||picasaweb.com
+||pki.goog
+||plus.codes
+||polymer-project.org
+||pride.google
+||questvisual.com
+||admin.recaptcha.net
+||api.recaptcha.net
+||api-secure.recaptcha.net
+||api-verify.recaptcha.net
+||redhotlabs.com
+||registry.google
+||safety.google
+||savethedate.foo
+||schema.org
+||shattered.io
+|http://sipml5.org/
+||stories.google
+||sustainability.google
+||synergyse.com
+||teachparentstech.org
+||tensorflow.org
+||tfhub.dev
+||thinkwithgoogle.com
+||tiltbrush.com
+||urchin.com
+!--||www.google
+||waveprotocol.org
+||waymo.com
+||web.dev
+||webmproject.org
+||webrtc.org
+||whatbrowser.org
+||widevine.com
+||withgoogle.com
+||withyoutube.com
+||x.company
+||xn--ngstr-lra8j.com
+||youtu.be
+.youtube.com
+||youtube.com
+||youtube-nocookie.com
+||youtubeeducation.com
+||youtubegaming.com
+||yt.be
+||ytimg.com
+||zynamics.com
+</code></pre><h3 id="参考">参考</h3>
+<ul>
+<li><a href="https://github.com/gfwlist/gfwlist">gfwlist/gfwlist</a></li>
+<li><a href="https://adblockplus.org/zh_CN/redundancy_check">查找冗余的过滤规则</a></li>
+<li><a href="https://help.eyeo.com/en/adblockplus/how-to-write-filters">How to write filters</a></li>
+<li><a href="https://www.jianshu.com/p/40fde927ae7d">ABP规则语法</a></li>
+<li><a href="http://blog.yzautop.com/it/787.html">AdBlock Plus 过滤规则介绍</a></li>
+<li><a href="https://github.com/yinheli/gfwlist2dnsmasq/blob/master/autoproxy.md">AutoProxy 代理规则</a></li>
+<li><a href="https://patriot.ninja/index.php?rp=/knowledgebase/17/PACorGFWList.html">PAC/GFWList自定义列表</a></li>
+<li><a href="https://github.com/rigious/gfwlist">rigious/gfwlist</a></li>
+</ul>
+
+        </div>
+
+        <div class="row middle-xs">
+          <div class="col-xs-12">
+            
+            <div class="post-category">
+              <a href="/categories/%e6%8a%80%e6%9c%af/">
+                技术
+              </a>
+            </div>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>
+          </div>
+        </div>
+
+        
+          
+
+          <div style="height: 50px;"></div>
+          
+            <div class="post-comments">
+              <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://stuarthua.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+            </div>
+          
+          
+          
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6137478455292280"
+     data-ad-slot="9229994044"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        
+        
+        <footer class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://stuarthua.com" target="_blank">Home</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/travel/" target="_blank">Travel</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/en/" target="_blank">EN</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="/index.xml" target="_blank">RSS</a>
+  </div>
+  
+</footer>
+
+      </div>
+    </div>
+  </article>
+
+  
+<script src="/js/highlight.pack.js"></script>
+
+
+
+<script src="/js/lazyload.min.js"></script>
+<script>
+  var lazyImage = new LazyLoad({
+    container: document.getElementById('article')
+  });
+</script>
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+
+  
+
+</body>
+
+</html>
