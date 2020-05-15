@@ -55,18 +55,17 @@
 
         {{ if in .Site.Params.mainSections .Type }}
           {{ partial "related.html" . }}
-          {{ if .Site.Params.postAds }}
-            <div class="post-ads">{{ .Site.Params.postAds | safeHTML }}</div>
-          {{ end }}
-          <!-- google adsnese -->
-          {{ partial "google-adsense.html" . }}
-          <!-- split -->
           <div style="height: 50px;"></div>
           {{ if .Site.Params.disqus }}
             <div class="post-comments">
               {{ partial "disqus.html" . }}
             </div>
           {{ end }}
+          {{ if .Site.Params.postAds }}
+            <div class="post-ads">{{ .Site.Params.postAds | safeHTML }}</div>
+          {{ end }}
+          <!-- google adsnese -->
+          {{ partial "google-adsense.html" . }}
         {{ end }}
         
         {{ partial "footer.html" . }}

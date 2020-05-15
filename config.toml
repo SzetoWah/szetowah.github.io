@@ -29,6 +29,20 @@ googleAnalytics = "UA-55082727-2"
 [permalinks]
   post = "/blog/:title/"
 
+[menu]
+  [[menu.main]]
+    identifier = "categories"
+    url = "/categories/"
+    name = "Categories"
+    title = "Categories"
+    weight = 1
+  [[menu.main]]
+    identifier = "about"
+    url = "/about/"
+    name = "About"
+    title = "About"
+    weight = 2
+
 [params]
   disqus = "stuarthua"
   favicon = "/logo.png"
@@ -38,29 +52,15 @@ googleAnalytics = "UA-55082727-2"
   description = "Software Developer, Life Adventurer"
   postHeaderContent = ""
   postFooterContent = '<br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="/cc.png" /></a>'
-
-[[params.socials]]
-  name = "Home"
-  link = "https://stuarthua.com"
-
-[[params.socials]]
-  name = "Travel"
-  link = "/travel/"
-
-[[params.socials]]
-  name = "EN"
-  link = "/en/"
-
-[[params.socials]]
-  name = "RSS"
-  link = "/index.xml"
-
-[menu]
-  [[menu.main]]
-    name = "Categories"
-    url = "/categories/"
-    weight = 1
-  [[menu.main]]
-    name = "About"
-    url = "/about/"
-    weight = 0
+  [[params.socials]]
+    name = "Home"
+    link = "https://stuarthua.com"
+  [[params.socials]]
+    name = "Travel"
+    link = "/travel/"
+  [[params.socials]]
+    name = "EN"
+    link = "/en/"
+  [[params.socials]]
+    name = "RSS"
+    link = "/index.xml"

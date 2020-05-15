@@ -62,14 +62,14 @@ a:hover {
 }
 
 .nav-container {
-  margin: 1.2rem auto;
+  margin: 2.2rem auto;
   position: relative;
   text-align: center;
 }
 
 .nav-title {
   color: #000;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   display: inline-block;
   margin: 0;
   padding-right: .2rem
